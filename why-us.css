@@ -1,0 +1,266 @@
+/* Why Us Page Styles */
+.why-us-hero {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 8rem 0 4rem;
+    text-align: center;
+}
+
+.why-us-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: #2A2A3A;
+}
+
+.why-us-hero .subtitle {
+    font-size: 1.4rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Benefits Grid */
+.benefits {
+    padding: 6rem 0;
+    background: #fff;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.benefit-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+}
+
+.benefit-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--primary-color);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.benefit-icon i {
+    font-size: 1.8rem;
+    color: white;
+}
+
+.benefit-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: #2A2A3A;
+}
+
+.benefit-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* ROI Stats */
+.roi-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat .number {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    display: block;
+}
+
+.stat .label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Security Badges */
+.security-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.security-badge {
+    background: #f8f9fa;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #2A2A3A;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.security-badge i {
+    color: var(--primary-color);
+}
+
+/* Chat Bubbles */
+.insight-demo {
+    margin-top: 1.5rem;
+}
+
+.chat-bubble {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.chat-bubble.response {
+    background: var(--primary-color);
+    color: white;
+    margin-left: 1rem;
+}
+
+/* Lab Metrics Section */
+.lab-metrics {
+    background: #f8f9fa;
+    padding: 4rem 2rem;
+    border-radius: 12px;
+    margin: 4rem 0;
+}
+
+.lab-metrics h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.metrics-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.metric-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.metric-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: #2A2A3A;
+}
+
+.metric-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.metric {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.metric .number {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.metric .label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Cost Effective Section */
+.cost-effective {
+    background: linear-gradient(135deg, #2A2A3A 0%, #1A1A1A 100%);
+    padding: 4rem 2rem;
+    border-radius: 12px;
+    color: white;
+    margin: 4rem 0;
+}
+
+.cost-content {
+    max-width: 600px;
+}
+
+.cost-content h2 {
+    margin-bottom: 1rem;
+}
+
+.cost-features {
+    margin-top: 2rem;
+    list-style: none;
+}
+
+.cost-features li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cost-features li::before {
+    content: '→';
+    color: var(--primary-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .why-us-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .why-us-hero .subtitle {
+        font-size: 1.2rem;
+    }
+
+    .benefits {
+        padding: 4rem 0;
+    }
+
+    .benefit-card {
+        padding: 1.5rem;
+    }
+
+    .roi-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .lab-metrics {
+        padding: 3rem 1.5rem;
+    }
+} 

@@ -1,0 +1,369 @@
+/* Marketplace Styles */
+.marketplace-hero {
+    padding: 1.5rem 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 1px solid #eee;
+    margin-top: -70px;
+    padding-top: 70px;
+    position: relative;
+    z-index: 0;
+}
+
+.marketplace-hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.marketplace-hero p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #4a4a4a;
+    margin: 0;
+}
+
+.marketplace-nav {
+    background: white;
+    padding: 0.75rem 0;
+    position: relative;
+    z-index: 1;
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+}
+
+.filter-tabs {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0;
+}
+
+.tab, a.tab {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 24px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: #666;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.tab:hover, a.tab:hover {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.tab.active, a.tab.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.agents-grid {
+    padding: 2rem 0;
+    background: #f8f9fa;
+}
+
+.agents-grid .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    overflow-x: visible;
+    max-width: 1400px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.agent-card {
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: all 0.2s ease;
+    overflow: hidden;
+}
+
+.agent-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    border-color: rgba(0,0,0,0.2);
+}
+
+.agent-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem;
+    border-bottom: 1px solid #f0f0f0;
+    background: #fafbfc;
+}
+
+.agent-header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+}
+
+.agent-header-left h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2A2A3A;
+    margin: 0;
+}
+
+.agent-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.agent-icon i {
+    font-size: 1.125rem;
+    color: white;
+}
+
+.agent-badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    background: #e6f3ff;
+    color: var(--primary-color);
+}
+
+.agent-card[data-category="support"] .agent-icon {
+    background: #4A90E2;
+}
+
+.agent-card[data-category="process"] .agent-icon {
+    background: #50B83C;
+}
+
+.agent-card[data-category="it"] .agent-icon {
+    background: #9C6ADE;
+}
+
+.agent-card[data-category="finance"] .agent-icon {
+    background: #47C1BF;
+}
+
+.agent-card[data-category="vendor"] .agent-icon {
+    background: #F49342;
+}
+
+.agent-card[data-category="data"] .agent-icon {
+    background: #DE5D5D;
+}
+
+.agent-content {
+    flex: 1;
+    padding: 1.25rem;
+    overflow-y: auto;
+}
+
+.agent-content p {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.agent-features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.agent-features li {
+    font-size: 0.75rem;
+    color: #4a4a4a;
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.agent-features li::before {
+    content: '•';
+    color: var(--primary-color);
+}
+
+.agent-footer {
+    padding: 1.25rem;
+    border-top: 1px solid #f0f0f0;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+.agent-pricing {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #2A2A3A;
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+}
+
+.agent-pricing span {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.btn-subscribe {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 6px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: auto;
+    min-width: 100px;
+}
+
+.btn-subscribe:hover {
+    background: #0066cc;
+    transform: translateY(-1px);
+}
+
+/* Remove scroll indicators since we don't need them anymore */
+.agents-grid::before,
+.agents-grid::after {
+    display: none;
+}
+
+/* Add responsive breakpoints for better grid layout */
+@media (min-width: 1200px) {
+    .agents-grid .container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .agents-grid .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .agents-grid .container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+}
+
+/* Add breadcrumb styles */
+.breadcrumb {
+    margin: 0 0 1rem;
+}
+
+.breadcrumb a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.breadcrumb a:hover {
+    color: #0066cc;
+    transform: translateX(-2px);
+}
+
+.breadcrumb a i {
+    font-size: 1rem;
+}
+
+/* Update badge styles for L1/L2 support */
+.agent-card[data-category="support-l1"] .agent-badge {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.agent-card[data-category="support-l2"] .agent-badge {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+/* Update icon colors for support agents */
+.agent-card[data-category="support-l1"] .agent-icon {
+    background: #2e7d32;
+}
+
+.agent-card[data-category="support-l2"] .agent-icon {
+    background: #1976d2;
+}
+
+/* Style for disabled cards */
+.agent-card[data-category="process"],
+.agent-card[data-category="it"],
+.agent-card[data-category="finance"],
+.agent-card[data-category="vendor"],
+.agent-card[data-category="data"] {
+    opacity: 0.65;
+    pointer-events: none;
+    filter: grayscale(0.4);
+    border: 1px solid rgba(0,0,0,0.15);
+}
+
+/* Update Customer Support card styling to make it brighter and more prominent */
+.agent-card[data-category="support"] {
+    border: 1px solid rgba(74, 144, 226, 0.4);
+    box-shadow: 0 4px 16px rgba(74, 144, 226, 0.12);
+    background: linear-gradient(to bottom, #ffffff, #f0f7ff);
+    position: relative;
+    cursor: pointer;
+    transform: scale(1.02); /* Slightly larger */
+}
+
+.agent-card[data-category="support"]:hover {
+    transform: translateY(-4px) scale(1.02);
+    border-color: rgba(74, 144, 226, 0.6);
+    box-shadow: 0 8px 28px rgba(74, 144, 226, 0.2);
+}
+
+.agent-card[data-category="support"] .agent-header {
+    background: linear-gradient(to right, #f0f7ff, #e6f2ff);
+}
+
+.agent-card[data-category="support"] .agent-icon {
+    background: #1a73e8; /* Brighter blue */
+    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.2);
+}
+
+.agent-card[data-category="support"] .agent-badge {
+    background: #e8f2ff;
+    color: #1a73e8;
+    border: 1px solid rgba(26, 115, 232, 0.2);
+}
+
+.agent-card[data-category="support"] .btn-subscribe {
+    background: #1a73e8;
+    box-shadow: 0 2px 6px rgba(26, 115, 232, 0.2);
+}
+
+.agent-card[data-category="support"] .btn-subscribe:hover {
+    background: #1557b0;
+    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+} 

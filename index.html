@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpotNub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <nav class="nav-container">
+            <div class="logo-section">
+                <img src="SpotNub Logo.webp" alt="SpotNub Logo">
+            </div>
+            
+            <div class="nav-links">
+                <ul>
+                    <li><a href="why-us.html">Why Us?</a></li>
+                    <li><a href="marketplace.html">AI Agents Marketplace</a></li>
+                    <li><a href="#product">Product</a></li>
+                    <li><a href="#solutions">Solutions</a></li>
+                    <li><a href="#customers">Customers</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#company">Company</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-actions">
+                <a href="#login" class="btn-login">Login</a>
+                <a href="#demo" class="btn-demo">Book a Demo</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="video-background">
+            <video autoplay muted loop playsinline id="heroVideo" poster="video-poster.jpg">
+                <source src="demo-video.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1>AI-Powered Operations<br>Performance Management</h1>
+            <p>Supercharge operations with Process Automation, Proactive Incident Response & Anomaly Detection<br>
+            while delivering exceptional customer experiences, optimizing costs & protecting revenue.</p>
+            <div class="hero-buttons">
+                <a href="#demo" class="btn btn-primary">Book a Demo</a>
+                <button class="btn-watch-demo" onclick="playFullVideo()">
+                    <div class="preview-container">
+                        <img src="demo-preview.jpg" alt="Demo Preview" class="preview-video">
+                        <div class="preview-overlay">
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <div class="watch-text">
+                                <span>Watch Demo</span>
+                                <span class="duration">3:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="demo-stats">
+                <div class="stat-item">
+                    <span class="stat-number">3 min</span>
+                    <span class="stat-label">Demo Length</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">No Sign-up</span>
+                    <span class="stat-label">Required</span>
+                </div>
+            </div>
+            <div class="hero-diagram">
+                <img src="spotnub-diagram.png" alt="SpotNub Integration Diagram" class="integration-diagram">
+                
+                <div class="connected-images">
+                    <div class="image-container">
+                        <img src="Support.png" alt="Support" class="connected-image">
+                        <span class="image-label">Support</span>
+                    </div>
+                    <div class="image-container">
+                        <img src="Dev.png" alt="Development" class="connected-image">
+                        <span class="image-label">Development</span>
+                    </div>
+                    <div class="image-container">
+                        <img src="Business.png" alt="Business Operations" class="connected-image">
+                        <span class="image-label">Business Teams</span>
+                    </div>
+                    <div class="connecting-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By Section -->
+    <section class="trusted-by">
+        <h2>Trusted by teams that keep the digital world running</h2>
+        <div class="logo-grid">
+            <!-- Add your client logos here -->
+        </div>
+        <div class="testimonial">
+            <blockquote>
+                "Your customer testimonial here"
+            </blockquote>
+            <cite>
+                <strong>Customer Name</strong>
+                <span>Customer Title, Company</span>
+            </cite>
+        </div>
+    </section>
+
+    <!-- Main Features -->
+    <section class="features">
+        <div class="feature-card">
+            <h3>Feature 1</h3>
+            <p>Description of your first main feature</p>
+            <ul>
+                <li>Benefit 1</li>
+                <li>Benefit 2</li>
+                <li>Benefit 3</li>
+            </ul>
+        </div>
+        <!-- Add more feature cards as needed -->
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#core">Core Features</a></li>
+                    <li><a href="#integrations">Integrations</a></li>
+                    <li><a href="#releases">Product Releases</a></li>
+                </ul>
+            </div>
+            <!-- Add more footer columns as needed -->
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SpotNub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="demo-modal" id="demoModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <h2>Book a Demo</h2>
+            <p>See how SpotNub can transform your operations</p>
+            <form id="demoForm" onsubmit="handleDemoSubmit(event)">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Work Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="company" name="company" placeholder="Company Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Book Demo</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <button class="close-video" onclick="closeVideoModal()">&times;</button>
+            <div class="video-container">
+                <video id="fullVideo" controls>
+                    <source src="full-demo-video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

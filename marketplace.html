@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agents Marketplace | SpotNub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="marketplace.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Include your header here -->
+
+    <section class="marketplace-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            </div>
+            <h1>Subscribe To Enterprise Agents</h1>
+            <p>Build with specialized AI agents for enterprise operations. Automate and optimize your business processes across departments.</p>
+        </div>
+    </section>
+
+    <section class="marketplace-nav">
+        <div class="container">
+            <div class="filter-tabs">
+                <button class="tab active">All</button>
+                <button class="tab" onclick="window.location.href='support-agents.html'">Support</button>
+                <button class="tab">Process</button>
+                <button class="tab">IT</button>
+                <button class="tab">Finance</button>
+                <button class="tab">Vendor</button>
+                <button class="tab">Data</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="agents-grid">
+        <div class="container">
+            <!-- Customer Support Agent -->
+            <div class="agent-card" data-category="support" onclick="window.location.href='support-agents.html'" style="cursor: pointer;">
+                <div class="agent-header">
+                    <div class="agent-header-left">
+                        <div class="agent-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Customer Support</h3>
+                    </div>
+                    <span class="agent-badge">Popular</span>
+                </div>
+                <div class="agent-content">
+                    <p>AI-powered support operations management</p>
+                    <ul class="agent-features">
+                        <li>Inbound/outbound support</li>
+                        <li>SLA monitoring</li>
+                        <li>CSAT optimization</li>
+                    </ul>
+                </div>
+                <div class="agent-footer">
+                    <div class="agent-pricing">
+                        $8<span>/mo</span>
+                    </div>
+                    <button class="btn-subscribe" onclick="event.stopPropagation()">Subscribe</button>
+                </div>
+            </div>
+
+            <!-- Process Operations Agent -->
+            <div class="agent-card" data-category="process">
+                <div class="agent-header">
+                    <div class="agent-header-left">
+                        <div class="agent-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>Process Operations</h3>
+                    </div>
+                    <span class="agent-badge">New</span>
+                </div>
+                <div class="agent-content">
+                    <p>Streamline business workflows</p>
+                    <ul class="agent-features">
+                        <li>Order fulfillment</li>
+                        <li>Billing automation</li>
+                        <li>Account management</li>
+                    </ul>
+                </div>
+                <div class="agent-footer">
+                    <span class="agent-pricing">$8<span>/mo</span></span>
+                    <button class="btn-subscribe">Subscribe</button>
+                </div>
+            </div>
+
+            <!-- IT Operations Agent -->
+            <div class="agent-card" data-category="it">
+                <div class="agent-header">
+                    <div class="agent-header-left">
+                        <div class="agent-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3>IT Operations</h3>
+                    </div>
+                    <span class="agent-badge">Essential</span>
+                </div>
+                <div class="agent-content">
+                    <p>Automated IT infrastructure management</p>
+                    <ul class="agent-features">
+                        <li>System monitoring</li>
+                        <li>Incident response</li>
+                        <li>Infrastructure updates</li>
+                    </ul>
+                </div>
+                <div class="agent-footer">
+                    <div class="agent-pricing">
+                        $8<span>/mo</span>
+                    </div>
+                    <button class="btn-subscribe">Subscribe</button>
+                </div>
+            </div>
+
+            <!-- Finance Operations Agent -->
+            <div class="agent-card" data-category="finance">
+                <div class="agent-header">
+                    <div class="agent-header-left">
+                        <div class="agent-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Finance Operations</h3>
+                    </div>
+                    <span class="agent-badge">Premium</span>
+                </div>
+                <div class="agent-content">
+                    <p>Automated financial operations</p>
+                    <ul class="agent-features">
+                        <li>Payroll automation</li>
+                        <li>Account processing</li>
+                        <li>Compliance checks</li>
+                    </ul>
+                </div>
+                <div class="agent-footer">
+                    <div class="agent-pricing">
+                        $8<span>/mo</span>
+                    </div>
+                    <button class="btn-subscribe">Subscribe</button>
+                </div>
+            </div>
+
+            <!-- Vendor Operations Agent -->
+            <div class="agent-card" data-category="vendor">
+                <div class="agent-header">
+                    <div class="agent-header-left">
+                        <div class="agent-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Vendor Operations</h3>
+                    </div>
+                    <span class="agent-badge">Advanced</span>
+                </div>
+                <div class="agent-content">
+                    <p>Partner relationship automation</p>
+                    <ul class="agent-features">
+                        <li>Contract management</li>
+                        <li>Service monitoring</li>
+                        <li>Partner coordination</li>
+                    </ul>
+                </div>
+                <div class="agent-footer">
+                    <div class="agent-pricing">
+                        $8<span>/mo</span>
+                    </div>
+                    <button class="btn-subscribe">Subscribe</button>
+                </div>
+            </div>
+
+            <!-- Data Operations Agent -->
+            <div class="agent-card" data-category="data">
+                <div class="agent-header">
+                    <div class="agent-header-left">
+                        <div class="agent-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3>Data Operations</h3>
+                    </div>
+                    <span class="agent-badge">Analytics</span>
+                </div>
+                <div class="agent-content">
+                    <p>Automated data management</p>
+                    <ul class="agent-features">
+                        <li>Dashboard creation</li>
+                        <li>Data quality checks</li>
+                        <li>Metric tracking</li>
+                    </ul>
+                </div>
+                <div class="agent-footer">
+                    <div class="agent-pricing">
+                        $8<span>/mo</span>
+                    </div>
+                    <button class="btn-subscribe">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html> 
