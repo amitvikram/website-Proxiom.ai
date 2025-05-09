@@ -169,6 +169,10 @@
     background: #DE5D5D;
 }
 
+.agent-card[data-category="legal"] .agent-icon {
+    background: #7B61FF;
+}
+
 .agent-content {
     flex: 1;
     padding: 1.25rem;
@@ -315,7 +319,7 @@
     background: #1976d2;
 }
 
-/* Style for disabled cards */
+/* Remove legal from disabled cards list */
 .agent-card[data-category="process"],
 .agent-card[data-category="it"],
 .agent-card[data-category="finance"],
@@ -325,6 +329,64 @@
     pointer-events: none;
     filter: grayscale(0.4);
     border: 1px solid rgba(0,0,0,0.15);
+}
+
+/* Add Legal & Risk card styling similar to Support */
+.agent-card[data-category="legal"] {
+    border: 1px solid rgba(123, 97, 255, 0.4);
+    box-shadow: 0 4px 16px rgba(123, 97, 255, 0.12);
+    background: linear-gradient(to bottom, #ffffff, #f8f6ff);
+    position: relative;
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+.agent-card[data-category="legal"]:hover {
+    transform: translateY(-4px) scale(1.02);
+    border-color: rgba(123, 97, 255, 0.6);
+    box-shadow: 0 8px 28px rgba(123, 97, 255, 0.2);
+}
+
+.agent-card[data-category="legal"] .agent-header {
+    background: linear-gradient(to right, #f8f6ff, #f3f0ff);
+}
+
+.agent-card[data-category="legal"] .agent-icon {
+    background: #7B61FF;
+    box-shadow: 0 4px 12px rgba(123, 97, 255, 0.2);
+}
+
+.agent-card[data-category="legal"] .agent-badge {
+    background: #f3f0ff;
+    color: #7B61FF;
+    border: 1px solid rgba(123, 97, 255, 0.2);
+}
+
+.agent-card[data-category="legal"] .btn-subscribe {
+    background: #7B61FF;
+    box-shadow: 0 2px 6px rgba(123, 97, 255, 0.2);
+}
+
+/* Add styles for Legal & Risk specific agent cards */
+.agent-card[data-category="legal-contract"] .agent-icon,
+.agent-card[data-category="legal-risk"] .agent-icon,
+.agent-card[data-category="legal-compliance"] .agent-icon {
+    background: #7B61FF;
+}
+
+.agent-card[data-category="legal-contract"] .agent-badge {
+    background: #f3f0ff;
+    color: #7B61FF;
+}
+
+.agent-card[data-category="legal-risk"] .agent-badge {
+    background: #ffe8e8;
+    color: #dc3545;
+}
+
+.agent-card[data-category="legal-compliance"] .agent-badge {
+    background: #e8f5e9;
+    color: #28a745;
 }
 
 /* Update Customer Support card styling to make it brighter and more prominent */
@@ -363,7 +425,28 @@
     box-shadow: 0 2px 6px rgba(26, 115, 232, 0.2);
 }
 
-.agent-card[data-category="support"] .btn-subscribe:hover {
-    background: #1557b0;
-    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+/* Add styles for new legal agent categories */
+.agent-card[data-category="legal-ip"] .agent-badge {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.agent-card[data-category="legal-intake"] .agent-badge {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+.agent-card[data-category="legal-finance"] .agent-badge {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+/* Update icon colors for new categories */
+.agent-card[data-category="legal-ip"] .agent-icon,
+.agent-card[data-category="legal-intake"] .agent-icon,
+.agent-card[data-category="legal-finance"] .agent-icon,
+.agent-card[data-category="legal-contract"] .agent-icon,
+.agent-card[data-category="legal-risk"] .agent-icon {
+    background: #7B61FF;
+    box-shadow: 0 4px 12px rgba(123, 97, 255, 0.2);
 } 

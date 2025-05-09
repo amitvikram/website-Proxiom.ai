@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal & Risk Agents | SpotNub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="marketplace.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Enhanced hero section */
+        .marketplace-hero {
+            background: linear-gradient(135deg, #f8f9fe 0%, #eef1f9 100%);
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .marketplace-hero h1 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #2d3748;
+            letter-spacing: -0.5px;
+        }
+
+        .marketplace-hero p {
+            font-size: 1rem;
+            max-width: 600px;
+            font-weight: 400;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
+        .breadcrumb a {
+            color: #4a5568;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: #2b6cb0;
+        }
+
+        /* Improved grid layout */
+        .agents-grid {
+            padding: 20px 0;
+            background: #ffffff;
+        }
+
+        .agents-grid .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;  /* Increased gap */
+            max-width: 1100px;  /* Slightly wider container */
+        }
+
+        /* Enhanced card styling */
+        .agent-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;  /* Increased padding */
+            height: 240px;  /* Increased height */
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .agent-header {
+            margin-bottom: 12px;  /* Increased spacing */
+            height: 36px;
+        }
+
+        .agent-header-left {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .agent-icon {
+            background: #ebf4ff;
+            color: #3182ce;
+            width: 28px;  /* Larger icon */
+            height: 28px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .agent-header h3 {
+            font-size: 1rem;  /* Slightly larger */
+            font-weight: 600;
+            color: #2d3748;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .agent-badge {
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            background: #edf2f7;
+            color: #4a5568;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .agent-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 12px;  /* Added margin to separate from footer */
+        }
+
+        .agent-content p {
+            font-size: 0.8rem;  /* Slightly larger */
+            color: #4a5568;
+            margin-bottom: 12px;  /* Increased spacing */
+            line-height: 1.4;
+            max-height: 36px;
+        }
+
+        .agent-features {
+            margin: 0;
+            padding: 0;
+            list-style: none;  /* Remove bullets */
+        }
+
+        .agent-features li {
+            font-size: 0.75rem;
+            color: #718096;
+            margin-bottom: 6px;
+            line-height: 1.4;
+            padding-left: 0;  /* Remove padding since no bullets */
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .agent-features li::before {
+            display: none;  /* Remove bullets */
+        }
+
+        .agent-footer {
+            border-top: 1px solid #edf2f7;
+            padding-top: 12px;
+            margin-top: auto;
+            height: 36px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+        }
+
+        .agent-pricing {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .btn-subscribe {
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 6px 16px;  /* Wider button */
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 70px;  /* Wider minimum width */
+            height: 28px;  /* Taller button */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-subscribe:hover {
+            background: #2c5282;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Enhance card hover effect */
+        .agent-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-color: #cbd5e0;
+        }
+    </style>
+</head>
+<body>
+    <section class="marketplace-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="marketplace.html">← Back to All Agents</a>
+            </div>
+            <h1>Legal & Risk Agents</h1>
+            <p>Specialized AI agents for legal operations, risk management, and compliance</p>
+        </div>
+    </section>
+
+    <section class="agents-grid">
+        <div class="container">
+            <!-- Legal Intake Agent -->
+            <div class="agent-card" data-category="legal-intake">
+                <div class="agent-header">
+                    <div class="agent-header-left">
+                        <div class="agent-icon">
+                            <i class="fas fa-inbox"></i>
+                        </div>
+                        <h3>Legal Intake</h3>
+                    </div>
+                    <span class="agent-badge">Workflow</span>
+                </div>
+                <div class="agent-content">
+                    <p>Streamlined legal request intake and routing system</p>
+                    <ul class="agent-features">
+                        <li>Request categorization</li>
+                        <li>Priority assessment</li>
+                        <li>Resource allocation</li>
+                        <li>SLA tracking</li>
+                    </ul>
+                </div>
+                <div class="agent-footer">
+                    <div class="agent-pricing">
+                        Pro
+                    </div>
+                    <button class="btn-subscribe">Deploy</button>
+                </div>
+            </div>
+
+            <!-- Patent Tracker Agent -->
+            <div class="agent-card" data-category="legal-ip">
+                <div class="agent-header">
+                    <div class="agent-header-left">
+                        <div class="agent-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>Patent Tracker</h3>
+                    </div>
+                    <span class="agent-badge">IP</span>
+                </div>
+                <div class="agent-content">
+                    <p>Intelligent patent monitoring and analysis system</p>
+                    <ul class="agent-features">
+                        <li>Patent portfolio tracking</li>
+                        <li>Infringement detection</li>
+                        <li>Competition analysis</li>
+                        <li>Filing deadlines monitor</li>
+                    </ul>
+                </div>
+                <div class="agent-footer">
+                    <div class="agent-pricing">
+                        Pro
+                    </div>
+                    <button class="btn-subscribe">Deploy</button>
+                </div>
+            </div>
+
+            <!-- Contract Risk Tracker Agent -->
+            <div class="agent-card" data-category="legal-contract">
+                <div class="agent-header">
+                    <div class="agent-header-left">
+                        <div class="agent-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h3>Contract Risk Tracker</h3>
+                    </div>
+                    <span class="agent-badge">Risk</span>
+                </div>
+                <div class="agent-content">
+                    <p>Streamlined contract risk assessment and monitoring system</p>
+                    <ul class="agent-features">
+                        <li>Risk clause identification</li>
+                        <li>Obligation tracking</li>
+                        <li>Compliance monitoring</li>
+                        <li>Renewal risk alerts</li>
+                    </ul>
+                </div>
+                <div class="agent-footer">
+                    <div class="agent-pricing">
+                        Pro
+                    </div>
+                    <button class="btn-subscribe">Deploy</button>
+                </div>
+            </div>
+
+            <!-- 3P Risk Tracker Agent -->
+            <div class="agent-card" data-category="legal-risk">
+                <div class="agent-header">
+                    <div class="agent-header-left">
+                        <div class="agent-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>3P Risk Tracker</h3>
+                    </div>
+                    <span class="agent-badge">Risk</span>
+                </div>
+                <div class="agent-content">
+                    <p>Streamlined third-party risk assessment and monitoring system</p>
+                    <ul class="agent-features">
+                        <li>Vendor risk scoring</li>
+                        <li>Continuous monitoring</li>
+                        <li>Due diligence automation</li>
+                        <li>Risk alerts & reporting</li>
+                    </ul>
+                </div>
+                <div class="agent-footer">
+                    <div class="agent-pricing">
+                        Pro
+                    </div>
+                    <button class="btn-subscribe">Deploy</button>
+                </div>
+            </div>
+
+            <!-- Contract Scribe Agent -->
+            <div class="agent-card" data-category="legal-contract">
+                <div class="agent-header">
+                    <div class="agent-header-left">
+                        <div class="agent-icon">
+                            <i class="fas fa-pen-fancy"></i>
+                        </div>
+                        <h3>Contract Scribe</h3>
+                    </div>
+                    <span class="agent-badge">Drafting</span>
+                </div>
+                <div class="agent-content">
+                    <p>AI-powered contract drafting and review assistant</p>
+                    <ul class="agent-features">
+                        <li>Template automation</li>
+                        <li>Clause suggestions</li>
+                        <li>Language optimization</li>
+                        <li>Style consistency</li>
+                    </ul>
+                </div>
+                <div class="agent-footer">
+                    <div class="agent-pricing">
+                        Pro
+                    </div>
+                    <button class="btn-subscribe">Deploy</button>
+                </div>
+            </div>
+
+            <!-- Term Sheet Insights Agent -->
+            <div class="agent-card" data-category="legal-finance">
+                <div class="agent-header">
+                    <div class="agent-header-left">
+                        <div class="agent-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <h3>Term Sheet Insights</h3>
+                    </div>
+                    <span class="agent-badge">Analysis</span>
+                </div>
+                <div class="agent-content">
+                    <p>Streamlined term sheet analysis and negotiation assistant</p>
+                    <ul class="agent-features">
+                        <li>Market comparison</li>
+                        <li>Term optimization</li>
+                        <li>Risk assessment</li>
+                        <li>Negotiation insights</li>
+                    </ul>
+                </div>
+                <div class="agent-footer">
+                    <div class="agent-pricing">
+                        Pro
+                    </div>
+                    <button class="btn-subscribe">Deploy</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html> 
