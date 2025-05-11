@@ -6,6 +6,44 @@
     <title>SpotNub</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            line-height: 1.5;
+            color: #4a5568;
+            margin-bottom: 32px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header Navigation -->
@@ -43,9 +81,9 @@
             <div class="video-overlay"></div>
         </div>
         <div class="hero-content">
-            <h1>AI-Powered Operations<br>Performance Management</h1>
-            <p>Supercharge operations with Process Automation, Proactive Incident Response & Anomaly Detection<br>
-            while delivering exceptional customer experiences, optimizing costs & protecting revenue.</p>
+            <h1>AI-Powered Contracts<br>Performance Management</h1>
+            <p>Supercharge Contract Lifecycle with Realtime-AI from Intake-to-Renewals<br>
+            delivering exceptional experiences, optimizing operational overhead & reducing risk.</p>
             <div class="hero-buttons">
                 <a href="#demo" class="btn btn-primary">Book a Demo</a>
                 <button class="btn-watch-demo" onclick="playFullVideo()">
