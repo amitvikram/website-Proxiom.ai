@@ -11,7 +11,7 @@
             text-align: center;
             max-width: 900px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 10px 20px 40px 20px;
         }
 
         .hero-content h1 {
@@ -50,8 +50,9 @@
     <header>
         <nav class="nav-container">
             <div class="logo-section">
-                <!--img src="Proxiom Logo.webp" alt="Proxiom Logo"-->
-                <img src="Proxiom Logo.webp" alt="Proxiom Logo" style="height: 70px;">
+                <a href="index.html">
+                    <img src="Proxiom Logo.webp" alt="Proxiom Logo" style="height: 70px;">
+                </a>
             </div>
             
             <div class="nav-links">
@@ -68,7 +69,7 @@
 
             <div class="nav-actions">
                 <a href="#login" class="btn-login">Login</a>
-                <a href="#demo" class="btn-demo">Book a Demo</a>
+                <a href="booking.html" class="btn-demo">Book a Demo</a>
             </div>
         </nav>
     </header>
@@ -86,7 +87,7 @@
             <p>Supercharge user requests from intake to renewal with real-time inline AI validations, <br>
             ensuring every request is complete and actionable right away — unlocking 30X ROI.</p>
             <div class="hero-buttons">
-                <a href="#demo" class="btn btn-primary">Book a Demo</a>
+                <a href="booking.html" class="btn btn-primary">Book a Demo</a>
                 <button class="btn-watch-demo" onclick="playFullVideo()">
                     <div class="preview-container">
                         <img src="demo-preview.jpg" alt="Demo Preview" class="preview-video">
@@ -184,29 +185,6 @@
         </div>
     </footer>
 
-    <div class="demo-modal" id="demoModal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModal()">&times;</button>
-            <h2>Book a Demo</h2>
-            <p>See how SpotNub can transform your operations</p>
-            <form id="demoForm" onsubmit="handleDemoSubmit(event)">
-                <div class="form-group">
-                    <input type="text" id="name" name="name" placeholder="Full Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" name="email" placeholder="Work Email" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" id="company" name="company" placeholder="Company Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Book Demo</button>
-            </form>
-        </div>
-    </div>
-
     <div class="video-modal" id="videoModal">
         <div class="video-modal-content">
             <button class="close-video" onclick="closeVideoModal()">&times;</button>
@@ -218,6 +196,14 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Remove these functions as they're no longer needed
+        // function openBookingModal() { ... }
+        // function closeBookingModal() { ... }
+        // function handleBookingSubmit(event) { ... }
+        
+        // Remove the event listener for demo buttons
+        // document.addEventListener('DOMContentLoaded', function() { ... });
+    </script>
 </body>
 </html> 

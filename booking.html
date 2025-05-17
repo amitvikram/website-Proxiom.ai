@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Demo - Proxiom.ai </title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="booking.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <nav class="nav-container">
+            <div class="logo-section">
+                <a href="index.html">
+                    <img src="Proxiom Logo.webp" alt="Proxiom Logo" style="height: 70px;">
+                </a>
+            </div>
+            
+            <div class="nav-links">
+                <ul>
+                    <li><a href="why-us.html">Why Us?</a></li>
+                    <li><a href="marketplace.html">AI Validator Studio</a></li>
+                    <li><a href="#solutions">Solutions</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#company">Company</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-actions">
+                <a href="#login" class="btn-login">Login</a>
+                <a href="booking.html" class="btn-demo">Book a Demo</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="booking-container">
+        <div class="booking-content">
+            <h1>Book a Demo - Proxiom</h1>
+            <p>Experience how Promptly can transform your operations</p>
+            
+            <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Work Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="company" name="company" placeholder="Company Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <input type="datetime-local" id="demoTime" name="demoTime" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message" placeholder="Any specific topics you'd like to cover?" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Schedule Demo</button>
+            </form>
+
+            <div class="booking-info">
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <span>30-minute personalized demo</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Flexible scheduling</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-user-tie"></i>
+                    <span>One-on-one with our experts</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="booking.js"></script>
+</body>
+</html> 
