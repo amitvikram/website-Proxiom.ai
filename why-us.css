@@ -1,8 +1,12 @@
 /* Why Us Page Styles */
 .why-us-hero {
+    padding: 1.5rem 0;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 8rem 0 4rem;
-    text-align: center;
+    border-bottom: 1px solid #eee;
+    margin-top: -70px;
+    padding-top: 70px;
+    position: relative;
+    z-index: 0;
 }
 
 .why-us-hero h1 {
@@ -12,16 +16,41 @@
 }
 
 .why-us-hero .subtitle {
-    font-size: 1.4rem;
-    color: #666;
-    max-width: 600px;
-    margin: 0 auto;
+    
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #4a4a4a;
+    margin: 0;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
+}
+
+/* Add breadcrumb styles */
+.breadcrumb {
+    margin: 0 0 1rem;
+}
+
+.breadcrumb a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.breadcrumb a:hover {
+    color: #0066cc;
+    transform: translateX(-2px);
+}
+
+.breadcrumb a i {
+    font-size: 1rem;
 }
 
 /* Benefits Grid */
