@@ -506,28 +506,39 @@
         /* New styles for Solution Overview section */
         .solution-overview {
             text-align: center;
-            padding: 30px 20px; /* Reduced padding */
-            /* Keeping the soft gradient background for visual separation */
-            background: linear-gradient(135deg, #e3f0ff 0%, #ffe3e3 100%);
-            color: #1a237e;
+            padding: 80px 20px;
+            background: linear-gradient(160deg, #1a237e 0%, #0099ff 100%);
+            color: #fff;
+            margin-top: 0;
+            position: relative;
+            z-index: 1;
         }
 
         .solution-overview .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
         .solution-overview .btn-primary {
             display: inline-block;
-            background-color: #0099ff;
-            color: #fff;
-            padding: 12px 25px;
+            background-color: #fff;
+            color: #1a237e;
+            padding: 15px 30px;
             border-radius: 8px;
             text-decoration: none;
-            font-size: 1.1em;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0, 153, 255, 0.2);
+            font-size: 1.2em;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            border: none;
+        }
+
+        .solution-overview .btn-primary:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
@@ -574,25 +585,12 @@
             ensuring every request is complete and actionable right away — unlocking 30X ROI.</p>
             <div class="hero-buttons">
                 <a href="booking.html" class="btn btn-primary">Book a Demo</a>
-                <button class="btn-watch-demo" onclick="playFullVideo()">
-                    <div class="preview-container">
-                        <img src="demo-preview.jpg" alt="Demo Preview" class="preview-video">
-                        <div class="preview-overlay">
-                            <div class="play-icon">
-                                <i class="fas fa-play"></i>
-                            </div>
-                            <div class="watch-text">
-                                <span>Watch Demo</span>
-                                <span class="duration">3:00</span>
-                            </div>
-                        </div>
-                    </div>
-                </button>
+                <a href="solutions.html" class="btn btn-primary">Learn More About Our Solution &rarr;</a>
             </div>
             <div class="demo-stats">
                 <div class="stat-item">
-                    <span class="stat-number">3 min</span>
-                    <span class="stat-label">Demo Length</span>
+                    <span class="stat-number">Live</span>
+                    <span class="stat-label">Interactive Demo</span>
                 </div>
                 <div class="stat-divider"></div>
                 <div class="stat-item">
@@ -667,21 +665,6 @@
         </div>
     </section>
 
-    <!-- New Solution Section -->
-    <section class="solution-overview">
-        <div class="container">
-            <a href="solutions.html" class="btn-primary">Learn More About Our Solution &rarr;</a>
-        </div>
-    </section>
-
-    <!-- Watch Demo Section -->
-    <section class="watch-demo-section">
-        <div class="video-background">
-            <!-- Replace with your actual video or image background -->
-            <img src="watch-demo-bg.jpg" alt="Demo Background">
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer>
         <div class="footer-grid">
@@ -700,20 +683,47 @@
         </div>
     </footer>
 
+    <!-- Video Modal (Keep for now if it's used elsewhere, but we'll add a new one for animation) -->
     <div class="video-modal" id="videoModal">
-        <div class="video-modal-content">
-            <button class="close-video" onclick="closeVideoModal()">&times;</button>
-            <div class="video-container">
-                <video id="fullVideo" controls>
-                    <source src="full-demo-video.mp4" type="video/mp4">
-                </video>
+       <!-- ... video modal content ... -->
+    </div>
+
+     <!-- New Promptly Animation Modal -->
+    <div class="animation-modal" id="promptlyModal">
+        <div class="animation-modal-content">
+            <button class="close-modal" onclick="closeAnimationModal()">&times;</button>
+            <div class="promptly-demo-modal-content"> {/* Wrapper for the animation content */}
+                <!-- Promptly Animation HTML goes here (Copied from solutions.html) -->
+                <div class="promptly-card"> {/* This needs to be adapted as it was designed for a different layout */}
+                   <div class="promptly-header">How can we help you today?</div>
+                    <textarea id="promptlyInputModal" placeholder="Describe your issue..."></textarea> {/* Added Modal suffix to ID */}
+                    <div class="feedback-bar">
+                        <div class="feedback-progress" id="feedbackProgressModal"></div> {/* Added Modal suffix to ID */}
+                        <span class="feedback-label" id="feedbackLabelModal">Clarity: 45%</span> {/* Added Modal suffix to ID */}
+                    </div>
+                    <div class="feedback-message" id="feedbackMessageModal"> {/* Added Modal suffix to ID */}
+                        <i class="fas fa-exclamation-circle"></i> Please add more specifics about your issue
+                    </div>
+                    <span class="submit-label" id="submitPromptLabelModal"> {/* Added Modal suffix to ID */}
+                        <i class="fas fa-paper-plane"></i> Submit Request
+                    </span>
+                    <div class="smart-feedback">
+                        <div class="smart-feedback-title"><i class="fas fa-lightbulb"></i> Smart Feedback</div>
+                        <ul id="smartFeedbackModal"> {/* Added Modal suffix to ID */}
+                            <li>Technical information (device, browser, app version)</li>
+                            <li>Clear statement of what you need help with</li>
+                            <li>Steps you've already tried to resolve the issue</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+
     <script>
+        // Existing script for fade-in (keep)
         document.addEventListener("DOMContentLoaded", function() {
-            // Fade in the heading
             const heading = document.querySelector('.fade-in-heading');
             const card = document.querySelector('.fade-in-card');
             if (heading) {
@@ -724,10 +734,125 @@
             if (card) {
                 setTimeout(() => {
                     card.classList.add('visible');
-                }, 900); // appears after heading
+                }, 900);
             }
         });
+
+         // === Promptly Animation Script (Copied and adapted from solutions.js) ===
+        const inputModal = document.getElementById('promptlyInputModal');
+        const progressModal = document.getElementById('feedbackProgressModal');
+        const labelModal = document.getElementById('feedbackLabelModal');
+        const messageModal = document.getElementById('feedbackMessageModal');
+        const smartFeedbackModal = document.getElementById('smartFeedbackModal'); // Use the ID
+
+        // Helper to interpolate between two colors (Copied from solutions.js)
+        function lerpColor(a, b, amount) {
+           // ... lerpColor function code ...
+        }
+
+        // Deep, realistic demo scenarios (Audit, Legal, IT) - Copied from solutions.js
+        const demoScenarios = [
+           // ... demoScenarios array with all scenarios and feedback ...
+        ];
+
+        let scenarioIdx = 0;
+        let charIdx = 0;
+        const typingDelay = 80; // Consistent typing delay
+        let currentTypingInterval;
+
+        function updateDemoModal(val, feedbackArr) { // Renamed function
+            const scenario = demoScenarios[scenarioIdx];
+            let percent = Math.min(100, Math.floor((val.length / scenario.text.length) * 100));
+
+            let color;
+            if (percent < 25) { color = lerpColor('#f44336', '#ff9800', percent / 25); }
+            else if (percent < 50) { color = lerpColor('#ff9800', '#ffeb3b', (percent - 25) / 25); }
+            else if (percent < 75) { color = lerpColor('#ffeb3b', '#8bc34a', (percent - 50) / 25); }
+            else { color = lerpColor('#8bc34a', '#4CAF50', (percent - 75) / 25); }
+
+            progressModal.style.width = percent + "%";
+            progressModal.style.background = color;
+            labelModal.textContent = percent > 0 ? `Clarity: ${percent}%` : "";
+
+            if (percent === 0) { messageModal.innerHTML = ""; }
+            else if (percent < 40) { messageModal.innerHTML = `<i class="fas fa-exclamation-circle"></i> Please add more specifics about your request.`; messageModal.style.color = "#ff9800"; }
+            else if (percent < 80) { messageModal.innerHTML = `<i class="fas fa-info-circle"></i> Add more details for faster review.`; messageModal.style.color = "#0099ff"; }
+            else { messageModal.innerHTML = `<i class="fas fa-check-circle"></i> Ready to submit! Your request is clear.`; messageModal.style.color = "#43a047"; }
+
+            let feedbackToShow = [];
+            if (percent < 30) { feedbackToShow = feedbackArr.slice(0, 1); }
+            else if (percent < 60) { feedbackToShow = feedbackArr.slice(0, Math.ceil(feedbackArr.length / 2)); }
+            else if (percent < 90) { feedbackToShow = feedbackArr.slice(0, feedbackArr.length - (percent > 85 ? 0 : 1)); }
+            else { feedbackToShow = ["All required details provided. Ready to submit!"]; }
+
+            smartFeedbackModal.innerHTML = feedbackToShow.length > 0 ? feedbackToShow.map(f => `<li>${f}</li>`).join('') : '<li>Awaiting input...</li>';
+        }
+
+        function runTypingDemoModal() { // Renamed function
+            inputModal.value = "";
+            charIdx = 0;
+            updateDemoModal("", demoScenarios[scenarioIdx].feedback);
+            progressModal.style.background = '#f44336'; // Reset color
+
+            if (currentTypingInterval) clearInterval(currentTypingInterval);
+
+            const scenario = demoScenarios[scenarioIdx];
+            currentTypingInterval = setInterval(() => {
+                if (charIdx <= scenario.text.length) {
+                    inputModal.value = scenario.text.slice(0, charIdx);
+                    updateDemoModal(inputModal.value, scenario.feedback);
+                    charIdx++;
+                } else {
+                    clearInterval(currentTypingInterval);
+                    setTimeout(() => {
+                        scenarioIdx = (scenarioIdx + 1) % demoScenarios.length;
+                        charIdx = 0;
+                        runTypingDemoModal();
+                    }, 2200);
+                }
+            }, typingDelay);
+        }
+
+        // Disable manual input for demo modal
+        if (inputModal) { // Check if element exists
+             inputModal.setAttribute('readonly', true);
+        }
+
+
+        // === Modal Control Script ===
+        const promptlyModal = document.getElementById('promptlyModal');
+        // const videoModal = document.getElementById('videoModal'); // If you still have this
+
+        function playAnimationModal() { // Function triggered by the button
+            promptlyModal.style.display = 'flex'; // Show the modal
+            runTypingDemoModal(); // Start the animation
+        }
+
+        function closeAnimationModal() { // Function to close the modal
+            promptlyModal.style.display = 'none'; // Hide the modal
+            if (currentTypingInterval) clearInterval(currentTypingInterval); // Stop the animation
+             // Reset the input and feedback when closing
+             inputModal.value = "";
+             progressModal.style.width = "0%";
+             progressModal.style.background = "#e0e7ef";
+             labelModal.textContent = "";
+             messageModal.innerHTML = "";
+             smartFeedbackModal.innerHTML = "";
+        }
+
+         // Optional: Close modal if clicked outside content
+        promptlyModal.addEventListener('click', function(e) {
+            if (e.target === promptlyModal) {
+                closeAnimationModal();
+            }
+        });
+
+
+        // Removed old playFullVideo and closeVideoModal if they are not needed anymore
+        // If playFullVideo is still in your HTML onclick, change it to playAnimationModal
+        // If closeVideoModal is still in your HTML onclick, change it to closeAnimationModal for the new modal
+
     </script>
-    <script src="solutions.js"></script>
+    <!-- Removed old solutions.js script include -->
 </body>
 </html> 

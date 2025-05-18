@@ -28,13 +28,246 @@
     filter: grayscale(0%); /* Color on hover */
 }
 
-/* New styles for Solution Overview section */
+/* New styles for Solution Overview section (Enhanced for prominence) */
 .solution-overview {
     text-align: center;
-    padding: 30px 20px; /* Reduced padding */
-    /* Keeping the soft gradient background for visual separation */
-    background: linear-gradient(135deg, #e3f0ff 0%, #ffe3e3 100%);
+    padding: 30px 20px; /* Reverted padding */
+    background: linear-gradient(135deg, #e3f0ff 0%, #ffe3e3 100%); /* Reverted background */
     color: #1a237e;
+    margin-top: 0; /* Keep margin-top 0 for spacing */
+    position: relative;
+    z-index: 1;
+}
+
+.solution-overview .container {
+    max-width: 800px; /* Reverted max-width */
+    margin: 0 auto;
+}
+
+.solution-overview p {
+    font-size: 1.3em; /* Reverted font size */
+    margin-bottom: 0; /* Remove margin below the paragraph since button is gone */
+    line-height: 1.6;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+/* Remove the old watch demo section styles */
+.watch-demo-section {
+    text-align: center;
+    padding: 60px 20px; /* Adjust padding as needed */
+    background-color: #f0f2f5; /* Example background */
+}
+
+.watch-demo-section .watch-demo-container { /* Style for the new wrapper */
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Restore .btn-watch-demo and related styles if they were in style.css */
+.btn-watch-demo {
+    display: inline-block;
+    background: none; /* Remove button background */
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.btn-watch-demo:hover {
+    transform: translateY(-3px);
+}
+
+.btn-watch-demo .preview-container {
+    position: relative;
+    display: inline-block;
+    border-radius: 12px; /* Match image border-radius */
+    overflow: hidden; /* Hide overflow for rounded corners */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+.btn-watch-demo .preview-video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.btn-watch-demo .preview-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: 12px;
+}
+
+.btn-watch-demo .play-icon {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.btn-watch-demo .watch-text {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.btn-watch-demo .watch-text .duration {
+    display: block;
+    font-size: 0.8em;
+    font-weight: 400;
+    opacity: 0.8;
+    margin-top: 3px;
+}
+
+/* === New Modal Styles for Animation === */
+.animation-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000; /* High z-index to be on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scrolling if content is too tall */
+    background-color: rgba(0, 0, 0, 0.7); /* Dark overlay background */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+
+.animation-modal-content {
+    background-color: #fefefe; /* White background for modal content */
+    margin: auto; /* Auto margins for centering */
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 550px; /* Max width for the animation card */
+    width: 90%; /* Responsive width */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: relative; /* Needed for close button positioning */
+}
+
+.close-modal {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: #777;
+    text-decoration: none;
+}
+
+.promptly-demo-modal-content {
+    /* Styles for the wrapper inside the modal if needed */
+    padding-top: 20px; /* Space below the close button */
+}
+
+/* === Promptly Animation Styles (Copied from solutions.css and adapted) === */
+/* Copy all the styles for the animation elements from solutions.css here */
+/* .promptly-card { ... } */
+/* .promptly-header { ... } */
+/* textarea#promptlyInputModal { ... } */ /* Use new ID */
+/* .feedback-bar { ... } */
+/* .feedback-progress { ... } */
+/* .feedback-label { ... } */
+/* .feedback-message { ... } */
+/* .submit-label { ... } */
+/* .smart-feedback { ... } */
+/* .smart-feedback-title { ... } */
+/* .smart-feedback ul { ... } */
+/* @keyframes fadeInUp { ... } */
+
+/* Ensure the styles for Promptly elements are copied here from solutions.css */
+/* Example: */
+.promptly-card {
+    /* Keep the styles from solutions.css */
+    background: linear-gradient(120deg, #fffbe6 60%, #e3f0ff 100%);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(44,62,80,0.13);
+    padding: 2rem 1.2rem 1.2rem 1.2rem;
+    max-width: 480px; /* Keep max-width */
+    width: 100%;
+    position: relative;
+    animation: none; /* Remove the initial fadeInUp animation for the modal version */
+    border: 1.5px solid #ffe082;
+    font-size: 0.9rem;
+}
+
+textarea#promptlyInputModal { /* Use the new ID */
+    width: 100%;
+    min-height: 80px;
+    border: 1.5px solid #e0e7ef;
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 0.95rem;
+    color: #222;
+    margin-bottom: 1rem;
+    resize: vertical;
+    transition: border 0.2s;
+    font-family: inherit;
+    background: #f8fafc;
+}
+
+/* ... copy other Promptly related CSS here ... */
+
+/* Styles for the Hero Section Buttons */
+.hero-buttons {
+    margin-top: 40px; /* Ensure spacing below text */
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    gap: 20px; /* Space between buttons */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.hero-buttons .btn { /* Apply general button styling if needed */
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hero-buttons .btn-primary {
+     /* Styles for the primary buttons in the hero section */
+     /* Use styles similar to the original book a demo button */
+    background-color: #0099ff;
+    color: #fff;
+    border: none; /* Remove default border */
+}
+
+.hero-buttons .btn-primary:hover {
+    background-color: #1a237e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure the .btn-watch-demo styles are removed or don't affect anything */
+/* .btn-watch-demo { display: none; } */ /* Or just remove the rule if it's gone */
+
+/* Reverted styles for Solution Overview section */
+.solution-overview {
+    text-align: center;
+    padding: 30px 20px; /* Reverted padding */
+    background: linear-gradient(135deg, #e3f0ff 0%, #ffe3e3 100%); /* Reverted background */
+    color: #1a237e;
+    margin-top: 0;
+    position: relative;
+    z-index: 1;
 }
 
 .solution-overview .container {
@@ -43,31 +276,30 @@
 }
 
 .solution-overview p {
-    font-size: 1.3em; /* Slightly larger font */
-    margin-bottom: 30px;
+    font-size: 1.3em; /* Reverted font size */
+    margin-bottom: 0; /* Remove margin below the paragraph since button is gone */
     line-height: 1.6;
     font-weight: 500;
-    color: #4a5568; /* Subtler text color */
+    color: #4a5568;
 }
 
-.solution-overview .btn-primary {
-    display: inline-block;
-    background-color: #0099ff;
-    color: #fff;
-    padding: 12px 25px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 1.1em;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0, 153, 255, 0.2);
+/* Remove the .btn-primary styles specifically within .solution-overview if they conflict */
+/* .solution-overview .btn-primary { display: none; } */ /* Or just ensure the moved button uses the hero-buttons styling */
+
+/* Reverted styles for the old watch demo section */
+.watch-demo-section {
+    /* Restore original styles or remove display: none */
+    text-align: center;
+    padding: 60px 20px; /* Adjust padding as needed */
+    background-color: #f0f2f5; /* Example background */
+    /* If this section is now empty or only has background/padding, keep it minimal */
+     /* display: none; If this section is truly empty and not needed for spacing */
 }
 
-.solution-overview .btn-primary:hover {
-    background-color: #1a237e;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(26, 35, 126, 0.3);
-}
+/* Remove any styles specifically targeting elements inside the old watch demo button */
+/* .watch-demo-section .watch-demo-container { ... } */
+/* .btn-watch-demo .preview-container { ... } */
+/* etc. */
 
 /* Responsive adjustments for Header Navigation */
 @media (max-width: 768px) {
@@ -104,7 +336,6 @@
         scrollbar-width: none;  /* Firefox */
     }
 
-
     .nav-links li {
         flex-shrink: 0; /* Prevent list items from shrinking */
         margin: 0 10px; /* Adjust spacing between links */
@@ -124,7 +355,7 @@
     }
 
     /* Ensure the header itself doesn't have conflicting overflow settings */
-     header {
+    header {
         overflow-x: hidden; /* Hide any overflow from the header container itself */
-     }
+    }
 } 
