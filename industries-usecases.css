@@ -1,0 +1,194 @@
+/* Specific styles for the Industries & Usecases page */
+
+body {
+    background-color: #f0f0f0; /* Lighter grey background matching the image */
+}
+
+.industries-usecases-main {
+    padding-top: 100px; /* Adjust based on fixed header height */
+    min-height: 100vh;
+    background-color: #f0f0f0; /* Ensure background color */
+}
+
+.usecases-hero {
+    padding: 60px 20px; /* Adjust padding for spacing */
+    background-color: #f0f0f0; /* Match body background */
+}
+
+.usecases-hero .container {
+    max-width: 1100px; /* Increase max-width slightly for a wider layout */
+    margin: 0 auto;
+    display: grid; /* Use grid for text block and tabs layout */
+    grid-template-columns: 1fr; /* Stack content initially */
+    gap: 30px; /* Space between blocks */
+    align-items: start; /* Align items to the top */
+}
+
+/* Grid for the top text block (heading and description) */
+.hero-text-block {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Heading on left, text on right */
+    gap: 60px; /* Space between heading and text */
+    align-items: start;
+}
+
+@media (max-width: 900px) { /* Adjust breakpoint for text block grid */
+    .hero-text-block {
+        grid-template-columns: 1fr; /* Stack heading and text */
+        gap: 20px;
+    }
+}
+
+
+.hero-text-block h1 {
+    font-size: 2.8em; /* Increase heading font size */
+    color: #222; /* Darker color */
+    margin-bottom: 0; /* Remove bottom margin */
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.hero-text-block .hero-description {
+    /* Container for the two paragraphs */
+}
+
+.hero-text-block .hero-description p {
+    font-size: 1.15em; /* Slightly larger text */
+    color: #444; /* Slightly lighter color */
+    line-height: 1.6;
+    margin-bottom: 20px; /* Space between paragraphs */
+}
+
+.hero-text-block .hero-description p:last-child {
+    margin-bottom: 0; /* Remove margin on the last paragraph */
+}
+
+
+.hero-text-block .highlight {
+     font-size: 1.15em;
+     color: #444;
+     font-weight: 500;
+     margin-bottom: 0;
+}
+
+.hero-text-block .highlight span {
+    color: #007bff; /* Blue color for highlight */
+    font-weight: 600;
+}
+
+/* Styles for the horizontal tabs bar */
+.usecases-tabs {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    gap: 0; /* Remove gap between buttons */
+    align-self: center;
+    justify-content: flex-start;
+    background-color: #e9e9e9; /* Light grey background for the bar */
+    border-radius: 30px; /* Pill shape for the bar */
+    padding: 5px; /* Padding inside the bar */
+    overflow-x: auto; /* Enable horizontal scrolling on smaller screens */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+     scrollbar-width: none;  /* Hide scrollbar Firefox */
+    -ms-overflow-style: none;  /* Hide scrollbar IE 10+ */
+}
+
+.usecases-tabs::-webkit-scrollbar {
+    display: none;  /* Hide scrollbar for Chrome, Safari, Edge */
+}
+
+
+.tab-button {
+    flex: 0 0 auto; /* Prevent shrinking, allow content size */
+    padding: 10px 20px;
+    border: none; /* Remove button border */
+    border-radius: 25px; /* Pill shape */
+    background-color: transparent; /* Transparent background by default */
+    color: #555; /* Default text color */
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap; /* Prevent text from wrapping within the button */
+}
+
+.tab-button:hover {
+    background-color: #dcdcdc; /* Slight background on hover */
+    color: #333;
+}
+
+.tab-button.active {
+    background-color: #007bff; /* Blue background for active */
+    color: #fff; /* White text for active */
+    font-weight: 600;
+}
+
+/* Use Case Grid */
+.usecase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive grid, slightly larger tiles */
+    gap: 20px; /* Space between tiles */
+    margin-top: 40px; /* Space below tabs */
+    grid-column: span 1; /* Revert span as container is 1 column */
+}
+
+.usecase-tile {
+    background-color: #fff; /* White background */
+    border: 1px solid #eee; /* Lighter border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 25px; /* Increased padding */
+    text-align: left; /* Align text left */
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.2s ease, min-height 0.3s ease; /* Transition min-height */
+    overflow: hidden; /* Hide overflow content initially */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to top */
+    min-height: 80px; /* Smaller initial min-height for collapsed state */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Subtle shadow */
+}
+
+.usecase-tile h3 {
+    font-size: 1em; /* Smaller font for heading */
+    color: #333; /* Dark text for heading */
+    margin: 0; /* Remove default margin */
+    text-transform: uppercase; /* Uppercase text */
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    flex-shrink: 0; /* Prevent heading from shrinking */
+}
+
+.usecase-tile .tile-hover-content {
+    max-height: 0; /* Hide content initially */
+    opacity: 0; /* Hide opacity initially */
+    padding-top: 0; /* Remove initial padding */
+    margin-top: 0; /* Remove initial margin */
+    border-top: none; /* Remove initial border */
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, padding-top 0.3s ease-in-out, margin-top 0.3s ease-in-out, border-top 0.3s ease-in-out;
+    font-size: 0.95em; /* Slightly larger font for description */
+    color: #555;
+    line-height: 1.5;
+}
+
+.usecase-tile:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Enhanced shadow on hover */
+    transform: translateY(-3px); /* Slight lift effect */
+    min-height: 180px; /* Expand min-height on hover (adjust as needed based on content) */
+}
+
+.usecase-tile:hover .tile-hover-content {
+     max-height: 200px; /* Allow content to expand (adjust as needed) */
+     opacity: 1; /* Show content on hover */
+     margin-top: 15px; /* Add space above content on hover */
+     padding-top: 15px; /* Add padding above content on hover */
+     border-top: 1px solid #eee; /* Add separator line on hover */
+}
+
+
+/* Ensure consistent padding/margin around main content */
+main {
+    padding-bottom: 60px; /* More padding below the grid */
+}
+
+footer {
+    margin-top: 0; /* Remove default footer margin if any */
+} 
