@@ -12,6 +12,8 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 10px 20px 40px 20px;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
         .hero-content h1 {
@@ -42,6 +44,270 @@
             .hero-content p {
                 font-size: 1.1rem;
             }
+        }
+
+        /* Validator Section Styles */
+        .validator-section {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 0.5rem;
+            padding-top: 0;
+            background: linear-gradient(120deg, #f8fafc 60%, #e3f0ff 100%);
+        }
+
+        .validator-card {
+            background: #fff;
+            border-radius: 22px;
+            box-shadow: 0 8px 32px rgba(44,62,80,0.13);
+            padding: 2.8rem 2.2rem 2.2rem 2.2rem;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            transition: box-shadow 0.2s, transform 0.2s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .validator-card:hover {
+            box-shadow: 0 16px 48px rgba(44,62,80,0.18);
+            transform: translateY(-4px) scale(1.03);
+        }
+
+        .validator-main-heading {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(90deg, #1a237e 30%, #0099ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .validator-title {
+            color: #1a237e;
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.7rem;
+        }
+
+        .validator-heading {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 1.3rem;
+        }
+
+        .validator-icon-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .validator-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #e3f0ff 0%, #f8fafc 100%);
+            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+            box-shadow: 0 4px 16px rgba(44,62,80,0.10);
+            position: relative;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+        .validator-icon i {
+            font-size: 2.2rem;
+            color: #1a237e;
+            transition: color 0.2s;
+        }
+
+        .icon-chat i {
+            color: #0099ff;
+        }
+        .icon-form i {
+            color: #43a047;
+        }
+        .icon-contract i {
+            color: #8855ff;
+        }
+
+        .validator-check {
+            position: absolute;
+            right: -22px;
+            bottom: -12px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.10);
+            z-index: 2;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .validator-check i {
+            color: #43a047;
+            font-size: 1.7rem;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        .validator-desc {
+            font-size: 1.08rem;
+            color: #444;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .validator-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            justify-content: center;
+        }
+
+        .validator-tag {
+            color: #1a237e;
+            background: #e3eafc;
+            border-radius: 16px;
+            padding: 0.35rem 1.1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.04);
+        }
+
+        .validator-tag:hover {
+            background: #1a237e;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(44,62,80,0.10);
+        }
+
+        @media (max-width: 600px) {
+            .validator-card {
+                padding: 1.5rem 0.5rem;
+                max-width: 98vw;
+            }
+            .validator-main-heading {
+                font-size: 1.3rem;
+            }
+            .validator-heading {
+                font-size: 1.1rem;
+            }
+            .validator-icon {
+                width: 48px;
+                height: 48px;
+            }
+            .validator-icon i {
+                font-size: 1.3rem;
+            }
+            .validator-check {
+                width: 28px;
+                height: 28px;
+                font-size: 1.1rem;
+                right: -10px;
+                bottom: -8px;
+            }
+        }
+
+        /* Promptly Heading Styles */
+        .promptly-heading {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a237e;
+            margin-top: -1.5rem !important;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(90deg, #1a237e 30%, #0099ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1);
+        }
+
+        .fade-in-heading.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(.4,0,.2,1) 0.3s, transform 0.8s cubic-bezier(.4,0,.2,1) 0.3s;
+        }
+
+        .fade-in-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Remove gap between demo and validator section */
+        .validator-section {
+            margin-top: 0.5rem;
+            padding-top: 0;
+        }
+
+        /* Responsive adjustments for heading */
+        @media (max-width: 600px) {
+            .promptly-heading {
+                font-size: 1.5rem;
+                margin-top: 1rem;
+            }
+        }
+
+        /* Reduce space below demo-stats and hero-diagram */
+        .demo-stats {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .hero-diagram {
+            display: none !important;
+        }
+
+        /* Remove top margin from promptly heading and validator section */
+        .promptly-heading {
+            margin-top: 0.5rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+
+        .validator-section {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* If you want it even tighter, you can do: */
+        .hero-content {
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        .hero {
+            padding-top: 100px;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .hero-diagram,
+        .demo-stats,
+        .promptly-heading,
+        .validator-section {
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+            margin-top: 0 !important;
+            padding-top: 0 !important;
         }
     </style>
 </head>
@@ -83,7 +349,7 @@
             <div class="video-overlay"></div>
         </div>
         <div class="hero-content">
-            <h1>AI-Powered Enterprise<br>Request Intake-Validator</h1>
+            <h1>AI-Powered Request Intake-Validator<br>For Enterprise Teams</h1>
             <p>Supercharge user requests from intake to renewal with real-time inline AI validations, <br>
             ensuring every request is complete and actionable right away — unlocking 30X ROI.</p>
             <div class="hero-buttons">
@@ -116,7 +382,6 @@
             </div>
             <div class="hero-diagram">
                 <img src="spotnub-diagram.png" alt="SpotNub Integration Diagram" class="integration-diagram">
-                
                 <div class="connected-images">
                     <div class="image-container">
                         <img src="Support.png" alt="Support" class="connected-image">
@@ -132,6 +397,44 @@
                     </div>
                     <div class="connecting-line"></div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introducing Promptly Heading -->
+    <div class="promptly-heading fade-in-heading">
+        Introducing Promptly
+    </div>
+
+    <!-- Validator Section -->
+    <section class="validator-section fade-in-card">
+        <div class="validator-card">
+            <div class="validator-title">Turn Input Into Actionable Requests</div>
+            <div class="validator-heading">Proxiom Real-Time Validator</div>
+            <div class="validator-icon-group">
+                <span class="validator-icon icon-chat">
+                    <i class="fas fa-comment-dots"></i>
+                </span>
+                <span class="validator-icon icon-form">
+                    <i class="fas fa-clipboard-list"></i>
+                </span>
+                <span class="validator-icon icon-contract">
+                    <i class="fas fa-file-contract"></i>
+                </span>
+                <span class="validator-icon icon-check">
+                    <i class="fas fa-check-circle"></i>
+                </span>
+            </div>
+            <div class="validator-desc">
+                Analyze freeform input as it's written or spoken, providing real-time feedback to ensure clarity and completeness.
+            </div>
+            <div class="validator-tags">
+                <a href="#" class="validator-tag">Legal</a>
+                <a href="#" class="validator-tag">HR</a>
+                <a href="#" class="validator-tag">IT &amp; Incident Resolution</a>
+                <a href="#" class="validator-tag">Issue Reporting</a>
+                <a href="#" class="validator-tag">Audit</a>
+                <a href="#" class="validator-tag">Customer Support</a>
             </div>
         </div>
     </section>
@@ -197,13 +500,21 @@
     </div>
 
     <script>
-        // Remove these functions as they're no longer needed
-        // function openBookingModal() { ... }
-        // function closeBookingModal() { ... }
-        // function handleBookingSubmit(event) { ... }
-        
-        // Remove the event listener for demo buttons
-        // document.addEventListener('DOMContentLoaded', function() { ... });
+        document.addEventListener("DOMContentLoaded", function() {
+            // Fade in the heading
+            const heading = document.querySelector('.fade-in-heading');
+            const card = document.querySelector('.fade-in-card');
+            if (heading) {
+                setTimeout(() => {
+                    heading.classList.add('visible');
+                }, 200);
+            }
+            if (card) {
+                setTimeout(() => {
+                    card.classList.add('visible');
+                }, 900); // appears after heading
+            }
+        });
     </script>
 </body>
 </html> 

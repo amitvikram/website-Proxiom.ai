@@ -1033,3 +1033,112 @@ footer {
     background: #0066cc;
     transform: translateY(-1px);
 }
+
+/* Validator Section Styles */
+.validator-section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 3rem 0 0 0;
+    padding: 0 1rem;
+}
+
+.validator-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(44,62,80,0.08);
+    padding: 2.5rem 2rem 2rem 2rem;
+    max-width: 370px;
+    width: 100%;
+    text-align: center;
+    transition: box-shadow 0.2s;
+}
+
+.validator-card:hover {
+    box-shadow: 0 8px 32px rgba(44,62,80,0.16);
+}
+
+.validator-title {
+    color: #1a237e;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.7rem;
+}
+
+.validator-heading {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 1.2rem;
+}
+
+.validator-icon {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.2rem;
+}
+
+.validator-icon i.fa-comment-dots {
+    font-size: 3.2rem;
+    color: #90a4ae;
+    background: #f5f7fa;
+    border-radius: 50%;
+    padding: 1.1rem;
+}
+
+.validator-check {
+    position: absolute;
+    right: 18%;
+    bottom: 18%;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.08);
+}
+
+.validator-check i {
+    color: #43a047;
+    font-size: 1.5rem;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.validator-desc {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 1.3rem;
+    line-height: 1.5;
+}
+
+.validator-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    justify-content: center;
+}
+
+.validator-tag {
+    color: #1a237e;
+    background: #e3eafc;
+    border-radius: 16px;
+    padding: 0.3rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.validator-tag:hover {
+    background: #1a237e;
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    .validator-card {
+        padding: 1.5rem 0.5rem;
+        max-width: 98vw;
+    }
+}

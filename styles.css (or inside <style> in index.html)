@@ -1,0 +1,16 @@
+.icon-check i {
+    color: #43a047;
+    font-size: 2.2rem;
+    background: none;
+    border-radius: 50%;
+}
+.validator-check {
+    position: static;
+    background: none;
+    box-shadow: none;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
