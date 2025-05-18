@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promptly Solutions | Proxiom.ai</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="solutions.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <nav class="nav-container">
+            <div class="logo-section">
+                <a href="index.html">
+                    <img src="Proxiom Logo.webp" alt="Proxiom Logo" style="height: 70px;">
+                </a>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="why-us.html">Why Us?</a></li>
+                    <li><a href="marketplace.html">AI Validator Studio</a></li>
+                    <li><a href="solutions.html" class="active">Solutions</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#company">Company</a></li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <a href="#login" class="btn-login">Login</a>
+                <a href="booking.html" class="btn-demo">Book a Demo</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Home Button -->
+    <div class="breadcrumb">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="solutions-hero">
+        <h1>How Promptly Works</h1>
+        <p class="subtitle">
+            Experience the next generation of enterprise request intake—real-time feedback, clarity scoring, and smart guidance for every user.
+        </p>
+    </section>
+
+    <!-- Animated How It Works Section -->
+    <section class="how-it-works">
+        <div class="how-steps">
+            <h2><i class="fas fa-magic"></i> How It Works</h2>
+            <ol>
+                <li>User describes issue (voice or text)</li>
+                <li>Promptly analyzes and guides in real time</li>
+                <li>Feedback bar shows clarity level</li>
+                <li>Smart feedback panel fills in gaps</li>
+                <li>Once clear → prioritized and routed to correct team</li>
+            </ol>
+        </div>
+        <div class="promptly-demo">
+            <div class="promptly-card">
+                <div class="promptly-header">How can we help you today?</div>
+                <textarea id="promptlyInput" placeholder="Describe your issue..."></textarea>
+                <div class="feedback-bar">
+                    <div class="feedback-progress" id="feedbackProgress"></div>
+                    <span class="feedback-label" id="feedbackLabel">Clarity: 45%</span>
+                </div>
+                <div class="feedback-message" id="feedbackMessage">
+                    <i class="fas fa-exclamation-circle"></i> Please add more specifics about your issue
+                </div>
+                <button class="btn-submit" id="submitBtn">
+                    <i class="fas fa-paper-plane"></i> Submit Request
+                </button>
+                <div class="smart-feedback">
+                    <div class="smart-feedback-title"><i class="fas fa-lightbulb"></i> Smart Feedback</div>
+                    <ul>
+                        <li>Technical information (device, browser, app version)</li>
+                        <li>Clear statement of what you need help with</li>
+                        <li>Steps you've already tried to resolve the issue</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="solutions.js"></script>
+</body>
+</html> 

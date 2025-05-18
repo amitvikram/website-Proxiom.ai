@@ -1,0 +1,230 @@
+body {
+    background: #f8fafc;
+}
+
+.breadcrumb {
+    margin: 2rem 0 0 2rem;
+}
+
+.breadcrumb a {
+    color: #0099ff;
+    text-decoration: none;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.breadcrumb a:hover {
+    color: #1a237e;
+}
+
+.solutions-hero {
+    text-align: center;
+    padding: 3rem 1rem 2rem 1rem;
+}
+
+.solutions-hero h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #1a237e;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #1a237e 30%, #0099ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.solutions-hero .subtitle {
+    font-size: 1.2rem;
+    color: #4a5568;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.how-it-works {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    padding: 2rem 1rem 4rem 1rem;
+}
+
+.how-steps {
+    flex: 1 1 320px;
+    max-width: 400px;
+    background: linear-gradient(120deg, #f0f7ff 60%, #e0e7ef 100%);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(44,62,80,0.10);
+    padding: 2rem 2rem 2rem 2rem;
+    margin-bottom: 2rem;
+    margin-left: 1.5rem;
+    border: 1.5px solid #b3d1ff;
+}
+
+.how-steps h2 {
+    font-size: 1.4rem;
+    color: #0099ff;
+    margin-bottom: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.how-steps ol {
+    color: #1a237e;
+    font-size: 1.08rem;
+    line-height: 2;
+    margin-left: 1.2rem;
+}
+
+.promptly-demo {
+    flex: 2 1 480px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.promptly-card {
+    background: linear-gradient(120deg, #fffbe6 60%, #e3f0ff 100%);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(44,62,80,0.13);
+    padding: 2rem 1.2rem 1.2rem 1.2rem;
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+    animation: fadeInUp 1s cubic-bezier(.4,0,.2,1);
+    border: 1.5px solid #ffe082;
+    font-size: 0.98rem;
+}
+
+.promptly-header {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1a237e;
+    margin-bottom: 1rem;
+}
+
+textarea#promptlyInput {
+    width: 100%;
+    min-height: 80px;
+    border: 1.5px solid #e0e7ef;
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 1.05rem;
+    color: #222;
+    margin-bottom: 1rem;
+    resize: vertical;
+    transition: border 0.2s;
+    font-family: inherit;
+    background: #f8fafc;
+}
+
+textarea#promptlyInput:focus {
+    border: 1.5px solid #0099ff;
+    outline: none;
+}
+
+.feedback-bar {
+    width: 100%;
+    height: 10px;
+    background: #e0e7ef;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.feedback-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #ff9800 0%, #0099ff 100%);
+    border-radius: 6px;
+    width: 45%;
+    transition: width 0.7s cubic-bezier(.4,0,.2,1);
+}
+
+.feedback-label {
+    position: absolute;
+    right: 10px;
+    top: -22px;
+    font-size: 0.95rem;
+    color: #0099ff;
+    font-weight: 600;
+}
+
+.feedback-message {
+    color: #ff9800;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 24px;
+    transition: color 0.3s;
+}
+
+.btn-submit {
+    background: #0099ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-submit:hover {
+    background: #1a237e;
+    transform: translateY(-2px) scale(1.03);
+}
+
+.smart-feedback {
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-top: 1.5rem;
+    font-size: 0.98rem;
+    color: #1a237e;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.04);
+}
+
+.smart-feedback-title {
+    font-weight: 700;
+    color: #0099ff;
+    margin-bottom: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.smart-feedback ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+@media (max-width: 900px) {
+    .how-it-works {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+    .how-steps {
+        margin-left: 0;
+        max-width: 90%;
+    }
+    .promptly-card {
+        max-width: 90%;
+    }
+} 
