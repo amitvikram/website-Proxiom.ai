@@ -319,26 +319,23 @@ textarea#promptlyInputModal { /* Use the new ID */
     }
 
     .nav-links ul {
-        display: flex; /* Keep flex for horizontal layout */
-        justify-content: center; /* Center links */
-        overflow-x: auto; /* **Allow horizontal scrolling** */
-        white-space: nowrap; /* **Prevent links from wrapping** */
-        padding-bottom: 8px; /* Add padding for potential scrollbar */
-        -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+        display: flex; /* Ensure items are in a row */
+        overflow-x: auto; /* Enable horizontal scrolling */
+        -webkit-overflow-scrolling: touch; /* Smoother scrolling on iOS */
+        white-space: nowrap; /* Prevent wrapping */
+        padding-bottom: 10px; /* Add some padding for the scrollbar space if visible */
+        /* Optional: Hide scrollbar */
+        scrollbar-width: none;  /* Firefox */
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
     }
 
-    /* Hide scrollbar for cleaner look, optional */
     .nav-links ul::-webkit-scrollbar {
-        display: none;
-    }
-    .nav-links ul {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
+        display: none;  /* Safari and Chrome */
     }
 
     .nav-links li {
-        flex-shrink: 0; /* Prevent list items from shrinking */
-        margin: 0 10px; /* Adjust spacing between links */
+        flex: 0 0 auto; /* Prevent list items from shrinking */
+        margin-right: 20px; /* Keep spacing between items */
     }
 
     .nav-actions {
