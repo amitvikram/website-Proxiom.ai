@@ -1124,16 +1124,22 @@ footer {
     color: #1a237e;
     background: #e3eafc;
     border-radius: 16px;
-    padding: 0.3rem 1rem;
-    font-size: 0.95rem;
+    padding: 0.35rem 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
-    text-decoration: none;
-    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.04);
+    display: inline-block;
+    cursor: default;
+    pointer-events: none; /* Prevents any mouse interaction */
+    user-select: none; /* Prevents text selection */
 }
 
+/* Remove all hover effects and transitions */
 .validator-tag:hover {
-    background: #1a237e;
-    color: #fff;
+    background: #e3eafc;
+    color: #1a237e;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.04);
+    transform: none;
 }
 
 @media (max-width: 600px) {

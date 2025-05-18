@@ -309,6 +309,166 @@
             margin-top: 0 !important;
             padding-top: 0 !important;
         }
+
+        /* Key Benefits Card Styles */
+        .key-benefits-card {
+            background: linear-gradient(120deg, #f8fafc 60%, #e3f0ff 100%);
+            border: 1.5px solid #e0e7ef;
+            box-shadow: 0 6px 24px rgba(44,62,80,0.10);
+            padding: 2.2rem 2rem 2rem 2rem;
+            border-radius: 16px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            min-height: 340px;
+        }
+
+        .key-benefits-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .key-benefits-header i {
+            color: #0099ff;
+            font-size: 2rem;
+            background: #e3f0ff;
+            border-radius: 50%;
+            padding: 0.5rem;
+        }
+
+        .key-benefits-header h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1a237e;
+            margin: 0;
+            letter-spacing: -0.01em;
+        }
+
+        .key-benefits-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+            width: 100%;
+        }
+
+        .key-benefits-list li {
+            display: flex;
+            align-items: center;
+            font-size: 1.08rem;
+            color: #1a237e;
+            font-weight: 500;
+            gap: 0.9rem;
+            background: #fff;
+            border-radius: 10px;
+            padding: 0.7rem 1rem;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.04);
+            transition: box-shadow 0.2s, background 0.2s;
+        }
+
+        .key-benefits-list li:hover {
+            box-shadow: 0 4px 16px rgba(44,62,80,0.10);
+            background: #f0f7ff;
+        }
+
+        .benefit-icon-bullet {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            background: #e3f0ff;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+
+        .benefit-icon-bullet i {
+            color: #0099ff;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .key-benefits-card {
+                padding: 1.2rem 0.7rem;
+                min-height: unset;
+            }
+            .key-benefits-header h3 {
+                font-size: 1.1rem;
+            }
+            .key-benefits-list li {
+                font-size: 0.98rem;
+                padding: 0.6rem 0.7rem;
+            }
+        }
+
+        .key-benefit {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 6px 24px rgba(44,62,80,0.10);
+            border: 1.5px solid #e0e7ef;
+            padding: 2.2rem 2rem 2rem 2rem;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            min-height: 320px;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+        .key-benefit:hover {
+            box-shadow: 0 12px 32px rgba(44,62,80,0.13);
+            transform: translateY(-6px) scale(1.02);
+        }
+
+        .key-benefit-icon {
+            background: linear-gradient(135deg, #0099ff 0%, #1a237e 100%);
+            box-shadow: 0 4px 16px rgba(0,153,255,0.13);
+            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .key-benefit-icon i {
+            color: #fff;
+            font-size: 1.6rem;
+        }
+
+        .key-benefit h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 0.7rem;
+            margin-top: 0;
+        }
+
+        .key-benefit p {
+            color: #4a5568;
+            font-size: 0.98rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .key-benefit {
+                padding: 1.2rem 0.7rem;
+                min-height: unset;
+            }
+            .key-benefit h3 {
+                font-size: 1rem;
+            }
+            .key-benefit p {
+                font-size: 0.92rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -429,12 +589,12 @@
                 Analyze freeform input as it's written or spoken, providing real-time feedback to ensure clarity and completeness.
             </div>
             <div class="validator-tags">
-                <a href="#" class="validator-tag">Legal</a>
-                <a href="#" class="validator-tag">HR</a>
-                <a href="#" class="validator-tag">IT &amp; Incident Resolution</a>
-                <a href="#" class="validator-tag">Issue Reporting</a>
-                <a href="#" class="validator-tag">Audit</a>
-                <a href="#" class="validator-tag">Customer Support</a>
+                <span class="validator-tag">Legal</span>
+                <span class="validator-tag">HR</span>
+                <span class="validator-tag">IT &amp; Incident Resolution</span>
+                <span class="validator-tag">Issue Reporting</span>
+                <span class="validator-tag">Audit</span>
+                <span class="validator-tag">Customer Support</span>
             </div>
         </div>
     </section>
@@ -445,29 +605,6 @@
         <div class="logo-grid">
             <!-- Add your client logos here -->
         </div>
-        <div class="testimonial">
-            <blockquote>
-                "Your customer testimonial here"
-            </blockquote>
-            <cite>
-                <strong>Customer Name</strong>
-                <span>Customer Title, Company</span>
-            </cite>
-        </div>
-    </section>
-
-    <!-- Main Features -->
-    <section class="features">
-        <div class="feature-card">
-            <h3>Feature 1</h3>
-            <p>Description of your first main feature</p>
-            <ul>
-                <li>Benefit 1</li>
-                <li>Benefit 2</li>
-                <li>Benefit 3</li>
-            </ul>
-        </div>
-        <!-- Add more feature cards as needed -->
     </section>
 
     <!-- Footer -->
