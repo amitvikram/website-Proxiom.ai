@@ -502,6 +502,33 @@
         .smart-feedback {
             font-size: 0.95rem;
         }
+
+        /* New styles for Solution Overview section */
+        .solution-overview {
+            text-align: center;
+            padding: 30px 20px; /* Reduced padding */
+            /* Keeping the soft gradient background for visual separation */
+            background: linear-gradient(135deg, #e3f0ff 0%, #ffe3e3 100%);
+            color: #1a237e;
+        }
+
+        .solution-overview .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .solution-overview .btn-primary {
+            display: inline-block;
+            background-color: #0099ff;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 153, 255, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -637,6 +664,21 @@
         <h2>Trusted by teams that keep the digital world running</h2>
         <div class="logo-grid">
             <!-- Add your client logos here -->
+        </div>
+    </section>
+
+    <!-- New Solution Section -->
+    <section class="solution-overview">
+        <div class="container">
+            <a href="solutions.html" class="btn-primary">Learn More About Our Solution &rarr;</a>
+        </div>
+    </section>
+
+    <!-- Watch Demo Section -->
+    <section class="watch-demo-section">
+        <div class="video-background">
+            <!-- Replace with your actual video or image background -->
+            <img src="watch-demo-bg.jpg" alt="Demo Background">
         </div>
     </section>
 

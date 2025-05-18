@@ -1,0 +1,130 @@
+.trusted-by {
+    text-align: center;
+    padding: 30px 20px; /* Adjusted padding */
+    background-color: #f8fafc; /* Keeping a light background */
+}
+
+.trusted-by h2 {
+    font-size: 1.5em;
+    color: #1a237e;
+    margin-bottom: 20px;
+}
+
+.trusted-by .logos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    opacity: 0.6; /* Make logos slightly subtle */
+}
+
+.trusted-by .logos img {
+    max-height: 40px;
+    filter: grayscale(100%); /* Make logos grayscale */
+    transition: filter 0.3s ease;
+}
+
+.trusted-by .logos img:hover {
+    filter: grayscale(0%); /* Color on hover */
+}
+
+/* New styles for Solution Overview section */
+.solution-overview {
+    text-align: center;
+    padding: 30px 20px; /* Reduced padding */
+    /* Keeping the soft gradient background for visual separation */
+    background: linear-gradient(135deg, #e3f0ff 0%, #ffe3e3 100%);
+    color: #1a237e;
+}
+
+.solution-overview .container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.solution-overview p {
+    font-size: 1.3em; /* Slightly larger font */
+    margin-bottom: 30px;
+    line-height: 1.6;
+    font-weight: 500;
+    color: #4a5568; /* Subtler text color */
+}
+
+.solution-overview .btn-primary {
+    display: inline-block;
+    background-color: #0099ff;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 153, 255, 0.2);
+}
+
+.solution-overview .btn-primary:hover {
+    background-color: #1a237e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(26, 35, 126, 0.3);
+}
+
+/* Responsive adjustments for Header Navigation */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 20px; /* Adjust padding for mobile */
+    }
+
+    .logo-section {
+        margin-bottom: 15px; /* Space below logo */
+    }
+
+    .nav-links {
+        width: 100%; /* Allow nav links to take full width */
+        margin-bottom: 15px; /* Space below nav links */
+    }
+
+    .nav-links ul {
+        display: flex; /* Keep flex for horizontal layout */
+        justify-content: center; /* Center links */
+        overflow-x: auto; /* **Allow horizontal scrolling** */
+        white-space: nowrap; /* **Prevent links from wrapping** */
+        padding-bottom: 8px; /* Add padding for potential scrollbar */
+        -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+    }
+
+    /* Hide scrollbar for cleaner look, optional */
+    .nav-links ul::-webkit-scrollbar {
+        display: none;
+    }
+    .nav-links ul {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+
+    .nav-links li {
+        flex-shrink: 0; /* Prevent list items from shrinking */
+        margin: 0 10px; /* Adjust spacing between links */
+    }
+
+    .nav-actions {
+        flex-direction: column;
+        gap: 10px; /* Space between buttons */
+        width: 100%;
+    }
+
+    .nav-actions .btn-login,
+    .nav-actions .btn-demo {
+        width: 100%; /* Make buttons take full width */
+        text-align: center;
+        padding: 10px; /* Adjust button padding */
+    }
+
+    /* Ensure the header itself doesn't have conflicting overflow settings */
+     header {
+        overflow-x: hidden; /* Hide any overflow from the header container itself */
+     }
+} 

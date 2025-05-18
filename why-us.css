@@ -9,7 +9,7 @@
 }
 
 .why-us-hero h1 {
-    font-size: 2.8rem;
+    font-size: 2rem;
     margin-bottom: 1.5rem;
     color: #1a237e;
     font-weight: 600;
@@ -20,7 +20,7 @@
 }
 
 .why-us-hero .subtitle {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     line-height: 1.7;
     color: #2A2A3A;
     margin: 0 0 1.5rem 0;
@@ -31,6 +31,16 @@
 
 .why-us-hero .subtitle:last-child {
     margin-bottom: 0;
+}
+
+.why-us-hero p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #2A2A3A;
+    margin: 0 0 1.5rem 0;
+    max-width: 800px;
+    text-align: left;
+    font-weight: 400;
 }
 
 .container {
@@ -66,7 +76,7 @@
 
 /* Benefits Grid */
 .benefits {
-    padding: 6rem 0;
+    padding: 5rem 0;
     background: #fff;
     position: relative;
 }
@@ -120,17 +130,17 @@
 }
 
 .benefit-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
     color: #1a237e;
     font-weight: 600;
 }
 
 .benefit-card p {
     color: #4a5568;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
 }
 
 /* ROI Stats */
@@ -317,20 +327,24 @@
     }
 
     .why-us-hero h1 {
-        font-size: 2.2rem;
+        font-size: 1.6rem;
+    }
+
+    .why-us-hero p {
+        font-size: 0.9rem;
     }
 
     .why-us-hero .subtitle {
-        font-size: 1rem;
+        font-size: 0.9rem;
         padding: 0 1rem;
     }
 
     .benefits {
-        padding: 3rem 0;
+        padding: 2.5rem 0;
     }
 
     .benefit-card {
-        padding: 1.5rem;
+        padding: 1.2rem;
     }
 
     .roi-stats {
@@ -341,6 +355,23 @@
 
     .lab-metrics {
         padding: 3rem 1.5rem;
+    }
+
+    .key-benefits-header h3 {
+        font-size: 0.9rem;
+    }
+
+    .key-benefits-list li {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.6rem;
+    }
+
+    .key-benefit h3 {
+        font-size: 0.85rem;
+    }
+
+    .key-benefit p {
+        font-size: 0.8rem;
     }
 }
 

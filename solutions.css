@@ -96,11 +96,11 @@ body {
     position: relative;
     animation: fadeInUp 1s cubic-bezier(.4,0,.2,1);
     border: 1.5px solid #ffe082;
-    font-size: 0.98rem;
+    font-size: 0.9rem;
 }
 
 .promptly-header {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: #1a237e;
     margin-bottom: 1rem;
@@ -112,7 +112,7 @@ textarea#promptlyInput {
     border: 1.5px solid #e0e7ef;
     border-radius: 8px;
     padding: 1rem;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     color: #222;
     margin-bottom: 1rem;
     resize: vertical;
@@ -148,14 +148,14 @@ textarea#promptlyInput:focus {
     position: absolute;
     right: 10px;
     top: -22px;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: #0099ff;
     font-weight: 600;
 }
 
 .feedback-message {
     color: #ff9800;
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -164,33 +164,29 @@ textarea#promptlyInput:focus {
     transition: color 0.3s;
 }
 
-.btn-submit {
-    background: #0099ff;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    margin-top: 0.5rem;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-    display: flex;
+/* Removed .btn-submit styles and added styles for the new label */
+.submit-label {
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-}
-
-.btn-submit:hover {
-    background: #1a237e;
-    transform: translateY(-2px) scale(1.03);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a237e;
+    margin-top: 0.5rem;
+    cursor: default;
+    background-color: #fff;
+    padding: 0.5rem 1rem;
+    border: 1px solid #e0e7ef;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.05);
 }
 
 .smart-feedback {
     background: #f8fafc;
     border-radius: 10px;
-    padding: 1rem 1.2rem;
-    margin-top: 1.5rem;
-    font-size: 0.98rem;
+    padding: 0.9rem 1.1rem;
+    margin-top: 1.2rem;
+    font-size: 0.9rem;
     color: #1a237e;
     box-shadow: 0 2px 8px rgba(44,62,80,0.04);
 }
@@ -198,7 +194,7 @@ textarea#promptlyInput:focus {
 .smart-feedback-title {
     font-weight: 700;
     color: #0099ff;
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.6rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -206,7 +202,7 @@ textarea#promptlyInput:focus {
 
 .smart-feedback ul {
     margin: 0;
-    padding-left: 1.2rem;
+    padding-left: 1.1rem;
 }
 
 @keyframes fadeInUp {
