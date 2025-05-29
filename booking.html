@@ -7,6 +7,153 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="booking.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Add responsive header styles here */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 80px;
+        }
+
+        .logo-section img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-links ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #1a237e;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #0099ff;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-login {
+            color: #1a237e;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background-color: #e3f0ff;
+        }
+
+        .btn-demo {
+            background-color: #1a237e;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-demo:hover {
+            background-color: #0099ff;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background-color: #1a237e;
+            transition: all 0.3s ease;
+        }
+
+        .nav-actions.mobile {
+            display: none; /* Hide mobile actions by default */
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background-color: white;
+                padding: 20px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-links ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-actions {
+                display: none;
+            }
+
+            .nav-actions.mobile {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+                margin-top: 15px;
+            }
+
+            .nav-actions.mobile .btn-login,
+            .nav-actions.mobile .btn-demo {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-actions.mobile .btn-demo {
+                color: #fff; /* Make text white for visibility */
+            }
+
+            .nav-actions.mobile .btn-login {
+                color: #1a237e; /* Ensure login button text is dark blue */
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header Navigation -->
@@ -14,18 +161,28 @@
         <nav class="nav-container">
             <div class="logo-section">
                 <a href="index.html">
-                    <img src="Proxiom Logo.webp" alt="Proxiom Logo" style="height: 70px;">
+                    <img src="Proxiom Logo.webp" alt="Proxiom Logo">
                 </a>
             </div>
             
-            <div class="nav-links">
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="nav-links" id="navLinks">
                 <ul>
                     <li><a href="why-us.html">Why Us?</a></li>
                     <li><a href="marketplace.html">AI Validator Studio</a></li>
-                    <li><a href="#solutions">Solutions</a></li>
-                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="Solutions_L1L2.html">Solutions</a></li>
+                    <li><a href="industries-usecases.html">Industries & Usecases</a></li>
                     <li><a href="#company">Company</a></li>
                 </ul>
+                <div class="nav-actions mobile">
+                    <a href="#login" class="btn-login">Login</a>
+                    <a href="booking.html" class="btn-demo">Book a Demo</a>
+                </div>
             </div>
 
             <div class="nav-actions">
@@ -80,5 +237,38 @@
     </div>
 
     <script src="booking.js"></script>
+    <script>
+        // Add this script for mobile menu toggle
+        document.getElementById('mobileMenuToggle').addEventListener('click', function() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+            
+            // Animate hamburger to X
+            const spans = this.querySelectorAll('span');
+            if (navLinks.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navLinks = document.getElementById('navLinks');
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            
+            if (!navLinks.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                navLinks.classList.remove('active');
+                const spans = mobileMenuToggle.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+    </script>
 </body>
 </html> 
