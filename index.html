@@ -827,11 +827,11 @@
                     <div class="hero-visual">
                         <div class="sootro-diagram">
                             <div class="diagram-title">Sootro Intelligence Flow</div>
-                            <div class="flow-step">📊 Log Ingestion & Analysis </div>
+                            <div class="flow-step">📊 Log Ingestion & Parsing</div>
                             <div class="arrow">↓</div>
                             <div class="flow-step">🧠 AI Pattern Recognition</div>
                             <div class="arrow">↓</div>
-                            <div class="flow-step">🔗 Knowledge Graph and Relationships</div>
+                            <div class="flow-step">🔗 Graph Relationship Mapping</div>
                             <div class="arrow">↓</div>
                             <div class="flow-step">⚡ Instant Root Cause Analysis</div>
                         </div>
@@ -909,13 +909,13 @@
                     <div class="architecture-visual">
                         <h3 style="color: #667eea; text-align: center; margin-bottom: 1.5rem;">Enterprise-Grade Architecture</h3>
                         <div class="tech-stack">
-                            <div class="tech-item">Vector Search<br><small></small></div>
-                            <div class="tech-item">Graph Database<br><small></small></div>
-                            <div class="tech-item">Document Store<br><small></small></div>
-                            <div class="tech-item">Stream Processing<br><small></small></div>
-                            <div class="tech-item">Big Data<br><small></small></div>
-                            <div class="tech-item">Orchestration<br><small></small></div>
-                            <div class="tech-item">AI/ML<br><small></small></div>
+                            <div class="tech-item">Vector Search<br><small>Milvus/Chroma</small></div>
+                            <div class="tech-item">Graph Database<br><small>Neo4j/Memgraph</small></div>
+                            <div class="tech-item">Document Store<br><small>MongoDB</small></div>
+                            <div class="tech-item">Stream Processing<br><small>Kafka/Flink</small></div>
+                            <div class="tech-item">Big Data<br><small>PySpark/Hadoop</small></div>
+                            <div class="tech-item">Orchestration<br><small>Kubernetes</small></div>
+                            <div class="tech-item">AI/ML<br><small>LLM Agents</small></div>
                             <div class="tech-item">Cloud Ready<br><small>AWS/Azure/GCP</small></div>
                         </div>
                     </div>
@@ -966,7 +966,7 @@
                     <div class="feature-card">
                         <div class="feature-icon">🧠</div>
                         <h3 class="feature-title">Intelligent Code Analysis</h3>
-                        <p class="feature-description">Automatically analyzes your codebase to identify high-risk components and map critical dependencies.</p>
+                        <p class="feature-description">EnhancedCodeGraphBuilder parses source code, scores methods, and builds weighted relationship graphs for deep insights.</p>
                         <ul class="feature-benefits">
                             <li>Method complexity scoring</li>
                             <li>Dependency mapping</li>
@@ -978,10 +978,11 @@
                     <div class="feature-card">
                         <div class="feature-icon">🔗</div>
                         <h3 class="feature-title">Smart Integrations</h3>
-                        <p class="feature-description">Connect with GitHub for PR analysis and Jira for issue tracking. All data is searchable for instant context.</p>
+                        <p class="feature-description">Connect with GitHub for PR analysis and Jira for issue tracking. All data vectorized and searchable for instant context.</p>
                         <ul class="feature-benefits">
                             <li>GitHub PR archiving</li>
                             <li>Jira story ingestion</li>
+                            <li>Similarity search</li>
                             <li>Cross-platform insights</li>
                         </ul>
                     </div>
@@ -989,7 +990,7 @@
                     <div class="feature-card">
                         <div class="feature-icon">⚡</div>
                         <h3 class="feature-title">Lightning-Fast Queries</h3>
-                        <p class="feature-description">Delivers lightning-fast responses to natural language queries about your systems. </p>
+                        <p class="feature-description">FastAPI-powered service with configurable LLM endpoints for query generation, refinement, and customizable code summaries.</p>
                         <ul class="feature-benefits">
                             <li>Sub-second responses</li>
                             <li>Natural language queries</li>
@@ -1000,7 +1001,7 @@
 
                     <div class="feature-card">
                         <div class="feature-icon">📊</div>
-                        <h3 class="feature-title">Relationship-Based Insights</h3>
+                        <h3 class="feature-title">Graph-Based Insights</h3>
                         <p class="feature-description">Visualize complex relationships between logs, code, and business context in an intuitive graph interface.</p>
                         <ul class="feature-benefits">
                             <li>Interactive visualization</li>
@@ -1040,7 +1041,7 @@
                     </div>
                     <div class="content-card">
                         <h3>🔒 Security First</h3>
-                        <p>Your critical application logs never leave your secure environment, eliminating sensitive data breaches.</p>
+                        <p>End-to-end encryption, role-based access control, and compliance with enterprise security standards including SOC2 and GDPR.</p>
                     </div>
                     <div class="content-card">
                         <h3>📈 Auto-Scaling</h3>
@@ -1103,7 +1104,7 @@
                 <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">Choose the plan that fits your team's needs</p>
 
                 <div class="pricing-grid">
-             <!--       <div class="pricing-card">
+                    <div class="pricing-card">
                         <div class="pricing-header">
                             <h3>Starter</h3>
                             <div class="price">$29</div>
@@ -1117,7 +1118,7 @@
                             <li>Basic dashboard</li>
                         </ul>
                         <a onclick="showPage('demo')" class="cta-button" style="width: 100%;">Start Free Trial</a>
-                    </div>  -->
+                    </div>
 
                     <div class="pricing-card featured">
                         <div class="pricing-header">
@@ -1128,7 +1129,7 @@
                         <ul class="pricing-features">
                             <li>Up to 100GB log processing</li>
                             <li>Advanced AI pattern recognition</li>
-                            <li>Upto 5 integrations</li>
+                            <li>Unlimited integrations</li>
                             <li>Priority support</li>
                             <li>Advanced analytics</li>
                             <li>Code graph analysis</li>
@@ -1204,21 +1205,21 @@
                 <h2>Leadership Team</h2>
                 <div class="content-grid">
                     <div class="content-card">
-                        <h3>👨‍💼 Co-Founder</h3>
+                        <h3>👨‍💼 CEO & Co-Founder</h3>
                         <p>Former Principal Engineer at leading tech companies with 15+ years of experience in distributed systems and AI.</p>
                     </div>
                     <div class="content-card">
-                        <h3>👩‍💻 Co-Founder</h3>
-                        <p>AI/ML expert with xtensive experience in natural language processing and graph analytics.</p>
+                        <h3>👩‍💻 CTO & Co-Founder</h3>
+                        <p>AI/ML expert with PhD in Computer Science and extensive experience in natural language processing and graph analytics.</p>
                     </div>
-               <!--     <div class="content-card">
+                    <div class="content-card">
                         <h3>👨‍🔬 VP of Engineering</h3>
                         <p>Former engineering leader at major cloud providers with deep expertise in scalable infrastructure and DevOps.</p>
                     </div>
                     <div class="content-card">
                         <h3>👩‍💼 VP of Product</h3>
                         <p>Product strategy expert with track record of bringing developer tools from concept to market leadership.</p>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -1232,7 +1233,15 @@
                 <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">Get in touch with our team to learn more about Sootro</p>
 
                 <div class="form-container">
-                    <form>
+                    <form name="contact" method="POST" data-netlify="true" action="/thank-you" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="contact">
+                        <input type="hidden" name="subject" value="New Contact Form Submission - Proxiom.ai">
+                        
+                        <!-- Honeypot field for spam protection -->
+                        <div style="display: none;">
+                            <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                        </div>
+                        
                         <div class="form-group">
                             <label for="name">Full Name</label>
                             <input type="text" id="name" name="name" required>
@@ -1296,11 +1305,11 @@
                 <div class="content-grid" style="margin-top: 4rem;">
                     <div class="content-card">
                         <h3>📧 Email</h3>
-                        <p>amit.vikram@proxiom.ai<br>amit.saxena@proxiom.ai</p>
+                        <p>sales@proxiom.ai<br>support@proxiom.ai</p>
                     </div>
                     <div class="content-card">
                         <h3>🏢 Office</h3>
-                        <p>San Francisco, CA<br>Princeton, NJ<br>Remote-first company</p>
+                        <p>San Francisco, CA<br>New York, NY<br>Remote-first company</p>
                     </div>
                     <div class="content-card">
                         <h3>💬 Support</h3>
@@ -1319,7 +1328,15 @@
                 <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">See Sootro in action with a personalized demonstration</p>
 
                 <div class="form-container">
-                    <form>
+                    <form name="demo" method="POST" data-netlify="true" action="/thank-you" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="demo">
+                        <input type="hidden" name="subject" value="New Demo Request - Proxiom.ai">
+                        
+                        <!-- Honeypot field for spam protection -->
+                        <div style="display: none;">
+                            <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                        </div>
+                        
                         <div class="form-group">
                             <label for="demo-name">Full Name</label>
                             <input type="text" id="demo-name" name="name" required>
@@ -1740,14 +1757,8 @@
 
         // Handle form submissions
         document.addEventListener('DOMContentLoaded', function() {
-            const forms = document.querySelectorAll('form');
-            forms.forEach(form => {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('Thank you for your submission! We will get back to you soon.');
-                });
-            });
-
+            // Remove the old form submission handler since Netlify will handle it
+            
             // Initialize scroll reveal animation
             const observerOptions = {
                 threshold: 0.1,
