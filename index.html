@@ -3,1588 +3,1793 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpotNub</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Proxiom.ai - Intelligent Software Troubleshooting</title>
     <style>
-        .hero-content {
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 10px 20px 40px 20px;
-            margin-bottom: 0;
-            padding-bottom: 0;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .hero-content h1 {
-            font-size: 3.2rem;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #0a0a0a;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Page Styles */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .page-content {
+            padding: 4rem 0;
+            color: #fff;
+        }
+
+        .page h1 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .page h2 {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .page h3 {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .page p {
+            color: #b0b0b0;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Header */
+        header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
             font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -0.02em;
+            background-clip: text;
+            cursor: pointer;
         }
 
-        .hero-content p {
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
             font-size: 1.25rem;
-            line-height: 1.5;
-            color: #4a5568;
-            margin-bottom: 32px;
-            max-width: 800px;
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sootro-diagram {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .diagram-title {
+            color: #667eea;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .flow-step {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            font-size: 0.9rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .flow-step:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateX(5px);
+        }
+
+        .arrow {
+            text-align: center;
+            color: #667eea;
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+        }
+
+        /* Problem Section */
+        .problem-section {
+            padding: 6rem 0;
+            background: #111;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .problem-description {
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        /* Solution Section */
+        .solution-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        .solution-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .solution-text h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .solution-text p {
+            color: #b0b0b0;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .feature-list li {
+            color: #b0b0b0;
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .architecture-visual {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .tech-item {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 8px;
+            padding: 0.8rem;
+            text-align: center;
+            color: #fff;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 6rem 0;
+            background: #0a0a0a;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-benefits {
+            list-style: none;
+        }
+
+        .feature-benefits li {
+            color: #888;
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .feature-benefits li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+
+        /* Form Styles */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card.featured {
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-card.featured:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .pricing-header h3 {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-header .price {
+            font-size: 3rem;
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-header .period {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            color: #b0b0b0;
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
 
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: #fff;
+            color: #667eea;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #888;
+            text-decoration: none;
+            line-height: 1.6;
+            cursor: pointer;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #666;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .hero-content h1 {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
                 font-size: 2.5rem;
             }
-            .hero-content p {
-                font-size: 1.1rem;
-            }
-        }
 
-        /* Validator Section Styles */
-        .validator-section {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            margin-top: 0.5rem;
-            padding-top: 0;
-            background: linear-gradient(120deg, #f8fafc 60%, #e3f0ff 100%);
-        }
-
-        .validator-card {
-            background: #fff;
-            border-radius: 22px;
-            box-shadow: 0 8px 32px rgba(44,62,80,0.13);
-            padding: 2.8rem 2.2rem 2.2rem 2.2rem;
-            max-width: 420px;
-            width: 100%;
-            text-align: center;
-            transition: box-shadow 0.2s, transform 0.2s;
-            position: relative;
-            z-index: 2;
-        }
-
-        .validator-card:hover {
-            box-shadow: 0 16px 48px rgba(44,62,80,0.18);
-            transform: translateY(-4px) scale(1.03);
-        }
-
-        .validator-main-heading {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #1a237e;
-            margin-bottom: 1.2rem;
-            letter-spacing: -0.02em;
-            background: linear-gradient(90deg, #1a237e 30%, #0099ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .validator-title {
-            color: #1a237e;
-            font-size: 1.05rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            margin-bottom: 0.7rem;
-        }
-
-        .validator-heading {
-            font-size: 1.45rem;
-            font-weight: 700;
-            color: #222;
-            margin-bottom: 1.3rem;
-        }
-
-        .validator-icon-group {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1.2rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .validator-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #e3f0ff 0%, #f8fafc 100%);
-            border-radius: 50%;
-            width: 64px;
-            height: 64px;
-            box-shadow: 0 4px 16px rgba(44,62,80,0.10);
-            position: relative;
-            transition: box-shadow 0.2s, transform 0.2s;
-        }
-
-        .validator-icon i {
-            font-size: 2.2rem;
-            color: #1a237e;
-            transition: color 0.2s;
-        }
-
-        .icon-chat i {
-            color: #0099ff;
-        }
-        .icon-form i {
-            color: #43a047;
-        }
-        .icon-contract i {
-            color: #8855ff;
-        }
-
-        .validator-check {
-            position: absolute;
-            right: -22px;
-            bottom: -12px;
-            background: #fff;
-            border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(44,62,80,0.10);
-            z-index: 2;
-            width: 38px;
-            height: 38px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .validator-check i {
-            color: #43a047;
-            font-size: 1.7rem;
-            background: #fff;
-            border-radius: 50%;
-        }
-
-        .validator-desc {
-            font-size: 1.08rem;
-            color: #444;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .validator-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.7rem;
-            justify-content: center;
-        }
-
-        .validator-tag {
-            color: #1a237e;
-            background: #e3eafc;
-            border-radius: 16px;
-            padding: 0.35rem 1.1rem;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-            box-shadow: 0 2px 8px rgba(44,62,80,0.04);
-        }
-
-        .validator-tag:hover {
-            background: #1a237e;
-            color: #fff;
-            box-shadow: 0 4px 16px rgba(44,62,80,0.10);
-        }
-
-        @media (max-width: 600px) {
-            .validator-card {
-                padding: 1.5rem 0.5rem;
-                max-width: 98vw;
-            }
-            .validator-main-heading {
-                font-size: 1.3rem;
-            }
-            .validator-heading {
-                font-size: 1.1rem;
-            }
-            .validator-icon {
-                width: 48px;
-                height: 48px;
-            }
-            .validator-icon i {
-                font-size: 1.3rem;
-            }
-            .validator-check {
-                width: 28px;
-                height: 28px;
-                font-size: 1.1rem;
-                right: -10px;
-                bottom: -8px;
-            }
-        }
-
-        /* Promptly Heading Styles */
-        .promptly-heading {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #1a237e;
-            margin-top: -1.5rem !important;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
-            background: linear-gradient(90deg, #1a237e 30%, #0099ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1);
-        }
-
-        .fade-in-heading.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .fade-in-card {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(.4,0,.2,1) 0.3s, transform 0.8s cubic-bezier(.4,0,.2,1) 0.3s;
-        }
-
-        .fade-in-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Remove gap between demo and validator section */
-        .validator-section {
-            margin-top: 0.5rem;
-            padding-top: 0;
-        }
-
-        /* Responsive adjustments for heading */
-        @media (max-width: 600px) {
-            .promptly-heading {
-                font-size: 1.5rem;
-                margin-top: 1rem;
-            }
-        }
-
-        /* Reduce space below demo-stats and hero-diagram */
-        .demo-stats {
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .hero-diagram {
-            display: none !important;
-        }
-
-        /* Remove top margin from promptly heading and validator section */
-        .promptly-heading {
-            margin-top: 0.5rem !important;
-            margin-bottom: 0.5rem !important;
-        }
-
-        .validator-section {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-        }
-
-        /* If you want it even tighter, you can do: */
-        .hero-content {
-            margin-bottom: 0 !important;
-            padding-bottom: 0 !important;
-        }
-
-        .hero {
-            padding-top: 100px;
-            padding-bottom: 0;
-            margin-bottom: 0;
-        }
-
-        .hero-diagram,
-        .demo-stats,
-        .promptly-heading,
-        .validator-section {
-            margin-bottom: 0 !important;
-            padding-bottom: 0 !important;
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-        }
-
-        /* Key Benefits Card Styles */
-        .key-benefits-card {
-            background: linear-gradient(120deg, #f8fafc 60%, #e3f0ff 100%);
-            border: 1.5px solid #e0e7ef;
-            box-shadow: 0 6px 24px rgba(44,62,80,0.10);
-            padding: 2.2rem 2rem 2rem 2rem;
-            border-radius: 16px;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            min-height: 340px;
-        }
-
-        .key-benefits-header {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .key-benefits-header i {
-            color: #0099ff;
-            font-size: 2rem;
-            background: #e3f0ff;
-            border-radius: 50%;
-            padding: 0.5rem;
-        }
-
-        .key-benefits-header h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #1a237e;
-            margin: 0;
-            letter-spacing: -0.01em;
-        }
-
-        .key-benefits-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 1.1rem;
-            width: 100%;
-        }
-
-        .key-benefits-list li {
-            display: flex;
-            align-items: center;
-            font-size: 1.08rem;
-            color: #1a237e;
-            font-weight: 500;
-            gap: 0.9rem;
-            background: #fff;
-            border-radius: 10px;
-            padding: 0.7rem 1rem;
-            box-shadow: 0 2px 8px rgba(44,62,80,0.04);
-            transition: box-shadow 0.2s, background 0.2s;
-        }
-
-        .key-benefits-list li:hover {
-            box-shadow: 0 4px 16px rgba(44,62,80,0.10);
-            background: #f0f7ff;
-        }
-
-        .benefit-icon-bullet {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 2rem;
-            height: 2rem;
-            background: #e3f0ff;
-            border-radius: 50%;
-            margin-right: 0.5rem;
-        }
-
-        .benefit-icon-bullet i {
-            color: #0099ff;
-            font-size: 1.1rem;
-        }
-
-        @media (max-width: 768px) {
-            .key-benefits-card {
-                padding: 1.2rem 0.7rem;
-                min-height: unset;
-            }
-            .key-benefits-header h3 {
-                font-size: 1.1rem;
-            }
-            .key-benefits-list li {
-                font-size: 0.98rem;
-                padding: 0.6rem 0.7rem;
-            }
-        }
-
-        .key-benefit {
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 6px 24px rgba(44,62,80,0.10);
-            border: 1.5px solid #e0e7ef;
-            padding: 2.2rem 2rem 2rem 2rem;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            min-height: 320px;
-            transition: box-shadow 0.2s, transform 0.2s;
-        }
-
-        .key-benefit:hover {
-            box-shadow: 0 12px 32px rgba(44,62,80,0.13);
-            transform: translateY(-6px) scale(1.02);
-        }
-
-        .key-benefit-icon {
-            background: linear-gradient(135deg, #0099ff 0%, #1a237e 100%);
-            box-shadow: 0 4px 16px rgba(0,153,255,0.13);
-            border-radius: 12px;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.2rem;
-        }
-
-        .key-benefit-icon i {
-            color: #fff;
-            font-size: 1.6rem;
-        }
-
-        .key-benefit h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: #1a237e;
-            margin-bottom: 0.7rem;
-            margin-top: 0;
-        }
-
-        .key-benefit p {
-            color: #4a5568;
-            font-size: 0.98rem;
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        @media (max-width: 768px) {
-            .key-benefit {
-                padding: 1.2rem 0.7rem;
-                min-height: unset;
-            }
-            .key-benefit h3 {
-                font-size: 1rem;
-            }
-            .key-benefit p {
-                font-size: 0.92rem;
-            }
-        }
-
-        .promptly-card {
-            background: linear-gradient(120deg, #fffbe6 60%, #e3f0ff 100%);
-            border-radius: 18px;
-            box-shadow: 0 8px 32px rgba(44,62,80,0.13);
-            padding: 2rem 1.2rem 1.2rem 1.2rem;
-            max-width: 480px;
-            width: 100%;
-            position: relative;
-            animation: fadeInUp 1s cubic-bezier(.4,0,.2,1);
-            border: 1.5px solid #ffe082;
-            font-size: 0.98rem;
-        }
-
-        .promptly-header {
-            font-size: 1.05rem;
-        }
-
-        textarea#promptlyInput {
-            font-size: 0.98rem;
-        }
-
-        .feedback-label {
-            font-size: 0.92rem;
-        }
-
-        .feedback-message {
-            font-size: 0.98rem;
-        }
-
-        .smart-feedback {
-            font-size: 0.95rem;
-        }
-
-        /* New styles for Solution Overview section */
-        .solution-overview {
-            text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(160deg, #1a237e 0%, #0099ff 100%);
-            color: #fff;
-            margin-top: 0;
-            position: relative;
-            z-index: 1;
-        }
-
-        .solution-overview .container {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .solution-overview .btn-primary {
-            display: inline-block;
-            background-color: #fff;
-            color: #1a237e;
-            padding: 15px 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1.2em;
-            font-weight: 700;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            border: none;
-        }
-
-        .solution-overview .btn-primary:hover {
-            background-color: #e0e0e0;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        /* New Image Tiles Section */
-        .image-tiles-section {
-            text-align: center;
-            padding: 60px 20px;
-            background: #f8f8f4; /* Light background color */
-            color: #333;
-            position: relative;
-            z-index: 1;
-        }
-
-         .image-tiles-section h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #1a237e;
-            margin-bottom: 40px;
-            letter-spacing: -0.02em;
-         }
-
-        .image-tiles-section .container {
-            max-width: 1000px; /* Wider container */
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .image-grid {
-            display: flex;
-            flex-wrap: nowrap; /* Prevent wrapping on wider screens */
-            justify-content: center; /* Center the cards */
-            gap: 30px; /* Increased gap */
-            padding: 0 20px;
-             overflow-x: auto; /* Add horizontal scroll if needed on very wide screens */
-             margin-bottom: 40px; /* Add space below the grid */
-        }
-
-        .image-card {
-            background: #fff;
-            border-radius: 12px; /* Consistent border-radius */
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08); /* Softer shadow */
-            padding: 20px; /* Adjusted padding */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
-            display: flex; /* Use flexbox for layout */
-            align-items: center; /* Vertically align content */
-            text-align: left; /* Align text left */
-        }
-
-        .image-card:hover {
-            transform: translateY(-10px); /* Lift effect on hover */
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12); /* More pronounced shadow on hover */
-        }
-
-        /* Style for the icon area */
-        .image-card .icon-area {
-            flex-shrink: 0; /* Prevent shrinking */
-            margin-right: 20px; /* Space between icon and text */
-            width: 60px; /* Circular area size */
-            height: 60px; /* Circular area size */
-            border-radius: 50%; /* Make it circular */
-            background: #e3f0ff; /* Light background for the icon */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-        }
-
-        .image-card .icon-area i {
-            font-size: 28px; /* Icon size */
-            color: #0099ff; /* Icon color */
-        }
-
-        .image-card .text-area {
-            flex-grow: 1; /* Allow text area to grow */
-        }
-
-        .image-card h3 {
-            font-size: 1.2rem; /* Heading font size */
-            font-weight: 700;
-            color: #2d3748; /* Darker heading color */
-            margin-top: 0;
-            margin-bottom: 5px; /* Smaller space below heading */
-            line-height: 1.3;
-        }
-
-        .image-card p {
-            font-size: 0.95rem; /* Paragraph font size */
-            color: #4a5568; /* Paragraph text color */
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        @media (max-width: 768px) {
-            .image-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust min width for smaller screens */
-                gap: 20px; /* Adjust gap for smaller screens */
-                 display: grid; /* Use grid layout for wrapping on smaller screens */
-                 flex-wrap: wrap; /* Allow wrapping on smaller screens */
-                 justify-content: center; /* Center grid items */
-                 overflow-x: hidden; /* Remove horizontal scroll */
-            }
-
-            .image-card {
-                flex-direction: column; /* Stack icon and text on small screens */
-                align-items: flex-start; /* Align items to the start */
-            }
-
-            .image-card .icon-area {
-                margin-right: 0; /* Remove right margin */
-                margin-bottom: 15px; /* Add bottom margin */
-                 width: 50px; /* Adjust icon area size */
-                height: 50px; /* Adjust icon area size */
-            }
-
-             .image-card .icon-area i {
-                 font-size: 24px; /* Adjust icon size */
-             }
-
-            .image-card h3 {
-                font-size: 1.1rem; /* Adjust heading font size */
-            }
-
-            .image-card p {
-                font-size: 0.9rem; /* Adjust paragraph font size */
-            }
-        }
-
-        /* Styles for the Promptly AI Studio image */
-         .section .image-area img {
-             max-width: 600px; /* Reduced max width for the image */
-             height: auto; /* Maintain aspect ratio */
-             display: block; /* Make it a block element */
-             margin: 20px auto; /* Center the image and add vertical margin */
-             border-radius: 8px; /* Subtle rounded corners */
-             box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Subtle shadow */
-             border: 1px solid #e0e0e0; /* Light border */
-         }
-
-        /* New styles for recreated Slack content - copied from Solutions_L1L2.html */
-        .slack-mockup {
-            background-color: #f8f8f8; /* Light background */
-            border-radius: 8px; /* Rounded corners */
-            padding: 15px;
-            font-family: 'Arial', sans-serif; /* Use a font similar to Slack or a standard sans-serif */
-            font-size: 0.9rem;
-            color: #2c2d2f; /* Slack text color */
-            line-height: 1.4;
-            max-width: 400px; /* Adjust max width for the layout */
-            margin: 0 auto; /* Center the mockup */
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Subtle shadow */
-             border: 1px solid #e0e0e0; /* Subtle border */
-        }
-
-        .slack-mockup .message {
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #e8e8e8; /* Separator */
-        }
-
-         .slack-mockup .message:last-child {
-             border-bottom: none;
-             padding-bottom: 0;
-             margin-bottom: 0;
-         }
-
-        .slack-mockup .message-header {
-            font-weight: bold;
-            color: #1d1c1d; /* Darker text for name */
-            margin-bottom: 4px;
-        }
-
-        .slack-mockup .message-content {
-            margin-left: 0;
-        }
-
-        .slack-mockup .highlight {
-            background-color: #fff9e6; /* Light yellow background */
-            padding: 8px;
-            border-left: 3px solid #e6a800; /* Yellow border */
-            margin-top: 8px;
-            border-radius: 4px;
-            font-style: italic;
-        }
-
-        .slack-mockup .thread-reply {
-             margin-left: 15px; /* Indent replies */
-             border-left: 2px solid #e8e8e8;
-             padding-left: 10px;
-             margin-top: 10px;
-        }
-
-        /* Update validator section container styles */
-        .validator-section .validator-container {
-            display: flex;
-            flex-direction: column; /* Stack items vertically */
-            align-items: center; /* Center items horizontally in the column */
-            gap: 40px; /* Adjust gap for vertical spacing */
-            max-width: 700px; /* Adjust max-width for a single column */
-            margin: 0 auto;
-            padding: 40px 20px; /* Add vertical padding */
-        }
-
-        .validator-section .validator-content {
-            flex: unset; /* Remove flex properties */
-            max-width: 100%; /* Allow content to take full width within container */
-            padding-top: 0; /* Adjust padding */
-            padding-bottom: 0; /* Adjust padding */
-            text-align: center; /* Center the content text */
-        }
-
-        .validator-section .validator-animation {
-            flex: unset; /* Remove flex properties */
-            max-width: 100%; /* Allow animation to take full width within container */
-            height: 450px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-         @media (max-width: 768px) {
-             .validator-section .validator-container {
-                 flex-direction: column;
-                 gap: 30px;
-                 align-items: center;
-                 padding: 30px 20px;
-                 max-width: 100%;
-             }
-
-             .validator-section .validator-content,
-             .validator-section .validator-animation {
-                 max-width: 100%;
-                 padding: 0;
-             }
-
-             .promptly-demo {
-                 height: 400px;
-             }
-         }
-
-        /* Validator Animation Styles */
-        .promptly-demo {
-            width: 100%;
-            max-width: 550px; /* Increased max-width */
-            margin: 0 auto;
-            height: 450px; /* Fixed height */
-            position: relative; /* Keep relative for potential future positioning */
-            box-shadow: 0 8px 32px rgba(44,62,80,0.13); /* Add shadow similar to validator-card */
-            border-radius: 18px; /* Match border-radius of validator-card */
-            background: #fff; /* Explicitly set white background */
-             overflow: hidden; /* Hide overflow from content inside */
-            display: flex; /* Use flexbox to manage the card inside */
-            justify-content: center;
-            align-items: center;
-        }
-
-        .promptly-card {
-            background: #fff; /* Background is now on the demo container */
-            border-radius: 12px;
-            box-shadow: none;
-            padding: 20px;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            position: static; /* Change to static positioning */
-            width: 100%; /* Allow card to take full width of demo container */
-            height: 100%; /* Allow card to take full height of demo container */
-            overflow-y: auto; /* Allow scrolling if content overflows */
-            display: flex;
-            flex-direction: column;
-        }
-
-        .promptly-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 15px;
-            flex-shrink: 0; /* Prevent header from shrinking */
-        }
-
-        #promptlyInput {
-            width: 100%;
-            min-height: 80px; /* Reduced height */
-            max-height: 80px; /* Fixed height */
-            padding: 12px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            resize: none;
-            margin-bottom: 15px;
-            font-family: inherit;
-            flex-shrink: 0; /* Prevent textarea from shrinking */
-        }
-
-        .feedback-bar {
-            height: 10px; /* Increased height */
-            background: #e0e7ef; /* Softer background color */
-            border-radius: 5px; /* More rounded corners */
-            margin-bottom: 8px;
-            position: relative;
-            flex-shrink: 0;
-            overflow: hidden; /* Hide overflowing progress */
-        }
-
-        .feedback-progress {
-            height: 100%;
-            background: #4CAF50; /* Default green, will be overridden by JS animation */
-            border-radius: 5px; /* Match border-radius of container */
-            width: 0%;
-            transition: width 0.5s ease-in-out, background 0.5s ease-in-out; /* Smoother transition */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-        }
-
-        .feedback-label {
-            font-size: 0.85rem;
-            color: #666;
-            display: block;
-            margin-bottom: 10px;
-            flex-shrink: 0; /* Prevent label from shrinking */
-        }
-
-        .feedback-message {
-            font-size: 0.9rem;
-            color: #ff9800;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0; /* Prevent message from shrinking */
-        }
-
-        .submit-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #0099ff;
-            font-size: 0.9rem;
-            cursor: pointer;
-            margin-bottom: 15px;
-            flex-shrink: 0; /* Prevent submit label from shrinking */
-        }
-
-        .smart-feedback {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 15px;
-            flex-grow: 1; /* Allow smart feedback to grow and fill remaining space */
-            overflow-y: auto; /* Allow scrolling if feedback items overflow */
-        }
-
-        .smart-feedback-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .smart-feedback ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .smart-feedback li {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 8px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .smart-feedback li:before {
-            content: "•";
-            position: absolute;
-            left: 8px;
-            color: #0099ff;
-        }
-
-        .smart-feedback li:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Add these styles before the existing styles */
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            height: 80px;
-        }
-
-        .logo-section img {
-            height: 50px;
-            width: auto;
-        }
-
-        .nav-links ul {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: #1a237e;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #0099ff;
-        }
-
-        .nav-actions {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .btn-login {
-            color: #1a237e;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 6px;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-login:hover {
-            background-color: #e3f0ff;
-        }
-
-        .btn-demo {
-            background-color: #1a237e;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 6px;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-demo:hover {
-            background-color: #0099ff;
-        }
-
-        .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        .mobile-menu-toggle span {
-            display: block;
-            width: 25px;
-            height: 2px;
-            background-color: #1a237e;
-            transition: all 0.3s ease;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: flex;
+            .solution-content {
+                grid-template-columns: 1fr;
             }
 
             .nav-links {
-                position: fixed;
-                top: 80px;
-                left: 0;
-                right: 0;
-                background-color: white;
-                padding: 20px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s ease;
-            }
-
-            .nav-links.active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-
-            .nav-links ul {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .nav-actions {
                 display: none;
             }
 
-            .nav-actions.mobile {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                gap: 10px;
-                margin-top: 15px;
-            }
-
-            .nav-actions.mobile .btn-login,
-            .nav-actions.mobile .btn-demo {
-                width: 100%;
-                text-align: center;
-            }
-        }
-
-        .nav-actions.mobile {
-            display: none; /* Hide mobile actions by default */
-        }
-
-        /* Add responsive styles for hero buttons */
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .hero-buttons .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1.1em;
-            font-weight: 700;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border: none;
-        }
-
-        .hero-buttons .btn-primary {
-             background-color: #1a237e;
-             color: white;
-        }
-
-         .hero-buttons .btn-primary:hover {
-             background-color: #0099ff;
-             transform: translateY(-3px);
-             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-         }
-
-         @media (max-width: 600px) {
             .hero-buttons {
                 flex-direction: column;
-                gap: 15px;
+                align-items: center;
             }
 
-            .hero-buttons .btn {
-                width: 100%;
-                text-align: center;
-                padding: 12px 20px;
-                font-size: 1em;
-            }
-         }
-
-        /* Styles for the new validator container heading */
-        .validator-container-heading {
-            text-align: center;
-            margin: 0 auto 3rem auto; /* Add margin below */
-            max-width: 800px; /* Limit width for readability */
-            padding: 0 20px; /* Add some padding */
-        }
-
-        .validator-container-heading h2 {
-            font-size: 1.8rem; /* Reduced size */
-            font-weight: 700;
-            color: #222;
-            margin-bottom: 0.8rem;
-            line-height: 1.3;
-            letter-spacing: -0.02em;
-            /* Optional: Add gradient if desired, similar to hero */
-            /* background: linear-gradient(90deg, #1a237e 30%, #0099ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; */
-        }
-
-        .validator-container-heading p {
-            font-size: 1.1rem; /* Readable paragraph size */
-            color: #4a5568; /* Consistent paragraph color */
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        /* Styles for the flashy subheading */
-        .flashy-subheading {
-            font-weight: 900; /* Make it bolder */
-            font-size: 1.2rem; /* Slightly increased size */
-            color: #ff5722; /* Changed starting color to orange/red */
-            animation: pulse-orange 2s infinite ease-in-out;
-        }
-
-        @keyframes pulse-orange {
-            0% { color: #ff5722; }
-            50% { color: #ffc107; } /* Animate to yellow */
-            100% { color: #ff5722; }
-        }
-
-        @media (max-width: 768px) {
-            .validator-container-heading {
-                margin: 0 auto 2rem auto; /* Adjust spacing on mobile */
-                padding: 0 10px; /* Adjust horizontal padding */
+            .stats {
+                justify-content: center;
             }
 
-             .validator-container-heading h2 {
-                 font-size: 1.5rem; /* Adjust font size on mobile */
-             }
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
 
-             .validator-container-heading p {
-                 font-size: 1rem; /* Adjust font size on mobile */
-             }
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-             .flashy-subheading {
-                 font-size: 1.1rem; /* Adjust size on mobile */
-             }
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <!-- Header Navigation -->
     <header>
-        <nav class="nav-container">
-            <div class="logo-section">
-                <a href="index.html">
-                    <img src="Proxiom Logo.webp" alt="Proxiom Logo">
-                </a>
-            </div>
-            
-            <div class="mobile-menu-toggle" id="mobileMenuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
-            <div class="nav-links" id="navLinks">
-                <ul>
-                    <li><a href="why-us.html">Why Us?</a></li>
-                    <li><a href="marketplace.html">AI Validator Studio</a></li>
-                    <li><a href="Solutions_L1L2.html">Solutions</a></li>
-                    <li><a href="industries-usecases.html">Industries & Usecases</a></li>
-                    <li><a href="Company.html">Company</a></li>
-                </ul>
-                <div class="nav-actions mobile">
-                    <a href="#login" class="btn-login">Login</a>
-                    <a href="booking.html" class="btn-demo">Book a Demo</a>
-                </div>
-            </div>
-
-            <div class="nav-actions">
-                <a href="#login" class="btn-login">Login</a>
-                <a href="booking.html" class="btn-demo">Book a Demo</a>
-            </div>
+        <nav class="container">
+            <div class="logo" onclick="showPage('home')">Proxiom.ai</div>
+            <ul class="nav-links">
+                <li><a onclick="showPage('solution')">Solution</a></li>
+                <li><a onclick="showPage('features')">Features</a></li>
+                <li><a onclick="showPage('architecture')">Architecture</a></li>
+                <li><a onclick="showPage('pricing')">Pricing</a></li>
+                <li><a onclick="showPage('about')">About</a></li>
+                <li><a onclick="showPage('contact')">Contact</a></li>
+            </ul>
+            <a onclick="showPage('demo')" class="cta-button">Request Demo</a>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="video-background">
-            <video autoplay muted loop playsinline id="heroVideo" poster="video-poster.jpg">
-                <source src="demo-video.mp4" type="video/mp4">
-            </video>
-            <div class="video-overlay"></div>
-        </div>
-        <div class="hero-content">
-            <h1>AI-Powered Operations Performance Management</h1>
-            <p>Supercharge Operations & Service Request Intakes with Proactive Incident Detection, Anomaly Detection, Revenue Growth and Process Automation — 30X Faster.</p>
-            <div class="hero-buttons">
-                <a href="booking.html" class="btn btn-primary">Book a Demo</a>
-                <a href="Solutions_L1L2.html" class="btn btn-primary">Learn More About Our Solution &rarr;</a>
-            </div>
-            <div class="demo-stats">
-                <div class="stat-item">
-                    <span class="stat-number">Live</span>
-                    <span class="stat-label">Interactive Demo</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-number">No Sign-up</span>
-                    <span class="stat-label">Required</span>
-                </div>
-            </div>
-            <div class="hero-diagram">
-                <img src="spotnub-diagram.png" alt="SpotNub Integration Diagram" class="integration-diagram">
-                <div class="connected-images">
-                    <div class="image-container">
-                        <img src="Support.png" alt="Support" class="connected-image">
-                        <span class="image-label">Support</span>
-                    </div>
-                    <div class="image-container">
-                        <img src="Dev.png" alt="Development" class="connected-image">
-                        <span class="image-label">Development</span>
-                    </div>
-                    <div class="image-container">
-                        <img src="Business.png" alt="Business Operations" class="connected-image">
-                        <span class="image-label">Business Teams</span>
-                    </div>
-                    <div class="connecting-line"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content fade-in">
+                    <div class="hero-text">
+                        <h1>Transform <span class="gradient-text">Software Troubleshooting</span> with AI</h1>
+                        <p>Sootro's intelligent agent framework revolutionizes how teams diagnose and resolve software issues. Cut troubleshooting time by 80% with automated log analysis, code insights, and root-cause detection.</p>
+                        
+                        <div class="hero-buttons">
+                            <a onclick="showPage('demo')" class="cta-button">Get Started Free</a>
+                            <a onclick="showPage('solution')" class="btn-secondary">See How It Works</a>
+                        </div>
 
-    <!-- Introducing Promptly Heading -->
-    <div class="promptly-heading fade-in-heading">
-        Introducing Promptly
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-number">80%</div>
+                                <div class="stat-label">Faster Resolution</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">24/7</div>
+                                <div class="stat-label">Automated Monitoring</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">∞</div>
+                                <div class="stat-label">Scale</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hero-visual">
+                        <div class="sootro-diagram">
+                            <div class="diagram-title">Sootro Intelligence Flow</div>
+                            <div class="flow-step">📊 Log Ingestion & Parsing</div>
+                            <div class="arrow">↓</div>
+                            <div class="flow-step">🧠 AI Pattern Recognition</div>
+                            <div class="arrow">↓</div>
+                            <div class="flow-step">🔗 Graph Relationship Mapping</div>
+                            <div class="arrow">↓</div>
+                            <div class="flow-step">⚡ Instant Root Cause Analysis</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="problem-section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2 class="section-title">The Hidden Cost of Software Issues</h2>
+                    <p class="section-subtitle">Every minute of downtime costs your business money, reputation, and developer productivity</p>
+                </div>
+
+                <div class="problem-grid">
+                    <div class="problem-card reveal">
+                        <div class="problem-icon">⏰</div>
+                        <h3 class="problem-title">Hours of Manual Investigation</h3>
+                        <p class="problem-description">Developers spend 40% of their time hunting through logs, tracing code paths, and connecting disparate data sources to understand what went wrong.</p>
+                    </div>
+
+                    <div class="problem-card reveal">
+                        <div class="problem-icon">💸</div>
+                        <h3 class="problem-title">Expensive Downtime</h3>
+                        <p class="problem-description">Critical system failures can cost enterprises up to $5,600 per minute, while teams scramble to identify root causes across complex architectures.</p>
+                    </div>
+
+                    <div class="problem-card reveal">
+                        <div class="problem-icon">🔍</div>
+                        <h3 class="problem-title">Data Silos</h3>
+                        <p class="problem-description">Logs, code repositories, issue trackers, and monitoring tools exist in isolation, making it nearly impossible to see the complete picture.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content reveal">
+                    <h2>Ready to Transform Your Troubleshooting?</h2>
+                    <p>Join forward-thinking teams who've already cut their incident response times by 80%. Start your free trial today and see the difference intelligent troubleshooting makes.</p>
+                    
+                    <div class="cta-buttons">
+                        <a onclick="showPage('demo')" class="btn-white">Start Free Trial</a>
+                        <a onclick="showPage('contact')" class="btn-secondary" style="border-color: white; color: white;">Schedule Demo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <!-- New Image Tiles Section -->
-    <div class="image-tiles-section">
-        <h2>Unlock Performance for Every Team</h2>
-        <div class="image-grid">
-            <div class="image-card">
-                <div class="icon-area">
-                     <i class="fas fa-users"></i> <!-- Placeholder icon -->
-                     </div>
-                <div class="text-area">
-                    <h3>For L1 Frontline:</h3>
-                    <p>Automated Alerts, Streamlined Escalations, High Throughput</p>
+    <!-- SOLUTION PAGE -->
+    <div id="solution" class="page">
+        <div class="container">
+            <div class="page-content">
+                <h1>Sootro Solution</h1>
+                
+                <div class="solution-content">
+                    <div class="solution-text">
+                        <h2>Meet <span class="gradient-text">Sootro</span> - Your AI Troubleshooting Assistant</h2>
+                        <p>Sootro transforms chaos into clarity by automatically connecting the dots between your logs, code, and business context. Our intelligent agent framework doesn't just find problems—it explains them.</p>
+                        
+                        <ul class="feature-list">
+                            <li>Unified Data Model standardizes logs from any source</li>
+                            <li>AI-powered pattern recognition spots anomalies instantly</li>
+                            <li>Graph database reveals hidden relationships</li>
+                            <li>Automated root cause analysis with explanations</li>
+                            <li>Integration with existing tools (Jira, GitHub, monitoring)</li>
+                        </ul>
+
+                        <a onclick="showPage('features')" class="cta-button">Explore Features</a>
+                    </div>
+
+                    <div class="architecture-visual">
+                        <h3 style="color: #667eea; text-align: center; margin-bottom: 1.5rem;">Enterprise-Grade Architecture</h3>
+                        <div class="tech-stack">
+                            <div class="tech-item">Vector Search<br><small>Milvus/Chroma</small></div>
+                            <div class="tech-item">Graph Database<br><small>Neo4j/Memgraph</small></div>
+                            <div class="tech-item">Document Store<br><small>MongoDB</small></div>
+                            <div class="tech-item">Stream Processing<br><small>Kafka/Flink</small></div>
+                            <div class="tech-item">Big Data<br><small>PySpark/Hadoop</small></div>
+                            <div class="tech-item">Orchestration<br><small>Kubernetes</small></div>
+                            <div class="tech-item">AI/ML<br><small>LLM Agents</small></div>
+                            <div class="tech-item">Cloud Ready<br><small>AWS/Azure/GCP</small></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="image-card">
-                 <div class="icon-area">
-                     <i class="fas fa-headset"></i> <!-- Placeholder icon -->
-                     </div>
-                <div class="text-area">
-                    <h3>For L2 Support:</h3>
-                    <p>Instant Deep, Relevant Answers, Fewer Escalations</p>
-                </div>
-            </div>
-            <div class="image-card">
-                 <div class="icon-area">
-                     <i class="fas fa-code"></i> <!-- Placeholder icon -->
-                     </div>
-                <div class="text-area">
-                    <h3>For Engineers:</h3>
-                    <p>Cut Debugging Time, Boost Productivity & GTM</p>
-                </div>
-            </div>
-            <div class="image-card">
-                 <div class="icon-area">
-                     <i class="fas fa-briefcase"></i> <!-- Placeholder icon -->
-                     </div>
-                <div class="text-area">
-                    <h3>For Business:</h3>
-                    <p>Minimize Risk, Maximize Revenue, Stronger NPS</p>
+
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>🔄 Log Processing Pipeline</h3>
+                        <p>Our advanced log processing pipeline automatically ingests logs from multiple sources, standardizes them using our Unified Data Model, and validates schema compliance in real-time.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>🧠 AI Pattern Recognition</h3>
+                        <p>Advanced LLM agents analyze log patterns, detect anomalies, and identify relationships between events across your entire system architecture.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>🔗 Graph Intelligence</h3>
+                        <p>Build comprehensive relationship maps between logs, code, and business context to understand the full impact of any issue.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>⚡ Real-time Analysis</h3>
+                        <p>Get instant insights with sub-second query responses and real-time monitoring of your systems.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Validator Section -->
-    <section class="validator-section fade-in-card">
-         <div class="validator-container">
-            <!-- New Validator Container Heading -->
-            <div class="validator-container-heading">
-                 <h2>Promptly API powers up your intake forms, chatbots, and IVR </h2>
-                 <p><span class="flashy-subheading"> NOW: Customers can self-serve!</span></p>
-            </div>
+    <!-- FEATURES PAGE -->
+    <div id="features" class="page">
+        <div class="container">
+            <div class="page-content">
+                <h1>Powerful Features</h1>
+                <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">Every component designed to accelerate your troubleshooting workflow</p>
 
-            <div class="validator-animation">
-                  <div class="promptly-demo">
-                    <div class="promptly-card">
-                        <div class="promptly-header">How can we help you today?</div>
-                        <textarea id="promptlyInput" placeholder="Describe your issue..."></textarea>
-                        <div class="feedback-bar">
-                            <div class="feedback-progress" id="feedbackProgress"></div>
-                            <span class="feedback-label" id="feedbackLabel">Clarity: 45%</span>
-                        </div>
-                        <div class="feedback-message" id="feedbackMessage">
-                            <i class="fas fa-exclamation-circle"></i> Please add more specifics about your issue
-                        </div>
-                        <span class="submit-label" id="submitPromptLabel">
-                            <i class="fas fa-paper-plane"></i> Submit Request
-                        </span>
-                        <div class="smart-feedback">
-                            <div class="smart-feedback-title"><i class="fas fa-lightbulb"></i> Smart Feedback</div>
-                            <ul>
-                                <li>Technical information (device, browser, app version)</li>
-                                <li>Clear statement of what you need help with</li>
-                                <li>Steps you've already tried to resolve the issue</li>
-                            </ul>
-                        </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3 class="feature-title">Unified Log Processing</h3>
+                        <p class="feature-description">Transform logs from any format into a standardized Unified Data Model. Support for Python, Java, Spring Boot, AWS, GCP, and more.</p>
+                        <ul class="feature-benefits">
+                            <li>Automatic format detection</li>
+                            <li>Real-time validation</li>
+                            <li>Schema enforcement</li>
+                            <li>Multi-source ingestion</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🧠</div>
+                        <h3 class="feature-title">Intelligent Code Analysis</h3>
+                        <p class="feature-description">EnhancedCodeGraphBuilder parses source code, scores methods, and builds weighted relationship graphs for deep insights.</p>
+                        <ul class="feature-benefits">
+                            <li>Method complexity scoring</li>
+                            <li>Dependency mapping</li>
+                            <li>Impact analysis</li>
+                            <li>Code quality assessment</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔗</div>
+                        <h3 class="feature-title">Smart Integrations</h3>
+                        <p class="feature-description">Connect with GitHub for PR analysis and Jira for issue tracking. All data vectorized and searchable for instant context.</p>
+                        <ul class="feature-benefits">
+                            <li>GitHub PR archiving</li>
+                            <li>Jira story ingestion</li>
+                            <li>Similarity search</li>
+                            <li>Cross-platform insights</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">Lightning-Fast Queries</h3>
+                        <p class="feature-description">FastAPI-powered service with configurable LLM endpoints for query generation, refinement, and customizable code summaries.</p>
+                        <ul class="feature-benefits">
+                            <li>Sub-second responses</li>
+                            <li>Natural language queries</li>
+                            <li>Custom summarization</li>
+                            <li>API-first design</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">Graph-Based Insights</h3>
+                        <p class="feature-description">Visualize complex relationships between logs, code, and business context in an intuitive graph interface.</p>
+                        <ul class="feature-benefits">
+                            <li>Interactive visualization</li>
+                            <li>Relationship discovery</li>
+                            <li>Pattern recognition</li>
+                            <li>Impact assessment</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">☁️</div>
+                        <h3 class="feature-title">Cloud-Native Architecture</h3>
+                        <p class="feature-description">Deploy anywhere with Kubernetes orchestration. Scales from local development to enterprise cloud deployments.</p>
+                        <ul class="feature-benefits">
+                            <li>Auto-scaling</li>
+                            <li>High availability</li>
+                            <li>Multi-cloud support</li>
+                            <li>Container-ready</li>
+                        </ul>
                     </div>
                 </div>
-             </div>
-            <div class="validator-content">
-                <div class="validator-title">Turn Input Into Actionable Requests</div>
-                <div class="validator-heading">Proxiom Real-Time Validator</div>
-                <div class="validator-icon-group">
-                    <span class="validator-icon icon-chat">
-                        <i class="fas fa-comment-dots"></i>
-                    </span>
-                    <span class="validator-icon icon-form">
-                        <i class="fas fa-clipboard-list"></i>
-                    </span>
-                    <span class="validator-icon icon-contract">
-                        <i class="fas fa-file-contract"></i>
-                    </span>
-                    <span class="validator-icon icon-check">
-                        <i class="fas fa-check-circle"></i>
-                    </span>
-                </div>
-                <div class="validator-desc">
-                    Analyze freeform input as it's written or spoken, providing real-time feedback to ensure clarity and completeness.
-                </div>
-                <div class="validator-tags">
-                    <span class="validator-tag">Legal</span>
-                    <span class="validator-tag">HR</span>
-                    <span class="validator-tag">IT &amp; Incident Resolution</span>
-                    <span class="validator-tag">Issue Reporting</span>
-                    <span class="validator-tag">Audit</span>
-                    <span class="validator-tag">Customer Support</span>
-                </div>
-             </div>
-    </section>
-
-    <!-- Trusted By Section -->
-    <section class="trusted-by">
-        <h2>Trusted by teams that keep the digital world running</h2>
-        <div class="logo-grid">
-            <!-- Add your client logos here -->
+            </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
+    <!-- ARCHITECTURE PAGE -->
+    <div id="architecture" class="page">
+        <div class="container">
+            <div class="page-content">
+                <h1>Architecture Overview</h1>
+                <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">Enterprise-grade, scalable, and secure architecture designed for modern DevOps</p>
+
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>🏗️ Microservices Architecture</h3>
+                        <p>Built on a modern microservices architecture with containerized components that can be deployed independently and scaled based on demand.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>🔒 Security First</h3>
+                        <p>End-to-end encryption, role-based access control, and compliance with enterprise security standards including SOC2 and GDPR.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>📈 Auto-Scaling</h3>
+                        <p>Kubernetes-native auto-scaling ensures optimal performance during peak loads while minimizing costs during low usage periods.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>🌐 Multi-Cloud Ready</h3>
+                        <p>Deploy on AWS, Azure, GCP, or on-premises. Our architecture is cloud-agnostic and portable across environments.</p>
+                    </div>
+                </div>
+
+                <h2>Technology Stack</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>🗄️ Data Layer</h3>
+                        <ul class="feature-benefits">
+                            <li>Neo4j/Memgraph for graph relationships</li>
+                            <li>MongoDB for document storage</li>
+                            <li>Milvus/Chroma for vector search</li>
+                            <li>Hadoop for big data storage</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3>🔄 Processing Layer</h3>
+                        <ul class="feature-benefits">
+                            <li>Kafka/Flink for stream processing</li>
+                            <li>PySpark for distributed computing</li>
+                            <li>Python-based LLM agents</li>
+                            <li>FastAPI for service endpoints</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3>🎨 Presentation Layer</h3>
+                        <ul class="feature-benefits">
+                            <li>React.js frontend</li>
+                            <li>Node.js backend services</li>
+                            <li>RESTful API design</li>
+                            <li>Real-time WebSocket connections</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3>⚙️ Infrastructure</h3>
+                        <ul class="feature-benefits">
+                            <li>Kubernetes orchestration</li>
+                            <li>Docker containerization</li>
+                            <li>CI/CD pipelines</li>
+                            <li>Monitoring and alerting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRICING PAGE -->
+    <div id="pricing" class="page">
+        <div class="container">
+            <div class="page-content">
+                <h1>Pricing Plans</h1>
+                <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">Choose the plan that fits your team's needs</p>
+
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Starter</h3>
+                            <div class="price">$29</div>
+                            <div class="period">per user/month</div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>Up to 10GB log processing</li>
+                            <li>Basic log pattern detection</li>
+                            <li>5 integrations</li>
+                            <li>Email support</li>
+                            <li>Basic dashboard</li>
+                        </ul>
+                        <a onclick="showPage('demo')" class="cta-button" style="width: 100%;">Start Free Trial</a>
+                    </div>
+
+                    <div class="pricing-card featured">
+                        <div class="pricing-header">
+                            <h3>Professional</h3>
+                            <div class="price">$99</div>
+                            <div class="period">per user/month</div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>Up to 100GB log processing</li>
+                            <li>Advanced AI pattern recognition</li>
+                            <li>Unlimited integrations</li>
+                            <li>Priority support</li>
+                            <li>Advanced analytics</li>
+                            <li>Code graph analysis</li>
+                            <li>Custom alerts</li>
+                        </ul>
+                        <a onclick="showPage('demo')" class="cta-button" style="width: 100%;">Start Free Trial</a>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Enterprise</h3>
+                            <div class="price">Custom</div>
+                            <div class="period">contact sales</div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>Unlimited log processing</li>
+                            <li>Full AI capabilities</li>
+                            <li>On-premise deployment</li>
+                            <li>24/7 dedicated support</li>
+                            <li>Custom integrations</li>
+                            <li>SLA guarantees</li>
+                            <li>Training & onboarding</li>
+                        </ul>
+                        <a onclick="showPage('contact')" class="cta-button" style="width: 100%;">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page">
+        <div class="container">
+            <div class="page-content">
+                <h1>About Proxiom.ai</h1>
+                
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>🎯 Our Mission</h3>
+                        <p>To revolutionize software troubleshooting by making it faster, smarter, and more intuitive through the power of AI and intelligent automation.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>🔮 Our Vision</h3>
+                        <p>A world where software issues are resolved instantly, developers focus on building rather than debugging, and downtime becomes a thing of the past.</p>
+                    </div>
+                </div>
+
+                <h2>Our Story</h2>
+                <p>Founded by experienced software engineers and data scientists who spent countless hours debugging complex systems, Proxiom.ai was born from the frustration of manual troubleshooting processes. We recognized that while software systems were becoming increasingly complex, the tools for understanding and debugging them remained primitive.</p>
+
+                <p>Our team combines deep expertise in artificial intelligence, distributed systems, and software engineering to create solutions that fundamentally change how teams approach problem-solving in software development and operations.</p>
+
+                <h2>Why Sootro?</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>⚡ Speed</h3>
+                        <p>Reduce mean time to resolution from hours to minutes with automated pattern recognition and root cause analysis.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>🎯 Accuracy</h3>
+                        <p>AI-powered insights eliminate guesswork and provide precise, actionable recommendations for issue resolution.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>📈 Scale</h3>
+                        <p>Handle enterprise-scale log volumes and complex distributed architectures with ease.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>🤝 Integration</h3>
+                        <p>Seamlessly integrate with your existing tools and workflows without disrupting your development process.</p>
+                    </div>
+                </div>
+
+                <h2>Leadership Team</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>👨‍💼 CEO & Co-Founder</h3>
+                        <p>Former Principal Engineer at leading tech companies with 15+ years of experience in distributed systems and AI.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>👩‍💻 CTO & Co-Founder</h3>
+                        <p>AI/ML expert with PhD in Computer Science and extensive experience in natural language processing and graph analytics.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>👨‍🔬 VP of Engineering</h3>
+                        <p>Former engineering leader at major cloud providers with deep expertise in scalable infrastructure and DevOps.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>👩‍💼 VP of Product</h3>
+                        <p>Product strategy expert with track record of bringing developer tools from concept to market leadership.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page">
+        <div class="container">
+            <div class="page-content">
+                <h1>Contact Us</h1>
+                <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">Get in touch with our team to learn more about Sootro</p>
+
+                <div class="form-container">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select id="role" name="role">
+                                <option value="">Select your role</option>
+                                <option value="developer">Developer</option>
+                                <option value="devops">DevOps Engineer</option>
+                                <option value="sre">Site Reliability Engineer</option>
+                                <option value="manager">Engineering Manager</option>
+                                <option value="cto">CTO/VP Engineering</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="team-size">Team Size</label>
+                            <select id="team-size" name="team-size">
+                                <option value="">Select team size</option>
+                                <option value="1-10">1-10 people</option>
+                                <option value="11-50">11-50 people</option>
+                                <option value="51-200">51-200 people</option>
+                                <option value="201+">201+ people</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interest">Primary Interest</label>
+                            <select id="interest" name="interest">
+                                <option value="">What interests you most?</option>
+                                <option value="demo">Schedule a demo</option>
+                                <option value="trial">Start a free trial</option>
+                                <option value="pricing">Discuss pricing</option>
+                                <option value="integration">Technical integration</option>
+                                <option value="partnership">Partnership opportunities</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Tell us about your current troubleshooting challenges..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="cta-button" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+
+                <div class="content-grid" style="margin-top: 4rem;">
+                    <div class="content-card">
+                        <h3>📧 Email</h3>
+                        <p>sales@proxiom.ai<br>support@proxiom.ai</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>🏢 Office</h3>
+                        <p>San Francisco, CA<br>New York, NY<br>Remote-first company</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>💬 Support</h3>
+                        <p>24/7 chat support<br>Community forum<br>Documentation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEMO PAGE -->
+    <div id="demo" class="page">
+        <div class="container">
+            <div class="page-content">
+                <h1>Request a Demo</h1>
+                <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">See Sootro in action with a personalized demonstration</p>
+
+                <div class="form-container">
+                    <form>
+                        <div class="form-group">
+                            <label for="demo-name">Full Name</label>
+                            <input type="text" id="demo-name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="demo-email">Work Email</label>
+                            <input type="email" id="demo-email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="demo-company">Company</label>
+                            <input type="text" id="demo-company" name="company" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="demo-title">Job Title</label>
+                            <input type="text" id="demo-title" name="title" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="demo-phone">Phone Number</label>
+                            <input type="tel" id="demo-phone" name="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="demo-team-size">Team Size</label>
+                            <select id="demo-team-size" name="team-size" required>
+                                <option value="">Select team size</option>
+                                <option value="1-10">1-10 developers</option>
+                                <option value="11-50">11-50 developers</option>
+                                <option value="51-200">51-200 developers</option>
+                                <option value="201+">201+ developers</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="demo-use-case">Primary Use Case</label>
+                            <select id="demo-use-case" name="use-case" required>
+                                <option value="">Select primary use case</option>
+                                <option value="incident-response">Faster incident response</option>
+                                <option value="debugging">Improved debugging workflow</option>
+                                <option value="monitoring">Enhanced monitoring</option>
+                                <option value="compliance">Compliance and auditing</option>
+                                <option value="cost-reduction">Reduce operational costs</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="demo-timeline">Implementation Timeline</label>
+                            <select id="demo-timeline" name="timeline">
+                                <option value="">When are you looking to implement?</option>
+                                <option value="immediate">Immediately</option>
+                                <option value="1-3-months">1-3 months</option>
+                                <option value="3-6-months">3-6 months</option>
+                                <option value="6+-months">6+ months</option>
+                                <option value="evaluating">Just evaluating</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="demo-challenges">Current Challenges</label>
+                            <textarea id="demo-challenges" name="challenges" rows="4" placeholder="Describe your current troubleshooting challenges and what you hope to achieve with Sootro..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="cta-button" style="width: 100%;">Schedule Demo</button>
+                    </form>
+                </div>
+
+                <div class="content-grid" style="margin-top: 4rem;">
+                    <div class="content-card">
+                        <h3>🕒 30-Minute Demo</h3>
+                        <p>Personalized demonstration of Sootro's capabilities tailored to your specific use case and technical environment.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>🔧 Technical Deep Dive</h3>
+                        <p>See how Sootro integrates with your existing tools and processes, including live examples with your data.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>💼 Business Case</h3>
+                        <p>Understand the ROI and business impact of implementing Sootro in your organization.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DOCUMENTATION PAGE -->
+    <div id="documentation" class="page">
+        <div class="container">
+            <div class="page-content">
+                <h1>Documentation</h1>
+                <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">Complete guides and API references for Sootro</p>
+
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>📚 Getting Started</h3>
+                        <p>Quick start guide to get Sootro up and running in your environment within minutes.</p>
+                        <ul class="feature-benefits">
+                            <li>Installation guide</li>
+                            <li>Basic configuration</li>
+                            <li>First log ingestion</li>
+                            <li>Dashboard overview</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3>🔧 Configuration</h3>
+                        <p>Detailed configuration options for customizing Sootro to your specific needs.</p>
+                        <ul class="feature-benefits">
+                            <li>Log format configuration</li>
+                            <li>Integration setup</li>
+                            <li>Alert configuration</li>
+                            <li>User management</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3>🔌 Integrations</h3>
+                        <p>Step-by-step guides for integrating with popular tools and platforms.</p>
+                        <ul class="feature-benefits">
+                            <li>GitHub integration</li>
+                            <li>Jira connectivity</li>
+                            <li>Slack notifications</li>
+                            <li>Custom webhooks</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3>🚀 API Reference</h3>
+                        <p>Complete API documentation with examples and SDKs for multiple languages.</p>
+                        <ul class="feature-benefits">
+                            <li>RESTful API endpoints</li>
+                            <li>Authentication</li>
+                            <li>Python SDK</li>
+                            <li>JavaScript SDK</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3>🛠️ Troubleshooting</h3>
+                        <p>Common issues and solutions to help you resolve problems quickly.</p>
+                        <ul class="feature-benefits">
+                            <li>Common errors</li>
+                            <li>Performance tuning</li>
+                            <li>Log debugging</li>
+                            <li>Support resources</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h3>📖 Best Practices</h3>
+                        <p>Industry best practices and recommendations for optimal Sootro usage.</p>
+                        <ul class="feature-benefits">
+                            <li>Log structure guidelines</li>
+                            <li>Performance optimization</li>
+                            <li>Security recommendations</li>
+                            <li>Scaling strategies</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUPPORT PAGE -->
+    <div id="support" class="page">
+        <div class="container">
+            <div class="page-content">
+                <h1>Support</h1>
+                <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">Get help when you need it with our comprehensive support options</p>
+
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>💬 Live Chat</h3>
+                        <p>Get instant help from our support team during business hours.</p>
+                        <ul class="feature-benefits">
+                            <li>Real-time assistance</li>
+                            <li>Technical support</li>
+                            <li>Available 9 AM - 6 PM PST</li>
+                            <li>Average response: < 2 minutes</li>
+                        </ul>
+                        <button class="cta-button">Start Chat</button>
+                    </div>
+                    <div class="content-card">
+                        <h3>📧 Email Support</h3>
+                        <p>Submit detailed support requests and get comprehensive responses.</p>
+                        <ul class="feature-benefits">
+                            <li>24/7 ticket submission</li>
+                            <li>Detailed technical help</li>
+                            <li>File attachments supported</li>
+                            <li>Response within 4 hours</li>
+                        </ul>
+                        <button class="cta-button" onclick="showPage('contact')">Contact Support</button>
+                    </div>
+                    <div class="content-card">
+                        <h3>🎓 Training</h3>
+                        <p>Comprehensive training programs to maximize your team's productivity.</p>
+                        <ul class="feature-benefits">
+                            <li>Onboarding sessions</li>
+                            <li>Advanced workshops</li>
+                            <li>Custom training</li>
+                            <li>Certification programs</li>
+                        </ul>
+                        <button class="cta-button">Schedule Training</button>
+                    </div>
+                    <div class="content-card">
+                        <h3>🏆 Premium Support</h3>
+                        <p>Enterprise-level support with dedicated resources and SLA guarantees.</p>
+                        <ul class="feature-benefits">
+                            <li>Dedicated support manager</li>
+                            <li>24/7 phone support</li>
+                            <li>SLA guarantees</li>
+                            <li>Priority escalation</li>
+                        </ul>
+                        <button class="cta-button" onclick="showPage('contact')">Upgrade Support</button>
+                    </div>
+                </div>
+
+                <h2>Frequently Asked Questions</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>❓ How quickly can I get started?</h3>
+                        <p>Most customers are up and running within 30 minutes. Our quick start guide and automated setup process make deployment straightforward.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>❓ What log formats do you support?</h3>
+                        <p>Sootro supports all major log formats including JSON, syslog, Apache, Nginx, and custom formats. Our AI can automatically detect and parse most formats.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>❓ How does pricing work?</h3>
+                        <p>Pricing is based on data volume processed and number of users. We offer flexible plans from small teams to large enterprises with volume discounts.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>❓ Is my data secure?</h3>
+                        <p>Yes, we use enterprise-grade security including encryption at rest and in transit, SOC2 compliance, and optional on-premises deployment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRIVACY POLICY PAGE -->
+    <div id="privacy" class="page">
+        <div class="container">
+            <div class="page-content">
+                <h1>Privacy Policy</h1>
+                <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">Last updated: January 2025</p>
+
+                <h2>Information We Collect</h2>
+                <p>We collect information you provide directly to us, such as when you create an account, use our services, or contact us for support.</p>
+
+                <h2>How We Use Your Information</h2>
+                <p>We use the information we collect to provide, maintain, and improve our services, process transactions, communicate with you, and comply with legal obligations.</p>
+
+                <h2>Information Sharing</h2>
+                <p>We do not sell, trade, or otherwise transfer your personal information to third parties except as described in this policy or with your consent.</p>
+
+                <h2>Data Security</h2>
+                <p>We implement appropriate security measures to protect your information against unauthorized access, alteration, disclosure, or destruction.</p>
+
+                <h2>Your Rights</h2>
+                <p>You have the right to access, update, or delete your personal information. You may also opt out of certain communications from us.</p>
+
+                <h2>Contact Us</h2>
+                <p>If you have questions about this Privacy Policy, please contact us at privacy@proxiom.ai</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TERMS OF SERVICE PAGE -->
+    <div id="terms" class="page">
+        <div class="container">
+            <div class="page-content">
+                <h1>Terms of Service</h1>
+                <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">Last updated: January 2025</p>
+
+                <h2>Acceptance of Terms</h2>
+                <p>By accessing and using Sootro and related services, you accept and agree to be bound by the terms and provision of this agreement.</p>
+
+                <h2>Use License</h2>
+                <p>Permission is granted to temporarily use Sootro for personal or commercial use. This is the grant of a license, not a transfer of title.</p>
+
+                <h2>Service Availability</h2>
+                <p>We strive to maintain high availability but do not guarantee uninterrupted access to our services.</p>
+
+                <h2>User Responsibilities</h2>
+                <p>You are responsible for maintaining the confidentiality of your account and for all activities that occur under your account.</p>
+
+                <h2>Limitation of Liability</h2>
+                <p>In no event shall Proxiom.ai be liable for any indirect, incidental, special, consequential, or punitive damages.</p>
+
+                <h2>Contact Information</h2>
+                <p>For questions about these Terms of Service, please contact us at legal@proxiom.ai</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- STATUS PAGE -->
+    <div id="status" class="page">
+        <div class="container">
+            <div class="page-content">
+                <h1>System Status</h1>
+                <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">Current status of all Sootro services</p>
+
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>🟢 API Services</h3>
+                        <p><strong>Operational</strong></p>
+                        <p>All API endpoints are functioning normally</p>
+                        <p>Response time: 45ms average</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>🟢 Web Application</h3>
+                        <p><strong>Operational</strong></p>
+                        <p>Dashboard and web interface fully available</p>
+                        <p>Load time: 1.2s average</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>🟢 Log Processing</h3>
+                        <p><strong>Operational</strong></p>
+                        <p>All log ingestion pipelines running normally</p>
+                        <p>Processing delay: <2 seconds</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>🟢 Database Services</h3>
+                        <p><strong>Operational</strong></p>
+                        <p>All database systems healthy</p>
+                        <p>Query response: 12ms average</p>
+                    </div>
+                </div>
+
+                <h2>Recent Incidents</h2>
+                <div class="content-card">
+                    <h3>✅ Resolved - January 5, 2025</h3>
+                    <p><strong>Brief API slowdown</strong> - Some users experienced slower response times between 2:15 PM and 2:45 PM PST. Issue was resolved by scaling additional processing nodes.</p>
+                </div>
+
+                <h2>Scheduled Maintenance</h2>
+                <div class="content-card">
+                    <h3>🔧 Upcoming - January 15, 2025</h3>
+                    <p><strong>Database optimization</strong> - Scheduled maintenance window from 2:00 AM to 4:00 AM PST. No service interruption expected.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
-        <div class="footer-grid">
-            <div class="footer-column">
-                <h4>Product</h4>
-                <ul>
-                    <li><a href="#core">Core Features</a></li>
-                    <li><a href="#integrations">Integrations</a></li>
-                    <li><a href="#releases">Product Releases</a></li>
-                </ul>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Proxiom.ai</h3>
+                    <p>Intelligent software troubleshooting powered by AI. Transforming how teams detect, diagnose, and resolve issues.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Product</h3>
+                    <p><a onclick="showPage('solution')">Sootro Platform</a></p>
+                    <p><a onclick="showPage('features')">Features</a></p>
+                    <p><a onclick="showPage('architecture')">Architecture</a></p>
+                    <p><a onclick="showPage('pricing')">Pricing</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <p><a onclick="showPage('about')">About Us</a></p>
+                    <p><a onclick="showPage('careers')">Careers</a></p>
+                    <p><a onclick="showPage('blog')">Blog</a></p>
+                    <p><a onclick="showPage('contact')">Contact</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <p><a onclick="showPage('documentation')">Documentation</a></p>
+                    <p><a onclick="showPage('api-reference')">API Reference</a></p>
+                    <p><a onclick="showPage('support')">Support</a></p>
+                    <p><a onclick="showPage('status')">Status</a></p>
+                </div>
             </div>
-            <!-- Add more footer columns as needed -->
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Proxiom.ai. All rights reserved.</p>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Proxiom.ai. All rights reserved. | <a onclick="showPage('privacy')">Privacy Policy</a> | <a onclick="showPage('terms')">Terms of Service</a></p>
+            </div>
         </div>
     </footer>
 
-    <!-- Video Modal (Keep for now if it's used elsewhere, but we'll add a new one for animation) -->
-    <div class="video-modal" id="videoModal">
-       <!-- ... video modal content ... -->
-    </div>
-
     <script>
-        // Existing script for fade-in (keep)
-        document.addEventListener("DOMContentLoaded", function() {
-            const heading = document.querySelector('.fade-in-heading');
-            const card = document.querySelector('.fade-in-card');
-            if (heading) {
-                setTimeout(() => {
-                    heading.classList.add('visible');
-                }, 200);
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show the selected page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+                
+                // Update page title
+                const titles = {
+                    'home': 'Proxiom.ai - Intelligent Software Troubleshooting',
+                    'solution': 'Sootro Solution - Proxiom.ai',
+                    'features': 'Features - Proxiom.ai',
+                    'architecture': 'Architecture - Proxiom.ai',
+                    'pricing': 'Pricing - Proxiom.ai',
+                    'about': 'About Us - Proxiom.ai',
+                    'contact': 'Contact - Proxiom.ai',
+                    'demo': 'Request Demo - Proxiom.ai',
+                    'documentation': 'Documentation - Proxiom.ai',
+                    'support': 'Support - Proxiom.ai',
+                    'privacy': 'Privacy Policy - Proxiom.ai',
+                    'terms': 'Terms of Service - Proxiom.ai',
+                    'status': 'System Status - Proxiom.ai'
+                };
+                
+                document.title = titles[pageId] || 'Proxiom.ai';
             }
-            if (card) {
-                setTimeout(() => {
-                    card.classList.add('visible');
-                }, 900);
-            }
+        }
+
+        // Handle form submissions
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your submission! We will get back to you soon.');
+                });
+            });
+
+            // Initialize scroll reveal animation
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all reveal elements
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
         });
 
-        // Validator Animation Script
-        const input = document.getElementById('promptlyInput');
-        const progress = document.getElementById('feedbackProgress');
-        const label = document.getElementById('feedbackLabel');
-        const message = document.getElementById('feedbackMessage');
-        const smartFeedback = document.querySelector('.smart-feedback ul');
-
-        // Helper to interpolate between two colors
-        function lerpColor(a, b, amount) { 
-            const ah = parseInt(a.replace(/#/g, ''), 16),
-                  ar = ah >> 16, ag = ah >> 8 & 0xff, ab = ah & 0xff,
-                  bh = parseInt(b.replace(/#/g, ''), 16),
-                  br = bh >> 16, bg = bh >> 8 & 0xff, bb = bh & 0xff,
-                  rr = ar + amount * (br - ar),
-                  rg = ag + amount * (bg - ag),
-                  rb = ab + amount * (bb - ab);
-            return '#' + (1 << 24 | rr << 16 | rg << 8 | rb).toString(16).slice(1);
-        }
-
-        // Deep, realistic demo scenarios
-        const demoScenarios = [
-            // AUDIT
-            {
-                text: "Internal audit request: Please review Q2 expense reports for the Marketing department. Pay special attention to vendor payments above $10,000. Reports attached. Deadline: 15th of this month.",
-                feedback: [
-                    "Specify department or business unit (e.g., Marketing, Sales)",
-                    "Attach relevant reports or data (e.g., Excel file, link to system)",
-                    "Highlight specific areas of concern (e.g., payments > $10k, travel expenses)",
-                    "Provide a clear deadline for the audit completion",
-                    "Mention relevant compliance standards (if applicable)",
-                    "Include contact person for questions or clarification",
-                    "Summarize key objectives of the audit"
-                ]
-            },
-            // LEGAL
-            {
-                text: "Requesting legal review of Master Service Agreement with BetaTech. Draft attached. Please focus on indemnity and liability clauses. Deadline: next Wednesday.",
-                feedback: [
-                    "Add counterparty name (e.g., BetaTech, Inc.)",
-                    "Specify document type (e.g., MSA, NDA, SOW)",
-                    "Attach the draft document if available",
-                    "Mention specific clauses or concerns (e.g., Section 5.1, warranty)",
-                    "Provide a clear deadline for the review"
-                ]
-            },
-            // IT SUPPORT
-            {
-                text: "Urgent IT support needed: Unable to access VPN from remote location since this morning. Error code: 720. Tried restarting device and reinstalling VPN client. Using Windows 11, Chrome browser. Please escalate if unresolved in 2 hours.",
-                feedback: [
-                    "Describe the issue and its urgency",
-                    "Include relevant error codes or messages",
-                    "List troubleshooting steps already tried",
-                    "Mention device/OS/browser details",
-                    "Specify desired escalation or resolution timeline"
-                ]
-            }
-        ];
-
-        let scenarioIdx = 0;
-        let charIdx = 0;
-        const typingDelay = 80;
-        let currentTypingInterval;
-
-        function updateDemo(val, feedbackArr) {
-            const scenario = demoScenarios[scenarioIdx];
-            let percent = Math.min(100, Math.floor((val.length / scenario.text.length) * 100));
-
-            let color;
-            if (percent < 25) {
-                color = lerpColor('#f44336', '#ff9800', percent / 25);
-            } else if (percent < 50) {
-                color = lerpColor('#ff9800', '#ffeb3b', (percent - 25) / 25);
-            } else if (percent < 75) {
-                color = lerpColor('#ffeb3b', '#8bc34a', (percent - 50) / 25);
-            } else {
-                color = lerpColor('#8bc34a', '#4CAF50', (percent - 75) / 25);
-            }
-
-            progress.style.width = percent + "%";
-            progress.style.background = color;
-
-            label.textContent = percent > 0 ? `Clarity: ${percent}%` : "";
-
-            if (percent === 0) {
-                message.innerHTML = "";
-            } else if (percent < 40) {
-                message.innerHTML = `<i class="fas fa-exclamation-circle"></i> Please add more specifics about your request.`;
-                message.style.color = "#ff9800";
-            } else if (percent < 80) {
-                message.innerHTML = `<i class="fas fa-info-circle"></i> Add more details for faster review.`;
-                message.style.color = "#0099ff";
-            } else {
-                message.innerHTML = `<i class="fas fa-check-circle"></i> Ready to submit! Your request is clear.`;
-                message.style.color = "#43a047";
-            }
-
-            let feedbackToShow = [];
-            if (percent < 30) {
-                feedbackToShow = feedbackArr.slice(0, 1);
-            } else if (percent < 60) {
-                feedbackToShow = feedbackArr.slice(0, Math.ceil(feedbackArr.length / 2));
-            } else if (percent < 90) {
-                feedbackToShow = feedbackArr.slice(0, feedbackArr.length - (percent > 85 ? 0 : 1));
-            } else {
-                feedbackToShow = ["All required details provided. Ready to submit!"];
-            }
-
-            smartFeedback.innerHTML = feedbackToShow.length > 0 ? feedbackToShow.map(f => `<li>${f}</li>`).join('') : '<li>Awaiting input...</li>';
-        }
-
-        function runTypingDemo() {
-            input.value = "";
-            charIdx = 0;
-            updateDemo("", demoScenarios[scenarioIdx].feedback);
-            progress.style.background = '#f44336';
-
-            if (currentTypingInterval) clearInterval(currentTypingInterval);
-
-            const scenario = demoScenarios[scenarioIdx];
-            currentTypingInterval = setInterval(() => {
-                if (charIdx <= scenario.text.length) {
-                    input.value = scenario.text.slice(0, charIdx);
-                    updateDemo(input.value, scenario.feedback);
-                    charIdx++;
-                } else {
-                    clearInterval(currentTypingInterval);
-                    setTimeout(() => {
-                        scenarioIdx = (scenarioIdx + 1) % demoScenarios.length;
-                        charIdx = 0;
-                        runTypingDemo();
-                    }, 2200);
+        // Handle navigation highlight
+        document.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
                 }
-            }, typingDelay);
-        }
+            });
 
-        // Disable manual input for demo
-        input.setAttribute('readonly', true);
-
-        // Start the animation on page load
-        window.addEventListener('DOMContentLoaded', runTypingDemo);
-
-        // Add this script at the end of the body
-        document.getElementById('mobileMenuToggle').addEventListener('click', function() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
-            
-            // Animate hamburger to X
-            const spans = this.querySelectorAll('span');
-            if (navLinks.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-            } else {
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            }
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const navLinks = document.getElementById('navLinks');
-            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-            
-            if (!navLinks.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
-                navLinks.classList.remove('active');
-                const spans = mobileMenuToggle.querySelectorAll('span');
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            }
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
         });
     </script>
 </body>
-</html> 
+</html>
