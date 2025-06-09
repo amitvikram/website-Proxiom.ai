@@ -23,7 +23,68 @@
             margin: 0 auto;
             padding: 0 20px;
         }
+/* Success Message Styles */
+.success-message {
+    background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+    text-align: center;
+    display: none;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
 
+.success-message.show {
+    display: block;
+    animation: slideInFromTop 0.5s ease-out;
+}
+
+.success-message h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.success-message p {
+    margin: 0;
+    opacity: 0.9;
+}
+
+@keyframes slideInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.form-submitting .loading-spinner {
+    display: inline-block;
+}
+
+.form-submitting .cta-button {
+    opacity: 0.7;
+    pointer-events: none;
+}
         /* Page Styles */
         .page {
             display: none;
@@ -142,18 +203,20 @@
             width: 100%;
         }
 
-        .cta-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
+       .cta-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
 
         .cta-button:hover {
             transform: translateY(-2px);
@@ -1259,6 +1322,10 @@
             <div class="page-content">
                 <h1>Contact Us</h1>
                 <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">Get in touch with our team to learn more about Sootro</p>
+                <div id="contact-success-message" class="success-message">
+    <h3>✅ Message Sent Successfully!</h3>
+    <p>Thank you for contacting us. We'll get back to you within 24 hours.</p>
+</div>
                 <div class="form-container">
 <form name="contact" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field">    <input type="hidden" name="form-name" value="contact" />
     <p style="display: none;">
