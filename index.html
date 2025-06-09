@@ -1774,26 +1774,30 @@
             }
         }
 
-      // Handle form submissions
+  // Handle form submissions
 document.addEventListener('DOMContentLoaded', function() {
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Reset the form (clear all fields)
-            form.reset();
-            
-            // Show success message
-            alert('Thank you for your submission! We will get back to you soon.');
-            
-            // Optional: Hide the form temporarily and show it again after 2 seconds
-            form.style.opacity = '0.5';
-            setTimeout(() => {
-                form.style.opacity = '1';
-            }, 2000);
+    // Remove all form submission handling - let Netlify handle it
+    // Forms will now submit properly to Netlify
+    
+    // Initialize scroll reveal animation
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
         });
+    }, observerOptions);
+
+    // Observe all reveal elements
+    document.querySelectorAll('.reveal').forEach(el => {
+        observer.observe(el);
     });
+});
 
             // Initialize scroll reveal animation
             const observerOptions = {
