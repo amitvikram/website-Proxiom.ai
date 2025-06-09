@@ -1,0 +1,5 @@
+# Handle form submissions
+/forms/* 200
+
+# SPA fallback
+/* /index.html 200
