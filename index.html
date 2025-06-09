@@ -1260,8 +1260,7 @@
                 <h1>Contact Us</h1>
                 <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">Get in touch with our team to learn more about Sootro</p>
                 <div class="form-container">
-<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-    <input type="hidden" name="form-name" value="contact" />
+<form name="contact" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field">    <input type="hidden" name="form-name" value="contact" />
     <p style="display: none;">
         <label>Don't fill this out: <input name="bot-field" /></label>
     </p>
@@ -1351,8 +1350,7 @@
                 <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;">See Sootro in action with a personalized demonstration</p>
 
                 <div class="form-container">
-                <form name="demo-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-    <input type="hidden" name="form-name" value="demo-request" />
+<form name="demo-request" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field">    <input type="hidden" name="form-name" value="demo-request" />
     <p style="display: none;">
         <label>Don't fill this out: <input name="bot-field" /></label>
     </p>
@@ -1737,7 +1735,7 @@
         </div>
     </footer>
 
-    <script>
+   <script>
         function showPage(pageId) {
             // Hide all pages
             const pages = document.querySelectorAll('.page');
@@ -1774,6 +1772,51 @@
             }
         }
 
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize scroll reveal animation
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all reveal elements
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Handle navigation highlight
+        document.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+</script>
+
   // Handle form submissions
 document.addEventListener('DOMContentLoaded', function() {
     // Remove all form submission handling - let Netlify handle it
@@ -1798,26 +1841,6 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 });
-
-            // Initialize scroll reveal animation
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, observerOptions);
-
-            // Observe all reveal elements
-            document.querySelectorAll('.reveal').forEach(el => {
-                observer.observe(el);
-            });
-        });
 
         // Handle navigation highlight
         document.addEventListener('scroll', function() {
