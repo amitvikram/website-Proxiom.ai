@@ -3,6 +3,1778 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sootro - Agentic AI for Software Troubleshooting</title>
+    <meta name="description" content="Transform chaos into clarity with Sootro's intelligent dual-engine framework. Cut troubleshooting time by 80% with AI that understands your code.">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #8ba4f5;
+            --primary-purple: #9b7cc8;
+            --primary-teal: #38c5e0;
+            --dark-bg: #f8f9fb;
+            --dark-secondary: #ffffff;
+            --dark-accent: #f1f3f6;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-accent: #2d3748;
+            --success-green: #48bb78;
+            --warning-orange: #ed8936;
+            --error-red: #e53e3e;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(248, 249, 251, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-teal));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .cta-btn.secondary:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        /* Main Content */
+        .main {
+            margin-top: 80px;
+        }
+
+        .section {
+            padding: 5rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(6, 182, 212, 0.1));
+            padding: 8rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(6, 182, 212, 0.3) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--primary-teal));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .hero-visual {
+            background: var(--dark-secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flow-diagram {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .flow-step {
+            background: var(--dark-accent);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            flex: 1 1 0;
+            min-width: 200px;
+            max-width: none;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .flow-step i {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .flow-step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .flow-step p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .flow-arrow {
+            color: var(--primary-teal);
+            font-size: 1.5rem;
+            margin: 0 1rem;
+        }
+
+        /* Problem Section */
+        .problem-section {
+            background: var(--dark-accent);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .problem-card {
+            background: var(--dark-accent);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-card .stat {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--warning-orange);
+            display: block;
+        }
+
+        .problem-card h3 {
+            margin: 1rem 0;
+            color: var(--text-primary);
+        }
+
+        .problem-card p {
+            color: var(--text-secondary);
+        }
+
+        /* Solution Overview */
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .solution-card {
+            background: var(--dark-secondary);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+        }
+
+        .solution-card i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .solution-card h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .solution-card p {
+            color: var(--text-secondary);
+        }
+
+        /* Dual Engine Section */
+        .dual-engine-section {
+            background: linear-gradient(135deg, rgba(155, 124, 200, 0.1), rgba(139, 164, 245, 0.1));
+            padding: 6rem 0;
+        }
+
+        .engine-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .toggle-container {
+            background: var(--dark-secondary);
+            border-radius: 50px;
+            padding: 0.5rem;
+            display: flex;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .toggle-btn {
+            background: transparent;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .toggle-btn.active {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+        }
+
+        .engine-content {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .engine-content.active {
+            display: grid;
+        }
+
+        .engine-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .engine-info p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .engine-features {
+            list-style: none;
+        }
+
+        .engine-features li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .engine-features li::before {
+            content: '✓';
+            color: var(--success-green);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .engine-visual {
+            background: var(--dark-secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .graph-visualization {
+            width: 100%;
+            height: 250px;
+            position: relative;
+            background: var(--dark-accent);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* Target Applications */
+        .target-apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .app-card {
+            background: var(--dark-secondary);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-teal);
+        }
+
+        .app-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .app-card.procedural .icon {
+            color: var(--primary-blue);
+        }
+
+        .app-card.microservices .icon {
+            color: var(--primary-teal);
+        }
+
+        .app-card.agentic .icon {
+            color: var(--primary-purple);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--dark-secondary);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+        }
+
+        .feature-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .feature-header i {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-right: 1rem;
+        }
+
+        .feature-header h3 {
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+
+        /* Enterprise Section */
+        .enterprise-section {
+            background: var(--dark-accent);
+        }
+
+        .enterprise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .enterprise-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .enterprise-item i {
+            font-size: 2.5rem;
+            color: var(--primary-teal);
+            margin-bottom: 1rem;
+        }
+
+        .enterprise-item h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .enterprise-item p {
+            color: var(--text-secondary);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-buttons .cta-btn {
+            background: white;
+            color: var(--primary-blue);
+        }
+
+        .cta-buttons .cta-btn.secondary {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .cta-buttons .cta-btn.secondary:hover {
+            background: white;
+            color: var(--primary-blue);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-secondary);
+            padding: 3rem 0 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-blue);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--dark-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transform: translateY(50px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h2 {
+            color: var(--text-primary);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .form-group.required label::after {
+            content: ' *';
+            color: var(--error-red);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            background: var(--dark-secondary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .form-control.error {
+            border-color: var(--error-red);
+        }
+
+        .error-message {
+            color: var(--error-red);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .social-proof {
+            background: var(--dark-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .social-proof-stat {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .social-proof-stat .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-teal);
+        }
+
+        .benefits-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .benefits-list li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .benefits-list li::before {
+            content: '✓';
+            color: var(--success-green);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-message i {
+            font-size: 4rem;
+            color: var(--success-green);
+            margin-bottom: 1rem;
+        }
+
+        .success-message h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .success-message p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .flow-diagram {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+
+            .engine-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section {
+                padding: 3rem 0;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 4rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .cta-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .toggle-container {
+                width: 100%;
+            }
+
+            .toggle-btn {
+                flex: 1;
+                padding: 0.75rem 1rem;
+            }
+        }
+
+        /* Loading States */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-2 {
+            margin-bottom: 2rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">Sootro</div>
+            <ul class="nav-links">
+                <li><a href="#solution">Solution</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#enterprise">Enterprise</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+            </ul>
+            <button class="cta-btn" onclick="openTrialModal()">Start Free Trial</button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero section">
+            <h1>De-Risk Your AI Implementations</h1>
+            <p>Sootro ensures your AI launches succeed with intelligent monitoring during critical hypercare periods. Maintain customer satisfaction and retention with proactive issue detection and rapid resolution.</p>
+
+            <div class="hero-ctas">
+                <button class="cta-btn" onclick="openTrialModal()">Start Free Trial</button>
+                <button class="cta-btn secondary" onclick="watchDemo()">Watch Demo</button>
+            </div>
+
+            <div class="hero-visual">
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <i class="fas fa-database"></i>
+                        <h3>Log Ingestion</h3>
+                        <p>Unified data model for any format</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <i class="fas fa-brain"></i>
+                        <h3>AI Analysis</h3>
+                        <p>Dual-engine intelligence</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <i class="fas fa-project-diagram"></i>
+                        <h3>Graph Relationships</h3>
+                        <p>Code correlation mapping</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <i class="fas fa-search"></i>
+                        <h3>Root Cause</h3>
+                        <p>Precise identification</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Section -->
+        <section class="problem-section section">
+            <h2 class="section-title">AI Launch Risks That Keep You Up at Night</h2>
+            <p class="section-subtitle">New AI implementations face unique challenges that can impact customer experience and business outcomes</p>
+
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <span class="stat">67%</span>
+                    <h3>AI Projects Fail</h3>
+                    <p>Due to undetected issues during critical launch periods</p>
+                </div>
+                <div class="problem-card">
+                    <span class="stat">-15</span>
+                    <h3>NPS Impact</h3>
+                    <p>Customer satisfaction drops when AI features malfunction</p>
+                </div>
+                <div class="problem-card">
+                    <span class="stat">3x</span>
+                    <h3>Higher Churn Risk</h3>
+                    <p>Failed launches lead to customer retention issues</p>
+                </div>
+                <div class="problem-card">
+                    <span class="stat">24/7</span>
+                    <h3>Hypercare Stress</h3>
+                    <p>Round-the-clock monitoring needed during critical periods</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution Overview -->
+        <section class="solution-section section" id="solution">
+            <h2 class="section-title">Your AI Launch Safety Net</h2>
+            <p class="section-subtitle">Proactive monitoring that protects your customer experience during critical periods</p>
+
+            <div class="solution-grid">
+                <div class="solution-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Launch Risk Mitigation</h3>
+                    <p>Proactively identify potential issues before they impact customers during your AI feature rollouts and releases.</p>
+                </div>
+                <div class="solution-card">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Hypercare Support</h3>
+                    <p>24/7 intelligent monitoring during critical launch periods with automated escalation and incident response.</p>
+                </div>
+                <div class="solution-card">
+                    <i class="fas fa-smile"></i>
+                    <h3>NPS Protection</h3>
+                    <p>Maintain customer satisfaction scores by detecting and resolving issues before they affect user experience.</p>
+                </div>
+                <div class="solution-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Confident Releases</h3>
+                    <p>Deploy new AI features with confidence knowing you have comprehensive visibility into system behavior.</p>
+                </div>
+                <div class="solution-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Customer Retention</h3>
+                    <p>Reduce churn risk by ensuring your AI implementations deliver consistent, reliable user experiences.</p>
+                </div>
+                <div class="solution-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Real-Time Insights</h3>
+                    <p>Get instant visibility into AI system performance with actionable insights for immediate response.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dual Engine Section -->
+        <section class="dual-engine-section section">
+            <h2 class="section-title">Dual Engine Intelligence: Adaptive by Design</h2>
+            <p class="section-subtitle">Two specialized engines that adapt to your environment for maximum effectiveness</p>
+
+            <div class="engine-toggle">
+                <div class="toggle-container">
+                    <button class="toggle-btn active" onclick="showEngine('deterministic')">Deterministic Engine</button>
+                    <button class="toggle-btn" onclick="showEngine('probabilistic')">Probabilistic Engine</button>
+                </div>
+            </div>
+
+            <div id="deterministic" class="engine-content active">
+                <div class="engine-info">
+                    <h3>Deterministic Graph Engine</h3>
+                    <p><strong>When:</strong> Source code access available</p>
+                    <p><strong>How:</strong> Direct log-to-code correlation using static analysis</p>
+
+                    <h4>Benefits:</h4>
+                    <ul class="engine-features">
+                        <li>Precise root cause identification</li>
+                        <li>Exact code segments highlighted</li>
+                        <li>Complete execution path reconstruction</li>
+                        <li>Real-time dependency mapping</li>
+                        <li>Automated fix suggestions</li>
+                    </ul>
+                </div>
+                <div class="engine-visual">
+                    <div class="graph-visualization" id="deterministic-viz">
+                        <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-secondary);">
+                            <div style="text-align: center;">
+                                <i class="fas fa-code" style="font-size: 3rem; color: var(--primary-blue); margin-bottom: 1rem;"></i>
+                                <p>Code-Level Analysis</p>
+                                <p style="font-size: 0.9rem;">Direct correlation between logs and source code</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="probabilistic" class="engine-content">
+                <div class="engine-info">
+                    <h3>Probabilistic Graph Engine</h3>
+                    <p><strong>When:</strong> No code access (third-party systems, legacy, SaaS)</p>
+                    <p><strong>How:</strong> ML pattern analysis of log signatures and temporal correlations</p>
+
+                    <h4>Benefits:</h4>
+                    <ul class="engine-features">
+                        <li>Predictive failure detection</li>
+                        <li>Cross-system pattern recognition</li>
+                        <li>Anomaly detection and alerting</li>
+                        <li>Behavioral baseline learning</li>
+                        <li>Proactive issue prevention</li>
+                    </ul>
+                </div>
+                <div class="engine-visual">
+                    <div class="graph-visualization" id="probabilistic-viz">
+                        <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-secondary);">
+                            <div style="text-align: center;">
+                                <i class="fas fa-chart-line" style="font-size: 3rem; color: var(--primary-teal); margin-bottom: 1rem;"></i>
+                                <p>Pattern Analysis</p>
+                                <p style="font-size: 0.9rem;">ML-driven correlation and prediction</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Target Applications -->
+        <section class="target-apps-section section">
+            <h2 class="section-title">Perfect for AI-First Organizations</h2>
+            <p class="section-subtitle">Specialized monitoring for modern AI implementations and critical launch phases</p>
+
+            <div class="target-apps-grid">
+                <div class="app-card procedural">
+                    <div class="icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>New AI Launches</h3>
+                    <p>Critical monitoring during the first 30-90 days of AI feature releases when customer impact is highest.</p>
+                    <ul style="text-align: left; margin-top: 1rem;">
+                        <li>ML model deployments</li>
+                        <li>Recommendation engines</li>
+                        <li>Personalization features</li>
+                    </ul>
+                </div>
+                <div class="app-card microservices">
+                    <div class="icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Hypercare Periods</h3>
+                    <p>Intensive monitoring during high-risk periods like major releases, infrastructure changes, or peak usage times.</p>
+                    <ul style="text-align: left; margin-top: 1rem;">
+                        <li>Black Friday deployments</li>
+                        <li>Product launch campaigns</li>
+                        <li>System migrations</li>
+                    </ul>
+                </div>
+                <div class="app-card agentic">
+                    <div class="icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Customer Experience</h3>
+                    <p>Real-time monitoring of user-facing AI features to maintain high NPS scores and prevent churn.</p>
+                    <ul style="text-align: left; margin-top: 1rem;">
+                        <li>Chatbots and virtual assistants</li>
+                        <li>Search and discovery</li>
+                        <li>Content recommendation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section class="features-section section" id="features">
+            <h2 class="section-title">Enterprise-Grade Capabilities</h2>
+            <p class="section-subtitle">Powerful features designed for the demands of modern software operations</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <i class="fas fa-microscope"></i>
+                        <h3>Enhanced Code Analysis</h3>
+                    </div>
+                    <p>Deep static and dynamic analysis that understands your application's DNA, providing insights into code behavior and potential failure points.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <i class="fas fa-plug"></i>
+                        <h3>Smart Integrations</h3>
+                    </div>
+                    <p>Native connections to GitHub, Jira, Slack, PagerDuty, and 300+ other tools. Seamlessly fits into your existing workflow.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <h3>Lightning-Fast Queries</h3>
+                    </div>
+                    <p>Sub-second responses to complex questions across petabytes of data using advanced indexing and intelligent caching strategies.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <i class="fas fa-project-diagram"></i>
+                        <h3>Graph-Based Insights</h3>
+                    </div>
+                    <p>Visualize relationships that traditional tools miss. Understand how components interact and how failures propagate through your system.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <i class="fas fa-cloud"></i>
+                        <h3>Cloud-Native Architecture</h3>
+                    </div>
+                    <p>Deploy anywhere, scale infinitely. Built on Kubernetes with auto-scaling, high availability, and multi-cloud support.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Enterprise Security</h3>
+                    </div>
+                    <p>End-to-end encryption, role-based access control, and compliance with major industry standards. Deploy in your own environment to maintain complete IP security.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customer Success Focus -->
+        <section class="enterprise-section section" id="customer-success">
+            <h2 class="section-title">Protect What Matters Most: Your Customers</h2>
+            <p class="section-subtitle">Ensure AI launches strengthen customer relationships instead of risking them</p>
+
+            <div class="enterprise-grid">
+                <div class="enterprise-item">
+                    <i class="fas fa-smile"></i>
+                    <h3>NPS Protection</h3>
+                    <p>Maintain high customer satisfaction scores by preventing AI-related issues from reaching your users.</p>
+                </div>
+                <div class="enterprise-item">
+                    <i class="fas fa-users-cog"></i>
+                    <h3>Retention Assurance</h3>
+                    <p>Reduce churn risk during critical launch periods with proactive monitoring and rapid issue resolution.</p>
+                </div>
+                <div class="enterprise-item">
+                    <i class="fas fa-clock"></i>
+                    <h3>24/7 Hypercare</h3>
+                    <p>Round-the-clock intelligent monitoring during your most vulnerable periods with automated alerting.</p>
+                </div>
+                <div class="enterprise-item">
+                    <i class="fas fa-server"></i>
+                    <h3>Secure Deployment</h3>
+                    <p>Deploy in your own environment to maintain complete control over sensitive customer data and AI models.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section section">
+            <h2>Launch Your Next AI Feature with Confidence</h2>
+            <p>Don't let your next AI implementation become a customer experience disaster. Protect your NPS and reduce churn risk.</p>
+
+            <div class="cta-buttons">
+                <button class="cta-btn" onclick="openTrialModal()">Secure Your AI Launch</button>
+                <button class="cta-btn secondary" onclick="scheduleDemo()">See Hypercare Demo</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Product</h3>
+                <ul>
+                    <li><a href="#solution">Solution</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#integrations">Integrations</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#docs">Documentation</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#case-studies">Case Studies</a></li>
+                    <li><a href="#webinars">Webinars</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                    <li><a href="#press">Press</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#help">Help Center</a></li>
+                    <li><a href="#community">Community</a></li>
+                    <li><a href="#status">Status</a></li>
+                    <li><a href="#security">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Sootro. All rights reserved. | <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- Trial Request Modal -->
+    <div id="trialModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Get Early Access to Sootro</h2>
+                <button class="close-btn" onclick="closeTrialModal()">&times;</button>
+            </div>
+
+            <div id="trialForm">
+                <div class="social-proof">
+                    <div class="social-proof-stat">
+                        <span class="number">500+</span>
+                        <p>Companies already on the waitlist</p>
+                    </div>
+                </div>
+
+                <p style="margin-bottom: 2rem; color: var(--text-secondary);">Join the waitlist for exclusive early access to our intelligent troubleshooting platform</p>
+
+                <form id="waitlistForm" onsubmit="submitForm(event)">
+                    <div class="form-group required">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" class="form-control" required>
+                        <div class="error-message" id="fullNameError"></div>
+                    </div>
+
+                    <div class="form-group required">
+                        <label for="email">Work Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                        <div class="error-message" id="emailError"></div>
+                    </div>
+
+                    <div class="form-group required">
+                        <label for="company">Company Name</label>
+                        <input type="text" id="company" name="company" class="form-control" required>
+                        <div class="error-message" id="companyError"></div>
+                    </div>
+
+                    <div class="form-group required">
+                        <label for="jobTitle">Job Title/Role</label>
+                        <input type="text" id="jobTitle" name="jobTitle" class="form-control" required>
+                        <div class="error-message" id="jobTitleError"></div>
+                    </div>
+
+                    <div class="form-group required">
+                        <label for="companySize">Company Size</label>
+                        <select id="companySize" name="companySize" class="form-control" required>
+                            <option value="">Select company size</option>
+                            <option value="1-50">1-50 employees</option>
+                            <option value="51-200">51-200 employees</option>
+                            <option value="201-1000">201-1000 employees</option>
+                            <option value="1000+">1000+ employees</option>
+                        </select>
+                        <div class="error-message" id="companySizeError"></div>
+                    </div>
+
+                    <div class="form-group required">
+                        <label for="useCase">Primary Use Case</label>
+                        <select id="useCase" name="useCase" class="form-control" required>
+                            <option value="">Select primary use case</option>
+                            <option value="microservices">Microservices</option>
+                            <option value="legacy">Legacy Systems</option>
+                            <option value="ai-ml">AI/ML Applications</option>
+                            <option value="mixed">Mixed Environment</option>
+                        </select>
+                        <div class="error-message" id="useCaseError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="painPoints">Current Pain Points (Optional)</label>
+                        <textarea id="painPoints" name="painPoints" class="form-control" rows="3" placeholder="Tell us about your current troubleshooting challenges..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number (Optional)</label>
+                        <input type="tel" id="phone" name="phone" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="source">How did you hear about us?</label>
+                        <select id="source" name="source" class="form-control">
+                            <option value="">Select source</option>
+                            <option value="google">Google Search</option>
+                            <option value="linkedin">LinkedIn</option>
+                            <option value="referral">Referral</option>
+                            <option value="event">Conference/Event</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="benefits-list" style="margin: 2rem 0;">
+                        <h4 style="color: var(--text-primary); margin-bottom: 1rem;">What you'll get:</h4>
+                        <li>Priority access to beta program</li>
+                        <li>Free setup consultation with our experts</li>
+                        <li>Custom demo with your actual log data</li>
+                        <li>30-day free trial when launched</li>
+                        <li>Direct line to our engineering team</li>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        Join the Waitlist
+                    </button>
+                </form>
+
+                <div style="margin-top: 1rem; text-align: center; font-size: 0.875rem; color: var(--text-secondary);">
+                    <p>🔒 Enterprise-grade security • On-premise deployment available • No spam guarantee</p>
+                    <p><a href="#privacy" style="color: var(--primary-blue);">Privacy Policy</a></p>
+                </div>
+            </div>
+
+            <div id="successMessage" class="success-message">
+                <i class="fas fa-check-circle"></i>
+                <h3>Welcome to the Sootro Waitlist!</h3>
+                <p>Thank you for your interest. We'll be in touch soon with exclusive updates and early access information.</p>
+                <button class="cta-btn" onclick="closeTrialModal()">Continue Exploring</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        function openTrialModal() {
+            const modal = document.getElementById('trialModal');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+
+            // Focus management for accessibility
+            const firstInput = modal.querySelector('input');
+            if (firstInput) {
+                setTimeout(() => firstInput.focus(), 100);
+            }
+        }
+
+        function closeTrialModal() {
+            const modal = document.getElementById('trialModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+
+            // Reset form if showing success message
+            const successMessage = document.getElementById('successMessage');
+            const trialForm = document.getElementById('trialForm');
+            if (successMessage.classList.contains('show')) {
+                successMessage.classList.remove('show');
+                trialForm.style.display = 'block';
+                document.getElementById('waitlistForm').reset();
+                clearErrors();
+            }
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('trialModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeTrialModal();
+            }
+        });
+
+        // Dual engine toggle functionality
+        function showEngine(engineType) {
+            // Update button states
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update content visibility
+            document.querySelectorAll('.engine-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(engineType).classList.add('active');
+        }
+
+        // Form validation
+        function validateField(fieldName, value) {
+            const errorElement = document.getElementById(fieldName + 'Error');
+            const fieldElement = document.getElementById(fieldName);
+
+            let isValid = true;
+            let errorMessage = '';
+
+            switch(fieldName) {
+                case 'fullName':
+                    if (!value || value.trim().length < 2) {
+                        isValid = false;
+                        errorMessage = 'Please enter your full name';
+                    }
+                    break;
+                case 'email':
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!value || !emailRegex.test(value)) {
+                        isValid = false;
+                        errorMessage = 'Please enter a valid email address';
+                    }
+                    break;
+                case 'company':
+                    if (!value || value.trim().length < 2) {
+                        isValid = false;
+                        errorMessage = 'Please enter your company name';
+                    }
+                    break;
+                case 'jobTitle':
+                    if (!value || value.trim().length < 2) {
+                        isValid = false;
+                        errorMessage = 'Please enter your job title';
+                    }
+                    break;
+                case 'companySize':
+                    if (!value) {
+                        isValid = false;
+                        errorMessage = 'Please select your company size';
+                    }
+                    break;
+                case 'useCase':
+                    if (!value) {
+                        isValid = false;
+                        errorMessage = 'Please select your primary use case';
+                    }
+                    break;
+            }
+
+            if (isValid) {
+                fieldElement.classList.remove('error');
+                errorElement.textContent = '';
+            } else {
+                fieldElement.classList.add('error');
+                errorElement.textContent = errorMessage;
+            }
+
+            return isValid;
+        }
+
+        function clearErrors() {
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.textContent = '';
+            });
+            document.querySelectorAll('.form-control').forEach(field => {
+                field.classList.remove('error');
+            });
+        }
+
+        // Add real-time validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const requiredFields = ['fullName', 'email', 'company', 'jobTitle', 'companySize', 'useCase'];
+
+            requiredFields.forEach(fieldName => {
+                const field = document.getElementById(fieldName);
+                if (field) {
+                    field.addEventListener('blur', function() {
+                        validateField(fieldName, this.value);
+                    });
+
+                    field.addEventListener('input', function() {
+                        if (this.classList.contains('error')) {
+                            validateField(fieldName, this.value);
+                        }
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        function submitForm(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            // Validate all required fields
+            const requiredFields = ['fullName', 'email', 'company', 'jobTitle', 'companySize', 'useCase'];
+            let isFormValid = true;
+
+            requiredFields.forEach(fieldName => {
+                if (!validateField(fieldName, data[fieldName])) {
+                    isFormValid = false;
+                }
+            });
+
+            if (!isFormValid) {
+                return;
+            }
+
+            // Show loading state
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="loading"></span> Joining waitlist...';
+            submitBtn.disabled = true;
+
+            // Simulate form submission
+            setTimeout(() => {
+                // Store data in localStorage for demo purposes
+                localStorage.setItem('sootroWaitlistData', JSON.stringify({
+                    ...data,
+                    timestamp: new Date().toISOString()
+                }));
+
+                console.log('Waitlist submission:', data);
+
+                // Show success message
+                document.getElementById('trialForm').style.display = 'none';
+                document.getElementById('successMessage').classList.add('show');
+
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+
+                // Simulate recent sign-up notification
+                if (Math.random() > 0.5) {
+                    showNotification('John from TechCorp just joined the waitlist!');
+                }
+
+            }, 1500);
+        }
+
+        // Notification system
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--dark-secondary);
+                color: var(--text-primary);
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                border: 1px solid var(--primary-teal);
+                z-index: 3000;
+                font-size: 0.9rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                animation: slideInRight 0.3s ease;
+            `;
+            notification.textContent = message;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease forwards';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 4000);
+        }
+
+        // Additional demo functions
+        function watchDemo() {
+            alert('Demo video would open here. For this prototype, imagine a 2-minute video showing Sootro in action!');
+        }
+
+        function scheduleDemo() {
+            alert('This would open a calendar booking widget to schedule a personalized enterprise demo.');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animation
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // Add CSS for slide animations
+        const slideStyles = document.createElement('style');
+        slideStyles.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(slideStyles);
+
+        // Update waitlist counter periodically
+        let waitlistCount = 500;
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                waitlistCount += Math.floor(Math.random() * 3) + 1;
+                const counterElement = document.querySelector('.social-proof-stat .number');
+                if (counterElement) {
+                    counterElement.textContent = waitlistCount + '+';
+                }
+            }
+        }, 30000);
+
+        // Keyboard navigation for modal
+        document.addEventListener('keydown', function(e) {
+            const modal = document.getElementById('trialModal');
+            if (modal.classList.contains('show')) {
+                if (e.key === 'Escape') {
+                    closeTrialModal();
+                }
+
+                // Tab trapping
+                if (e.key === 'Tab') {
+                    const focusableElements = modal.querySelectorAll(
+                        'button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                    );
+                    const firstElement = focusableElements[0];
+                    const lastElement = focusableElements[focusableElements.length - 1];
+
+                    if (e.shiftKey && document.activeElement === firstElement) {
+                        e.preventDefault();
+                        lastElement.focus();
+                    } else if (!e.shiftKey && document.activeElement === lastElement) {
+                        e.preventDefault();
+                        firstElement.focus();
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proxiom.ai - Intelligent Software Troubleshooting</title>
     <style>
         * {
