@@ -114,7 +114,7 @@ try {
     fclose($file_handle);
 
     // Log successful submission (optional)
-    error_log("New lead submitted: " . $sanitized_data['email'] . " from " . $sanitized_data['company']);
+    error_log("New early access request: " . $sanitized_data['email'] . " from " . $sanitized_data['company']);
 
     // Return success response
     echo json_encode([
