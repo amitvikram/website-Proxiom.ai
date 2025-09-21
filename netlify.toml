@@ -1,17 +1,36 @@
+# Netlify configuration file
 [build]
-  publish = "."
+  # No build process needed for static HTML
 
-# Form notifications - emails will be sent to these addresses
-[[forms]]
-  name = "contact"
-  
-[[forms]]
-  name = "demo-request"
+[functions]
+  # If you want to use Netlify Functions later
 
-# Security headers
+# Form handling configuration
+[[forms]]
+  name = "early-access"
+
+  # Optional: Custom success page
+  # action = "/success.html"
+
+  # Email notifications
+  # Note: Email notifications are configured in Netlify dashboard
+  # Go to Site settings > Forms > Form notifications
+
+  # Optional: Slack notifications
+  # slack_webhook = "your-slack-webhook-url"
+
+# Headers for security
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self';"
+
+# Redirects (if needed)
+# [[redirects]]
+#   from = "/old-path"
+#   to = "/new-path"
+#   status = 301
