@@ -1607,72 +1607,38 @@
             submitBtn.innerHTML = '<span class="loading"></span> Getting early access...';
             submitBtn.disabled = true;
 
-            // Check if we're on Netlify (has netlify attribute)
-            const isNetlifyEnabled = form.hasAttribute('netlify');
-
-            if (isNetlifyEnabled) {
-                // Submit to Netlify Forms
-                fetch('/', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams({
-                        'form-name': 'early-access',
-                        ...data
-                    }).toString()
-                })
-                .then(response => {
-                    if (response.ok) {
-                        handleSuccessfulSubmission(data);
-                    } else {
-                        throw new Error('Netlify form submission failed');
-                    }
-                })
-                .catch(error => {
-                    console.error('Netlify form error, trying PHP fallback:', error);
-                    submitToPhpBackend(data);
-                })
-                .finally(() => {
-                    resetSubmitButton(submitBtn, originalText);
-                });
-            } else {
-                // Submit to PHP backend
-                submitToPhpBackend(data);
-                resetSubmitButton(submitBtn, originalText);
-            }
-        }
-
-        function submitToPhpBackend(data) {
-            // Submit form data to PHP backend
-            fetch('submit-form.php', {
+            // Submit to Netlify Forms
+            fetch('/', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    ...data,
-                    timestamp: new Date().toISOString()
-                })
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    'form-name': 'early-access',
+                    ...data
+                }).toString()
             })
-            .then(response => response.json())
-            .then(result => {
-                if (result.success) {
-                    handleSuccessfulSubmission(data, result.lead_id);
+            .then(response => {
+                if (response.ok) {
+                    handleSuccessfulSubmission(data);
                 } else {
-                    throw new Error(result.error || 'Submission failed');
+                    throw new Error('Form submission failed');
                 }
             })
             .catch(error => {
                 console.error('Form submission error:', error);
                 handleFailedSubmission(data, error.message);
+            })
+            .finally(() => {
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
             });
         }
 
-        function handleSuccessfulSubmission(data, leadId = null) {
+        function handleSuccessfulSubmission(data) {
             // Store data in localStorage as backup
             localStorage.setItem('sootroEarlyAccessData', JSON.stringify({
                 ...data,
                 timestamp: new Date().toISOString(),
-                leadId: leadId,
                 status: 'submitted'
             }));
 
@@ -1703,11 +1669,6 @@
             // Show success message anyway for better UX
             document.getElementById('trialForm').style.display = 'none';
             document.getElementById('successMessage').classList.add('show');
-        }
-
-        function resetSubmitButton(submitBtn, originalText) {
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
         }
 
         // Notification system
@@ -1849,5 +1810,34 @@
             }
         });
     </script>
+
+    <!-- Hidden form for Netlify to detect form fields during build time -->
+    <form name="early-access" netlify netlify-honeypot="bot-field" hidden>
+        <input type="text" name="fullName" />
+        <input type="email" name="email" />
+        <input type="text" name="company" />
+        <input type="text" name="jobTitle" />
+        <select name="companySize">
+            <option value="1-50">1-50 employees</option>
+            <option value="51-200">51-200 employees</option>
+            <option value="201-1000">201-1000 employees</option>
+            <option value="1000+">1000+ employees</option>
+        </select>
+        <select name="useCase">
+            <option value="microservices">Microservices</option>
+            <option value="legacy">Legacy Systems</option>
+            <option value="cloud-native">Cloud-Native Applications</option>
+            <option value="mixed">Mixed Environment</option>
+        </select>
+        <textarea name="painPoints"></textarea>
+        <input type="tel" name="phone" />
+        <select name="source">
+            <option value="google">Google Search</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="referral">Referral</option>
+            <option value="event">Conference/Event</option>
+            <option value="other">Other</option>
+        </select>
+    </form>
 </body>
 </html>
