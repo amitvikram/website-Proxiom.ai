@@ -1325,13 +1325,18 @@
             <div class="modal-header">
                 <h2>Get Early Access to Sootro</h2>
                 <button class="close-btn" onclick="closeTrialModal()">&times;</button>
-            </div>
+            </div> to 
 
             <div id="trialForm">
 
                 <p style="margin-bottom: 2rem; color: var(--text-secondary);">Join the revolution in software troubleshooting and cut your resolution times by 80%</p>
 
-                <form id="waitlistForm" onsubmit="submitForm(event)">
+                <form id="earlyAccessForm" onsubmit="submitForm(event)" netlify netlify-honeypot="bot-field" name="early-access">
+                    <!-- Hidden honeypot field for spam protection -->
+                    <p style="display: none;">
+                        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                    </p>
+
                     <div class="form-group required">
                         <label for="fullName">Full Name</label>
                         <input type="text" id="fullName" name="fullName" class="form-control" required>
@@ -1412,7 +1417,7 @@
                     </div>
 
                     <button type="submit" class="submit-btn" id="submitBtn">
-                        Join the Waitlist
+                        Get Early Access
                     </button>
                 </form>
 
@@ -1424,7 +1429,7 @@
 
             <div id="successMessage" class="success-message">
                 <i class="fas fa-check-circle"></i>
-                <h3>Welcome to the Sootro Waitlist!</h3>
+                <h3>Welcome to Sootro Early Access!</h3>
                 <p>Thank you for your interest. We'll be in touch soon with exclusive updates and early access information.</p>
                 <button class="cta-btn" onclick="closeTrialModal()">Continue Exploring</button>
             </div>
@@ -1456,7 +1461,7 @@
             if (successMessage.classList.contains('show')) {
                 successMessage.classList.remove('show');
                 trialForm.style.display = 'block';
-                document.getElementById('waitlistForm').reset();
+                document.getElementById('earlyAccessForm').reset();
                 clearErrors();
             }
         }
@@ -1575,8 +1580,12 @@
         function submitForm(event) {
             event.preventDefault();
 
-            const formData = new FormData(event.target);
+            const form = event.target;
+            const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
+
+            // Remove bot field from data if present
+            delete data['bot-field'];
 
             // Validate all required fields
             const requiredFields = ['fullName', 'email', 'company', 'jobTitle', 'companySize', 'useCase'];
@@ -1595,33 +1604,110 @@
             // Show loading state
             const submitBtn = document.getElementById('submitBtn');
             const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<span class="loading"></span> Joining waitlist...';
+            submitBtn.innerHTML = '<span class="loading"></span> Getting early access...';
             submitBtn.disabled = true;
 
-            // Simulate form submission
-            setTimeout(() => {
-                // Store data in localStorage for demo purposes
-                localStorage.setItem('sootroWaitlistData', JSON.stringify({
+            // Check if we're on Netlify (has netlify attribute)
+            const isNetlifyEnabled = form.hasAttribute('netlify');
+
+            if (isNetlifyEnabled) {
+                // Submit to Netlify Forms
+                fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({
+                        'form-name': 'early-access',
+                        ...data
+                    }).toString()
+                })
+                .then(response => {
+                    if (response.ok) {
+                        handleSuccessfulSubmission(data);
+                    } else {
+                        throw new Error('Netlify form submission failed');
+                    }
+                })
+                .catch(error => {
+                    console.error('Netlify form error, trying PHP fallback:', error);
+                    submitToPhpBackend(data);
+                })
+                .finally(() => {
+                    resetSubmitButton(submitBtn, originalText);
+                });
+            } else {
+                // Submit to PHP backend
+                submitToPhpBackend(data);
+                resetSubmitButton(submitBtn, originalText);
+            }
+        }
+
+        function submitToPhpBackend(data) {
+            // Submit form data to PHP backend
+            fetch('submit-form.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
                     ...data,
                     timestamp: new Date().toISOString()
-                }));
-
-                console.log('Waitlist submission:', data);
-
-                // Show success message
-                document.getElementById('trialForm').style.display = 'none';
-                document.getElementById('successMessage').classList.add('show');
-
-                // Reset button
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-
-                // Simulate recent sign-up notification
-                if (Math.random() > 0.5) {
-                    showNotification('John from TechCorp just joined the waitlist!');
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    handleSuccessfulSubmission(data, result.lead_id);
+                } else {
+                    throw new Error(result.error || 'Submission failed');
                 }
+            })
+            .catch(error => {
+                console.error('Form submission error:', error);
+                handleFailedSubmission(data, error.message);
+            });
+        }
 
-            }, 1500);
+        function handleSuccessfulSubmission(data, leadId = null) {
+            // Store data in localStorage as backup
+            localStorage.setItem('sootroEarlyAccessData', JSON.stringify({
+                ...data,
+                timestamp: new Date().toISOString(),
+                leadId: leadId,
+                status: 'submitted'
+            }));
+
+            console.log('Early access submission successful:', data);
+
+            // Show success message
+            document.getElementById('trialForm').style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+
+            // Simulate recent sign-up notification
+            if (Math.random() > 0.5) {
+                showNotification('John from TechCorp just joined early access!');
+            }
+        }
+
+        function handleFailedSubmission(data, errorMessage) {
+            // Fallback: Store in localStorage if server submission fails
+            localStorage.setItem('sootroEarlyAccessData', JSON.stringify({
+                ...data,
+                timestamp: new Date().toISOString(),
+                status: 'offline_backup',
+                error: errorMessage
+            }));
+
+            // Show error message but still allow user to continue
+            alert('There was an issue submitting your form. Your information has been saved locally and we will follow up with you.');
+
+            // Show success message anyway for better UX
+            document.getElementById('trialForm').style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+        }
+
+        function resetSubmitButton(submitBtn, originalText) {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
         }
 
         // Notification system
@@ -1724,14 +1810,14 @@
         `;
         document.head.appendChild(slideStyles);
 
-        // Update waitlist counter periodically
-        let waitlistCount = 500;
+        // Update early access counter periodically
+        let earlyAccessCount = 500;
         setInterval(() => {
             if (Math.random() > 0.7) {
-                waitlistCount += Math.floor(Math.random() * 3) + 1;
+                earlyAccessCount += Math.floor(Math.random() * 3) + 1;
                 const counterElement = document.querySelector('.social-proof-stat .number');
                 if (counterElement) {
-                    counterElement.textContent = waitlistCount + '+';
+                    counterElement.textContent = earlyAccessCount + '+';
                 }
             }
         }, 30000);
