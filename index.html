@@ -1325,7 +1325,7 @@
             <div class="modal-header">
                 <h2>Get Early Access to Sootro</h2>
                 <button class="close-btn" onclick="closeTrialModal()">&times;</button>
-            </div>
+            </div> to 
 
             <div id="trialForm">
 
@@ -1598,30 +1598,63 @@
             submitBtn.innerHTML = '<span class="loading"></span> Joining waitlist...';
             submitBtn.disabled = true;
 
-            // Simulate form submission
-            setTimeout(() => {
-                // Store data in localStorage for demo purposes
-                localStorage.setItem('sootroWaitlistData', JSON.stringify({
+            // Submit form data to PHP backend
+            fetch('submit-form.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
                     ...data,
                     timestamp: new Date().toISOString()
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    // Store data in localStorage as backup
+                    localStorage.setItem('sootroWaitlistData', JSON.stringify({
+                        ...data,
+                        timestamp: new Date().toISOString(),
+                        leadId: result.lead_id
+                    }));
+
+                    console.log('Waitlist submission successful:', data);
+
+                    // Show success message
+                    document.getElementById('trialForm').style.display = 'none';
+                    document.getElementById('successMessage').classList.add('show');
+
+                    // Simulate recent sign-up notification
+                    if (Math.random() > 0.5) {
+                        showNotification('John from TechCorp just joined the waitlist!');
+                    }
+                } else {
+                    throw new Error(result.error || 'Submission failed');
+                }
+            })
+            .catch(error => {
+                console.error('Form submission error:', error);
+
+                // Fallback: Store in localStorage if server submission fails
+                localStorage.setItem('sootroWaitlistData', JSON.stringify({
+                    ...data,
+                    timestamp: new Date().toISOString(),
+                    status: 'offline_backup'
                 }));
 
-                console.log('Waitlist submission:', data);
+                // Show error message but still allow user to continue
+                alert('There was an issue submitting your form. Your information has been saved locally and we will follow up with you.');
 
-                // Show success message
+                // Show success message anyway for better UX
                 document.getElementById('trialForm').style.display = 'none';
                 document.getElementById('successMessage').classList.add('show');
-
+            })
+            .finally(() => {
                 // Reset button
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
-
-                // Simulate recent sign-up notification
-                if (Math.random() > 0.5) {
-                    showNotification('John from TechCorp just joined the waitlist!');
-                }
-
-            }, 1500);
+            });
         }
 
         // Notification system
