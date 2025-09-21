@@ -14,7 +14,7 @@ if (!file_exists($csv_file)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sootro Leads - Admin View</title>
+    <title>Sootro Early Access - Admin View</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -125,7 +125,7 @@ if (!file_exists($csv_file)) {
 </head>
 <body>
     <div class="container">
-        <h1>🎯 Sootro Leads Dashboard</h1>
+        <h1>🎯 Sootro Early Access Dashboard</h1>
 
         <?php
         // Read and parse CSV
@@ -138,9 +138,9 @@ if (!file_exists($csv_file)) {
             fclose($handle);
         }
 
-        $total_leads = count($leads);
-        $today_leads = 0;
-        $this_week_leads = 0;
+        $total_requests = count($leads);
+        $today_requests = 0;
+        $this_week_requests = 0;
         $companies = [];
         $use_cases = [];
 
@@ -150,10 +150,10 @@ if (!file_exists($csv_file)) {
             $week_ago = strtotime('-1 week');
 
             if ($timestamp >= $today) {
-                $today_leads++;
+                $today_requests++;
             }
             if ($timestamp >= $week_ago) {
-                $this_week_leads++;
+                $this_week_requests++;
             }
 
             if (!empty($lead['Company'])) {
@@ -172,15 +172,15 @@ if (!file_exists($csv_file)) {
 
         <div class="stats">
             <div class="stat-card">
-                <div class="stat-number"><?php echo $total_leads; ?></div>
-                <div class="stat-label">Total Leads</div>
+                <div class="stat-number"><?php echo $total_requests; ?></div>
+                <div class="stat-label">Total Requests</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number"><?php echo $today_leads; ?></div>
+                <div class="stat-number"><?php echo $today_requests; ?></div>
                 <div class="stat-label">Today</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number"><?php echo $this_week_leads; ?></div>
+                <div class="stat-number"><?php echo $this_week_requests; ?></div>
                 <div class="stat-label">This Week</div>
             </div>
             <div class="stat-card">
@@ -201,7 +201,7 @@ if (!file_exists($csv_file)) {
         // Handle CSV download
         if (isset($_GET['download']) && $_GET['download'] === 'csv') {
             header('Content-Type: text/csv');
-            header('Content-Disposition: attachment; filename="sootro-leads-' . date('Y-m-d') . '.csv"');
+            header('Content-Disposition: attachment; filename="sootro-early-access-' . date('Y-m-d') . '.csv"');
             readfile($csv_file);
             exit;
         }
@@ -246,8 +246,8 @@ if (!file_exists($csv_file)) {
 
         <?php if (empty($leads)): ?>
             <div style="text-align: center; padding: 40px; color: #4a5568;">
-                <h3>No leads yet</h3>
-                <p>Submit the form on your website to see leads appear here.</p>
+                <h3>No early access requests yet</h3>
+                <p>Submit the form on your website to see requests appear here.</p>
             </div>
         <?php endif; ?>
 
